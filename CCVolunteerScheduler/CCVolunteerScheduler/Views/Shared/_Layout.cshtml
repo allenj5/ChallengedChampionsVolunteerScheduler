@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>@ViewBag.Title - Challenged Champions Volunteer Management</title>
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width">
         @Styles.Render("~/Content/Site.css")
         <!--The statements below pull Bootstrap from MaxCDN-->
         @Styles.Render("~/Bootstrap/bootstrap.css")
@@ -11,9 +11,22 @@
         @Scripts.Render("~/Bootstrap/bootstrap.js")
     </head>
     <body>
-        <header>
-            <!--Logo and nav bar go here.-->
+        <header class="container">
+            <div class="row rounded chalchampbackgroundcolor">
+                <div class="col-xs-12 col-md-12">
+                    <img class="img-center" src="~/Images/Challeneged-Champions-Logo.png" alt="Challenged Champions Equestrian Center Logo"/>
+                </div>
+            </div>
         </header>
+        @RenderSection("navbar", false)
         @RenderBody() <!--This will render each page while maintaining the unified look stored in this file-->
+        <footer class="container">
+            <div class="row rounded chalchampbackgroundcolor">
+                <div class="col-xs-12 col-md-12">
+                    <div id="footer1">© Copyright 1997-2015 Challenged Champions Equestrian Center Ottawa, OH</div>
+                    <div id="footer2">Designed and Developed by Jon Allen, Sam Testen, Aziz Aldaghiri, and Cody Frick (University of Findlay CSCI480)</div>
+                </div>
+            </div>
+        </footer>
     </body>
 </html>

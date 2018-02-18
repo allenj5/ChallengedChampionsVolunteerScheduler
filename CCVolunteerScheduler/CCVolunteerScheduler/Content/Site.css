@@ -1,3 +1,28 @@
 ﻿body {
     background-image: url(../Images/Challenged-Champions-Background.jpg) !important;
 }
+
+#footer1 {
+    font-style: normal;
+    font-size: 14px;
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+}
+
+#footer2 {
+    font-style: italic;
+    font-size: 12px;
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+}
+
+.chalchampbackgroundcolor {
+    background-color: #F3F0EB;
+}
+
+.img-center {
+    display: block;
+    margin: 0 auto;
+}
