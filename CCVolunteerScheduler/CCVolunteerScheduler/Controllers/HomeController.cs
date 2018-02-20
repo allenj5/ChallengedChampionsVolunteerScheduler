@@ -34,7 +34,8 @@ namespace CCVolunteerScheduler.Controllers
             Models.CalendarViewModel model = new Models.CalendarViewModel
             {
                 NumberOfDays = 7,
-                StartDate = DateTime.Now
+                StartDate = DateTime.Now,
+                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year,DateTime.Now.Month)
             };
             return View(model);
         }

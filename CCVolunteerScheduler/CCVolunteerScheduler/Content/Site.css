@@ -18,6 +18,11 @@
     text-align: center;
 }
 
+.bold-under {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
 .chalchampbackgroundcolor {
     background-color: #F3F0EB;
 }
