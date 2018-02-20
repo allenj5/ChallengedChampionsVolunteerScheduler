@@ -30,24 +30,49 @@
         </div>
     </div>
 }
+<br />
+<center>
+    <table>
+        <thead>
+            <tr>
+                @for (int i = 0; i < Model.NumberOfDays; i++)
+                {
+                    <th>
+                        @Model.StartDate.AddDays(i).ToString("ddd")
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @for (int i = 0; i < Model.NumberOfDays; i++)
+                {
+                    <td>@Model.StartDate.AddDays(i).ToString("MMM") @Model.StartDate.AddDays(i).ToString("dd")</td>
+                }
+            </tr>
+        </tbody>
+    </table>
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#AddEventModal">Add Event</button>
+</center>
+<br />
 
-<table>
-    <thead>
-        <tr>
-            @for (int i = 0; i < Model.NumberOfDays; i++)
-            {
-                <th>
-                    @Model.StartDate.AddDays(i).ToString("ddd")
-                </th>
-            }
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            @for(int i = 0; i < Model.NumberOfDays; i++)
-            {
-                <td>@Model.StartDate.AddDays(i).ToString("MMM") @Model.StartDate.AddDays(i).ToString("dd")</td>
-            }
-        </tr>
-    </tbody>
-</table>
+<!-- Modal -->
+<div id="AddEventModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="">
+                    <h4 class="modal-title">Add Event</h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
