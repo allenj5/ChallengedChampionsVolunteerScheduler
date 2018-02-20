@@ -28,5 +28,10 @@ namespace CCVolunteerScheduler.Controllers
 
             return View();
         }
+
+        public ActionResult AdminCalendar()
+        {
+            return View();
+        }
     }
 }
