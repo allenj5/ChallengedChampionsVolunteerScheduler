@@ -31,7 +31,12 @@ namespace CCVolunteerScheduler.Controllers
 
         public ActionResult AdminCalendar()
         {
-            return View();
+            Models.CalendarViewModel model = new Models.CalendarViewModel
+            {
+                NumberOfDays = 7,
+                StartDate = DateTime.Now
+            };
+            return View(model);
         }
     }
 }
