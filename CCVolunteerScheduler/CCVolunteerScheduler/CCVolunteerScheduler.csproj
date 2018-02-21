@@ -165,6 +165,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -289,6 +290,7 @@
     <Content Include="Views\Home\AdminCalendar.cshtml" />
     <Content Include="Views\Home\AdminHome.cshtml" />
     <Content Include="Views\Home\ManageAccount.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

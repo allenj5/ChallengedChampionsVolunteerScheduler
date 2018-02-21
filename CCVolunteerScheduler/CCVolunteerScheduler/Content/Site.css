@@ -35,3 +35,13 @@
 .txt-center {
     text-align: center !important;
 }
+
+.prompt {
+    margin: 10px;
+}
+
+label {
+    text-align: right;
+    margin-right: 10px;
+    font-weight: bold;
+}
