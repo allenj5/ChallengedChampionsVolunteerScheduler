@@ -291,6 +291,7 @@
     <Content Include="Views\Home\AdminHome.cshtml" />
     <Content Include="Views\Home\ManageAccount.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Home\MySchedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
