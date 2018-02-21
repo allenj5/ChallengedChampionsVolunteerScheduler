@@ -39,5 +39,11 @@ namespace CCVolunteerScheduler.Controllers
             };
             return View(model);
         }
+
+        public ActionResult AdminHome()
+        {
+
+            return View();
+        }
     }
 }
