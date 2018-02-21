@@ -1,0 +1,75 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "MySchedule";
+}
+
+@section navbar {
+    <div class="row container">
+        <div class="col-xs-12 col-md-12">
+            <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                 <a class="navbar-brand" href="#">Links</a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item  active">
+                            @Html.ActionLink("Calendar", "AdminCalendar", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Communications", "Communications", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Volunteers", "Volunteers", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+}
+<br />
+<br />
+<br />
+
+<div class="col-xs-12 col-md-12">
+    <h2>Your upcoming events</h2>
+</div>
+<center>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="7" align="center">@DateTime.Now.ToString("MMMMMMMMMMMMM")</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ 
+                        var curDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, 1);
+                        var lastDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, DateTime.DaysInMonth(Model.StartDate.Year, Model.StartDate.Month));
+
+                        for (int i = 0; i < Model.NumberOfDays; i++)
+                        {
+                            if(curDay.CompareTo(lastDay) <= 0)
+                            {
+                            <tr>
+                               @for(int j = 0; j < Model.NumberOfDays; j++)
+                               {
+                                    <td>@curDay.AddDays(j).ToString("dd")</td>
+                               }
+                        </tr>
+
+                        curDay = curDay.AddDays(Model.NumberOfDays);
+                    }
+                }
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#AddEventModal">Add Event</button>
+</center>
+<br />
