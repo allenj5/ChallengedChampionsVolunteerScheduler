@@ -18,6 +18,10 @@
     text-align: center;
 }
 
+#headerSpacing {
+    margin-bottom: 30px;
+}
+
 .bold-under {
     text-decoration: underline;
     font-weight: bold;
