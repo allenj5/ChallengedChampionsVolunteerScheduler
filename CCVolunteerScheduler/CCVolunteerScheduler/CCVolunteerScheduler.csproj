@@ -288,6 +288,7 @@
     </Content>
     <Content Include="Views\Home\AdminCalendar.cshtml" />
     <Content Include="Views\Home\AdminHome.cshtml" />
+    <Content Include="Views\Home\ManageAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
