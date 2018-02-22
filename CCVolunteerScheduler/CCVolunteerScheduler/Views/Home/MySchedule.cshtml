@@ -51,7 +51,7 @@
                         var curDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, 1);
                         var lastDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, DateTime.DaysInMonth(Model.StartDate.Year, Model.StartDate.Month));
 
-                        int daysToAdd = 7 - (int)curDay.DayOfWeek;
+                        int daysToAdd = (int)curDay.DayOfWeek;
                         if(daysToAdd > 0){
                             <tr>
                             @for (int i = daysToAdd; i > 0; i--){
