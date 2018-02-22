@@ -11,7 +11,7 @@ namespace CCVolunteerScheduler.Controllers
         //
         // GET: /Login/
 
-        public ActionResult Index()
+        public ActionResult Login()
         {
             return View();
         }

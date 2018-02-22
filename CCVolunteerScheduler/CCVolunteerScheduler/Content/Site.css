@@ -18,9 +18,35 @@
     text-align: center;
 }
 
+#headerSpacing {
+    margin-bottom: 30px;
+}
+
 .bold-under {
     text-decoration: underline;
     font-weight: bold;
+}
+
+.btn {
+    background-color: #006543 !important;
+}
+
+.btn:hover {
+    background-color: white !important;
+    color: #006543 !important;
+}
+
+.calendar {
+    border-spacing: 5px;
+    border-collapse: separate;
+    width: 98%;
+}
+
+.calendar-day {
+    border: groove;
+    border-color: black;
+    padding: 5px;
+    height: 80px;
 }
 
 .chalchampbackgroundcolor {
@@ -34,6 +60,10 @@
 
 .txt-center {
     text-align: center !important;
+}
+
+.modal-header {
+    margin: 0 auto !important;
 }
 
 .prompt {
