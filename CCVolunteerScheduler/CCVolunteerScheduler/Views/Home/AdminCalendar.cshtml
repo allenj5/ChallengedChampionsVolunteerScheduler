@@ -34,10 +34,10 @@
 <br />
 <center>
     <div class="table-responsive">
-        <table class="table">
+        <table class="calendar">
             <thead>
                 <tr>
-                    <th colspan="7" align="center">@DateTime.Now.ToString("MMMMMMMMMMMMM")</th>
+                    <th colspan="7" class="txt-center">@DateTime.Now.ToString("MMMMMMMMMMMMM")</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,16 +49,18 @@
                         {
                             if(curDay.CompareTo(lastDay) <= 0)
                             {
-                            <tr>
+                                <tr>
                                @for(int j = 0; j < Model.NumberOfDays; j++)
                                {
-                                    <td>@curDay.AddDays(j).ToString("dd")</td>
+                                    <td class="calendar-day">
+                                        @curDay.AddDays(j).ToString("dd")
+                                    </td>
                                }
-                        </tr>
+                                </tr>
 
-                        curDay = curDay.AddDays(Model.NumberOfDays);
-                    }
-                }
+                                curDay = curDay.AddDays(Model.NumberOfDays);
+                            }
+                        }
                 }
             </tbody>
         </table>
@@ -82,7 +84,7 @@
                 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
