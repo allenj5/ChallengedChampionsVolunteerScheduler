@@ -27,6 +27,28 @@
     font-weight: bold;
 }
 
+.btn {
+    background-color: #006543 !important;
+}
+
+.btn:hover {
+    background-color: white !important;
+    color: #006543 !important;
+}
+
+.calendar {
+    border-spacing: 5px;
+    border-collapse: separate;
+    width: 98%;
+}
+
+.calendar-day {
+    border: groove;
+    border-color: black;
+    padding: 5px;
+    height: 80px;
+}
+
 .chalchampbackgroundcolor {
     background-color: #F3F0EB;
 }
@@ -38,6 +60,10 @@
 
 .txt-center {
     text-align: center !important;
+}
+
+.modal-header {
+    margin: 0 auto !important;
 }
 
 .prompt {
