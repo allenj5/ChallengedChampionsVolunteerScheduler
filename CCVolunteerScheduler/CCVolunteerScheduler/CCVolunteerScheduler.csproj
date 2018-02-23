@@ -292,6 +292,7 @@
     <Content Include="Views\Home\ManageAccount.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Home\MySchedule.cshtml" />
+    <Content Include="Views\Home\VolunteerCalendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

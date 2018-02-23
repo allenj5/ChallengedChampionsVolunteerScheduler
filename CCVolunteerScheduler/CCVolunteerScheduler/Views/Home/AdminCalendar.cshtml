@@ -3,33 +3,33 @@
     ViewBag.Title = "AdminCalendar";
 }
 
+
 @section navbar {
-<div class="row container">
-    <div class="col-xs-12 col-md-12">
-        <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand"  id="headerSpacing" href="#"></a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        @Html.ActionLink("Home", "AdminHome", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        @Html.ActionLink("Calendar", "AdminCalendar", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Communications", "Communications", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Volunteers", "Volunteers", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+    <div class="row container">
+        <div class="col-xs-12 col-md-12">
+            <nav class="navbar navbar-toggleable navbar-inverse bg-inverse">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            @Html.ActionLink("Home", "AdminHome", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            @Html.ActionLink("Calendar", "AdminCalendar", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Communications", "Communications", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Volunteers", "Volunteers", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     </div>
-</div>
 }
 <br />
 <center>
@@ -37,34 +37,59 @@
         <table class="calendar">
             <thead>
                 <tr>
-                    <th colspan="7" class="txt-center">@DateTime.Now.ToString("MMMMMMMMMMMMM")</th>
+                    <th colspan="7" class="txt-center"><h2>@DateTime.Now.ToString("MMMMMMMMMMMMM")</h2></th>
                 </tr>
             </thead>
             <tbody>
-                @{ 
-                        var curDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, 1);
-                        var lastDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, DateTime.DaysInMonth(Model.StartDate.Year, Model.StartDate.Month));
+                <tr class="txt-center">
+                    <td><h6>Sunday</h6></td>
+                    <td><h6>Monday</h6></td>
+                    <td><h6>Tuesday</h6></td>
+                    <td><h6>Wednesday</h6></td>
+                    <td><h6>Thursday</h6></td>
+                    <td><h6>Friday</h6></td>
+                    <td><h6>Saturday</h6></td>
+                </tr>
+                @{
+                    var curDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, 1);
+                    var lastDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, DateTime.DaysInMonth(Model.StartDate.Year, Model.StartDate.Month));
 
-                        for (int i = 0; i < Model.NumberOfDays; i++)
-                        {
-                            if(curDay.CompareTo(lastDay) <= 0)
+                    int daysToAdd = (int)curDay.DayOfWeek;
+                    if (daysToAdd > 0)
+                    {
+                        <tr>
+                            @for (int i = daysToAdd; i > 0; i--)
                             {
-                                <tr>
-                               @for(int j = 0; j < Model.NumberOfDays; j++)
-                               {
-                                    <td class="calendar-day">
-                                        @curDay.AddDays(j).ToString("dd")
-                                    </td>
-                               }
-                                </tr>
 
-                                curDay = curDay.AddDays(Model.NumberOfDays);
+                                <td class="calendar-day">@curDay.AddDays(-i).ToString("dd") </td>
+
                             }
+                            @for (int i = 0; i < Model.NumberOfDays - daysToAdd; i++)
+                            {
+                                <td class="calendar-day">@curDay.AddDays(i).ToString("dd") </td>
+                            }
+                        </tr>
+                        curDay = curDay.AddDays(Model.NumberOfDays - daysToAdd);
+                    }
+                    for (int i = 0; i < Model.NumberOfDays; i++)
+                    {
+                        if (curDay.CompareTo(lastDay) <= 0)
+                        {
+                            <tr>
+                                @for (int j = 0; j < Model.NumberOfDays; j++)
+                                {
+                                    <td class="calendar-day">@curDay.AddDays(j).ToString("dd")</td>
+                                }
+                            </tr>
+
+                            curDay = curDay.AddDays(Model.NumberOfDays);
                         }
+                    }
                 }
             </tbody>
         </table>
     </div>
+    <br />
     <!-- Trigger the modal with a button -->
     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#AddEventModal">Add Event</button>
 </center>
@@ -79,10 +104,29 @@
                 <h4 class="modal-title">Add Event</h4>
             </div>
             <div class="modal-body">
-                
+                <form>
+                    <div class="form-group">
+                        <label for="eventTitle">Event Title</label>
+                        <input type="text" class="form-control" id="eventTitle" />
+                        <br />
+
+                        <label for="eventDesc">Event Description</label>
+                        <textarea class="form-control" rows="3" id="eventDesc"></textarea>
+                        <small id="eventDescTime" class="form-text text-muted">Please include event start and end time in description.</small>
+                        <br />
+
+                        <label for="datepicker">Event Date</label>
+                        <input id="datepicker" width="276" />
+                        <script>
+                            $('#datepicker').datepicker({
+                                uiLibrary: 'bootstrap4'
+                            });
+                        </script>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Save</button>
             </div>
         </div>
     </div>
