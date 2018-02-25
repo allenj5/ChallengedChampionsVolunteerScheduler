@@ -293,6 +293,10 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Home\MySchedule.cshtml" />
     <Content Include="Views\Home\VolunteerCalendar.cshtml" />
+    <Content Include="Views\Home\ChangePassword.cshtml" />
+    <Content Include="Views\Home\ChangeEmailAddress.cshtml" />
+    <Content Include="Views\Home\ChangePhoneNumber.cshtml" />
+    <Content Include="Views\Home\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

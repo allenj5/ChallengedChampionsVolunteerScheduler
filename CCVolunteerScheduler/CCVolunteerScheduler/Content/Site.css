@@ -81,3 +81,22 @@ label {
 table {
     table-layout: fixed;
 }
+
+.changeemail, .forgotpwd, .changepwd, .changephone {
+    background-color: rgba(224, 221, 216, 1);
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    height: auto;
+    height: 420px
+}
+
+ .changeemail h2, .forgotpwd h2, .changepwd h2, .changephone h2 {
+        text-align: center;
+    }
+
+.changeemail p, .forgotpwd p, .changepwd p, .changephone p {
+        margin: auto;
+        text-align:left;
+    }
+

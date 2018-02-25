@@ -73,5 +73,29 @@ namespace CCVolunteerScheduler.Controllers
             };
             return View(model);
         }
+
+
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        public ActionResult ChangeEmailAddress()
+        {
+            return View();
+        }
+
+        public ActionResult ChangePhoneNumber()
+        {
+            return View();
+        }
+
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+
+
     }
 }
