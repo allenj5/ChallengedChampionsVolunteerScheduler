@@ -37,49 +37,63 @@
 </div>
 <center>
     <div class="table-responsive">
-        <table class="table">
+        <table class="calendar">
             <thead>
                 <tr>
-                    <th colspan="7" align="center">@DateTime.Now.ToString("MMMMMMMMMMMMM")</th>
+                    <th colspan="7" class="txt-center"><h2>@DateTime.Now.ToString("MMMMMMMMMMMMM")</h2></th>
                 </tr>
             </thead>
             <tbody>
-                @{ 
-                        var curDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, 1);
-                        var lastDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, DateTime.DaysInMonth(Model.StartDate.Year, Model.StartDate.Month));
+                <tr class="txt-center">
+                    <td><h6>Sunday</h6></td>
+                    <td><h6>Monday</h6></td>
+                    <td><h6>Tuesday</h6></td>
+                    <td><h6>Wednesday</h6></td>
+                    <td><h6>Thursday</h6></td>
+                    <td><h6>Friday</h6></td>
+                    <td><h6>Saturday</h6></td>
+                </tr>
+                @{
+                    var curDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, 1);
+                    var lastDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, DateTime.DaysInMonth(Model.StartDate.Year, Model.StartDate.Month));
 
-                        int daysToAdd = (int)curDay.DayOfWeek;
-                        if(daysToAdd > 0){
-                            <tr>
-                            @for (int i = daysToAdd; i > 0; i--){
-                            
-                                <td>@curDay.AddDays(-i).ToString("dd") </td>
-                                
+                    int daysToAdd = (int)curDay.DayOfWeek;
+                    if (daysToAdd > 0)
+                    {
+                        <tr>
+                            @for (int i = daysToAdd; i > 0; i--)
+                            {
+
+                                <td class="calendar-day">@curDay.AddDays(-i).ToString("dd") </td>
+
                             }
                             @for (int i = 0; i < Model.NumberOfDays - daysToAdd; i++)
                             {
-                                <td>@curDay.AddDays(i).ToString("dd") </td>
+                                <td class="calendar-day">@curDay.AddDays(i).ToString("dd") </td>
                             }
-                            </tr>
-                            curDay = curDay.AddDays(Model.NumberOfDays - daysToAdd);
-                        }
-                        for (int i = 0; i < Model.NumberOfDays; i++)
-                        {
-                            if(curDay.CompareTo(lastDay) <= 0)
-                            {
-                            <tr>
-                               @for(int j = 0; j < Model.NumberOfDays; j++)
-                               {
-                                    <td>@curDay.AddDays(j).ToString("dd")</td>
-                               }
                         </tr>
-
-                        curDay = curDay.AddDays(Model.NumberOfDays);
+                        curDay = curDay.AddDays(Model.NumberOfDays - daysToAdd);
                     }
-                }
+                    for (int i = 0; i < Model.NumberOfDays; i++)
+                    {
+                        if (curDay.CompareTo(lastDay) <= 0)
+                        {
+                            <tr>
+                                @for (int j = 0; j < Model.NumberOfDays; j++)
+                                {
+                                    <td class="calendar-day">@curDay.AddDays(j).ToString("dd")</td>
+                                }
+                            </tr>
+
+                            curDay = curDay.AddDays(Model.NumberOfDays);
+                        }
+                    }
                 }
             </tbody>
         </table>
     </div>
+    <br />
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#AddEventModal">Add Event</button>
 </center>
 <br />
