@@ -95,7 +95,10 @@ namespace CCVolunteerScheduler.Controllers
             return View();
         }
 
-
+        public ActionResult Volunteers()
+        {
+            return View();
+        }
 
     }
 }
