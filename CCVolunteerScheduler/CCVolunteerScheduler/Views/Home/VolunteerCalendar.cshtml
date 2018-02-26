@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "MySchedule";
+    ViewBag.Title = "AdminHome";
 }
 
 @section navbar {
@@ -16,10 +16,10 @@
                         <li class="nav-item">
                             @Html.ActionLink("Manage Account", "ManageAccount", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             @Html.ActionLink("View Calendar", "VolunteerCalendar", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item  active">
+                        <li class="nav-item">
                             @Html.ActionLink("My Schedule", "MySchedule", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
@@ -29,12 +29,6 @@
     </div>
 }
 <br />
-<br />
-<br />
-
-<div class="col-xs-12 col-md-12">
-    <h2>Your Upcoming Events</h2>
-</div>
 <center>
     <div class="table-responsive">
         <table class="calendar">
@@ -92,8 +86,5 @@
             </tbody>
         </table>
     </div>
-    <br />
-    <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#AddEventModal">Add Event</button>
 </center>
 <br />
