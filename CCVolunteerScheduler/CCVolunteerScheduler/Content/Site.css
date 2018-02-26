@@ -84,11 +84,15 @@ table {
 
 .changeemail, .forgotpwd, .changepwd, .changephone {
     background-color: rgba(224, 221, 216, 1);
-    margin: auto;
-    width: 50%;
+    //margin: 0 auto;
+    margin-left: auto;
+    margin-right:auto;
+    width: 500px;
     padding: 10px;
-    height: auto;
-    height: 420px
+    border: solid 2px black;
+    text-align:center;
+
+
 }
 
  .changeemail h2, .forgotpwd h2, .changepwd h2, .changephone h2 {
@@ -96,7 +100,18 @@ table {
     }
 
 .changeemail p, .forgotpwd p, .changepwd p, .changephone p {
-        margin: auto;
-        text-align:left;
+        width:100%;
+       margin: auto;
+        padding-top:20px;
     }
 
+input[type=submit] {
+    display:block;
+    margin-top:20px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.changeemail_form {
+    margin: 0 auto;
+}
