@@ -46,6 +46,12 @@ namespace CCVolunteerScheduler.Controllers
             return View();
         }
 
+        public ActionResult Communications()
+        {
+
+            return View();
+        }
+
         public ActionResult ManageAccount()
         {
 
