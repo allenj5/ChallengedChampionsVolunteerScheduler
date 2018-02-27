@@ -299,7 +299,6 @@
     <Content Include="Views\Home\ForgotPassword.cshtml" />
     <Content Include="Views\Home\Volunteers.cshtml" />
     <Content Include="Views\Home\Communications.cshtml" />
-    <Content Include="Views\Home\AddNewEvent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
