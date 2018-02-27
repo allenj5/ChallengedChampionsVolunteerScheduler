@@ -51,6 +51,14 @@
     height: 80px;
 }
 
+.cell-active {
+    background-color: #F8CD2E;
+}
+
+.cell-inactive {
+    background-color: white;
+}
+
 .chalchampbackgroundcolor {
     background-color: #F3F0EB;
 }
@@ -66,6 +74,7 @@
 
 .modal-header {
     margin: 0 auto !important;
+    /*background-color: #006543 !important;*/
 }
 
 .prompt {
@@ -80,6 +89,11 @@ label {
 
 table {
     table-layout: fixed;
+}
+
+td:hover {
+    border-width: 5px !important;
+    cursor: pointer;
 }
 
 .changeemail, .forgotpwd, .changepwd, .changephone {
@@ -115,4 +129,21 @@ input[type=submit] {
     background-color: rgba(224, 221, 216, 1);
     border: solid 2px black;
     padding: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .mobile-row {
+        visibility: hidden;
+    }
+
+    .headerSpacing {
+        margin-top: 0px;
+        margin-bottom: 30px;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    .desktop-row {
+        visibility: hidden;
+    }
 }
