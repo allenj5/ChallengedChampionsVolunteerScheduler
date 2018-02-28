@@ -13,10 +13,10 @@ namespace CCVolunteerScheduler.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class VolunteersDBEntities : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public VolunteersDBEntities()
+            : base("name=VolunteersDBEntities")
         {
         }
     

@@ -4,9 +4,9 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="ModelStoreContainer">
-          <EntitySet Name="Volunteer" EntityType="Model.Store.Volunteer" store:Type="Tables" Schema="dbo" />
+      <Schema Namespace="VolunteersDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="VolunteersDBModelStoreContainer">
+          <EntitySet Name="Volunteer" EntityType="VolunteersDBModel.Store.Volunteer" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
         <EntityType Name="Volunteer">
           <Key>
@@ -25,9 +25,9 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="Volunteers" EntityType="Model.Volunteer" />
+      <Schema Namespace="VolunteersDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="VolunteersDBEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Volunteers" EntityType="VolunteersDBModel.Volunteer" />
         </EntityContainer>
         <EntityType Name="Volunteer">
           <Key>
@@ -47,9 +47,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="VolunteersDBModelStoreContainer" CdmEntityContainer="VolunteersDBEntities">
           <EntitySetMapping Name="Volunteers">
-            <EntityTypeMapping TypeName="Model.Volunteer">
+            <EntityTypeMapping TypeName="VolunteersDBModel.Volunteer">
               <MappingFragment StoreEntitySet="Volunteer">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
