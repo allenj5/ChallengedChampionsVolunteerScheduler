@@ -90,3 +90,4 @@ C:\Users\frickc\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerSc
 C:\Users\frickc\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.csprojResolveAssemblyReference.cache
 C:\Users\frickc\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.dll
 C:\Users\frickc\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.pdb
+C:\Users\Jonathan\Documents\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.csprojResolveAssemblyReference.cache

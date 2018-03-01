@@ -36,16 +36,15 @@
 
 <div class="col-xs-12 col-md-12">
     <h2>Manage Volunteers</h2>
-    <table>
+    <table class="volunteerTable">
 
         <tr>
 
-            <th></th>
             <th>
-                FirstName
+                First Name
             </th>
             <th>
-                LastName
+                Last Name
             </th>
             <th>
                 Phone
@@ -57,10 +56,7 @@
                 Active
             </th>
             <th>
-                HoursWorked
-            </th>
-            <th>
-                Email Opt Out
+                Hours Worked
             </th>
         </tr> 
     
@@ -69,30 +65,26 @@
         <tr>
             
             <td>
-                < @Html.Encode(item.FirstName) >
+                @Html.Encode(item.FirstName)
             </td>
             <td>
-                < @Html.Encode(item.LastName) >
+                @Html.Encode(item.LastName)
             </td>
             <td>
-                < @Html.Encode(item.Phone) >
+                @Html.Encode(item.Phone)
             </td>
             <td>
-                < @Html.Encode(item.Email) >
+                @Html.Encode(item.Email)
             </td>
             <td>
-                < @Html.Encode(item.Active) >
+                @Html.Encode(item.Active)
             </td>
             <td>
-                < @Html.Encode(item.HoursWorked) >
-            </td>
-            <td>
-                < @Html.Encode(item.EmailOptOut) >
+                @Html.Encode(item.HoursWorked)
             </td>
         </tr>
 
     } 
-    }
 
     </table> 
 </div>
