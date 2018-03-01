@@ -10,6 +10,7 @@
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <a class="navbar-brand headerSpacing" href="#"></a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
@@ -35,4 +36,63 @@
 
 <div class="col-xs-12 col-md-12">
     <h2>Manage Volunteers</h2>
+    <table>
+
+        <tr>
+
+            <th></th>
+            <th>
+                FirstName
+            </th>
+            <th>
+                LastName
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Active
+            </th>
+            <th>
+                HoursWorked
+            </th>
+            <th>
+                Email Opt Out
+            </th>
+        </tr> 
+    
+    @foreach (var item in Model) {
+
+        <tr>
+            
+            <td>
+                < @Html.Encode(item.FirstName) >
+            </td>
+            <td>
+                < @Html.Encode(item.LastName) >
+            </td>
+            <td>
+                < @Html.Encode(item.Phone) >
+            </td>
+            <td>
+                < @Html.Encode(item.Email) >
+            </td>
+            <td>
+                < @Html.Encode(item.Active) >
+            </td>
+            <td>
+                < @Html.Encode(item.HoursWorked) >
+            </td>
+            <td>
+                < @Html.Encode(item.EmailOptOut) >
+            </td>
+        </tr>
+
+    } 
+    }
+
+    </table> 
 </div>
