@@ -96,6 +96,8 @@ namespace CCVolunteerScheduler.Controllers
             return View();
         }
 
+
+
         public ActionResult ForgotPassword()
         {
             return View();
@@ -105,6 +107,8 @@ namespace CCVolunteerScheduler.Controllers
         {
             return View();
         }
+
+
 
     }
 }

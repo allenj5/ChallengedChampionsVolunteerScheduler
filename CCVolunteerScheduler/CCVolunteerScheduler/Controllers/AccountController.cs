@@ -122,6 +122,23 @@ namespace CCVolunteerScheduler.Controllers
             return RedirectToAction("Manage", new { Message = message });
         }
 
+        [AllowAnonymous]
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        public ActionResult ChangePhoneNumber()
+        {
+            return View();
+        }
+
+
         //
         // GET: /Account/Manage
 

@@ -1,16 +1,22 @@
-﻿@{
-    ViewBag.Title = "ChangeEmailAddress";
+﻿@model CCVolunteerScheduler.Models.ChangeEmailAddressModel
+
+@{
+    ViewBag.Title = "Change Email Address";
 }
 
-<div class="changeemail">
-    <h4>Change Email Address</h4>
-    <form class="changeemail_form">
-        <p>New Email Address</p>
-        <input type="email" name="" placeholder="Enter new email address">
-        <p>Confirm New Email Address:</p>
-        <input type="email" name="" placeholder="Confirm new email address">
-        <p>Password:</p>
-        <input type="password" name="" placeholder="Enter your password">
-        <input type="submit" value="Submit" />
-    </form>
+<h2>@ViewBag.Title</h2>
+
+<div class="col-md-8">
+    @Html.LabelFor(model => model.NewEmailAddress)
+    @Html.EditorFor(model => model.NewEmailAddress)
+    @Html.ValidationMessageFor(model => model.NewEmailAddress)
+
+    @Html.LabelFor(model => model.ConfirmNewEmailAddress)
+    @Html.EditorFor(model => model.ConfirmNewEmailAddress)
+    @Html.ValidationMessageFor(model => model.ConfirmNewEmailAddress)
+
+    @Html.LabelFor(model => model.Password)
+    @Html.EditorFor(model => model.Password)
+    @Html.ValidationMessageFor(model => model.Password)
 </div>
+<input type="submit" value="Save" />
