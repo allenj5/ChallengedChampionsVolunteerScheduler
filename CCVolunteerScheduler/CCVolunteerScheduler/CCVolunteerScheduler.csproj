@@ -46,6 +46,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -172,6 +174,24 @@
     </Compile>
     <Compile Include="Models\CalendarModels.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Volunteer.cs">
+      <DependentUpon>Volunteers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Volunteers.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Volunteers.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Volunteers.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Volunteers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Volunteers.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Volunteers.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -231,7 +251,24 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <EntityDeploy Include="Models\Volunteers.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Volunteers.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Volunteers.edmx.diagram">
+      <DependentUpon>Volunteers.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Models\Volunteers.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Volunteers.edmx</DependentUpon>
+      <LastGenOutput>Volunteers.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Volunteers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Volunteers.edmx</DependentUpon>
+      <LastGenOutput>Volunteers.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -305,6 +342,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
