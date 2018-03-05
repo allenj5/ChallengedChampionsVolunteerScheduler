@@ -10,7 +10,7 @@
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" id="headerSpacing" href="#"></a>
+                <a class="navbar-brand headerSpacing" href="#"></a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
@@ -44,7 +44,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="txt-center">
+                <tr class="txt-center mobile-row">
                     <td><h6>Sunday</h6></td>
                     <td><h6>Monday</h6></td>
                     <td><h6>Tuesday</h6></td>
@@ -52,6 +52,15 @@
                     <td><h6>Thursday</h6></td>
                     <td><h6>Friday</h6></td>
                     <td><h6>Saturday</h6></td>
+                </tr>
+                <tr class="txt-center desktop-row">
+                    <td><h6>S</h6></td>
+                    <td><h6>M</h6></td>
+                    <td><h6>T</h6></td>
+                    <td><h6>W</h6></td>
+                    <td><h6>T</h6></td>
+                    <td><h6>F</h6></td>
+                    <td><h6>S</h6></td>
                 </tr>
                 @{
                     var curDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, 1);
@@ -63,13 +72,26 @@
                         <tr>
                             @for (int i = daysToAdd; i > 0; i--)
                             {
-
-                                <td class="calendar-day">@curDay.AddDays(-i).ToString("dd") </td>
+                                if (DateTime.Compare(curDay.AddDays(-i).Date, DateTime.Today) == 0)
+                                {
+                                    <td class="calendar-day cell-active">@curDay.AddDays(-i).ToString("dd") </td>
+                                }
+                                else
+                                {
+                                    <td class="calendar-day cell-inactive">@curDay.AddDays(-i).ToString("dd") </td>
+                                }
 
                             }
                             @for (int i = 0; i < Model.NumberOfDays - daysToAdd; i++)
                             {
-                                <td class="calendar-day">@curDay.AddDays(i).ToString("dd") </td>
+                                if (DateTime.Compare(curDay.AddDays(i).Date, DateTime.Today) == 0)
+                                {
+                                    <td class="calendar-day cell-active">@curDay.AddDays(i).ToString("dd") </td>
+                                }
+                                else
+                                {
+                                    <td class="calendar-day cell-inactive">@curDay.AddDays(i).ToString("dd") </td>
+                                }
                             }
                         </tr>
                         curDay = curDay.AddDays(Model.NumberOfDays - daysToAdd);
@@ -81,7 +103,14 @@
                             <tr>
                                 @for (int j = 0; j < Model.NumberOfDays; j++)
                                 {
-                                    <td class="calendar-day">@curDay.AddDays(j).ToString("dd")</td>
+                                    if (DateTime.Compare(curDay.AddDays(j).Date, DateTime.Today) == 0)
+                                    {
+                                        <td class="calendar-day cell-active">@curDay.AddDays(j).ToString("dd") </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="calendar-day cell-inactive">@curDay.AddDays(j).ToString("dd") </td>
+                                    }
                                 }
                             </tr>
 

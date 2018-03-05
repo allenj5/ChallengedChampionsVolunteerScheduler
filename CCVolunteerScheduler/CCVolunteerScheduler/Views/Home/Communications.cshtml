@@ -1,0 +1,115 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Communications";
+}
+
+@section navbar {
+    <div class="row container">
+        <div class="col-xs-12 col-md-12">
+            <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand headerSpacing" href="#"></a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            @Html.ActionLink("Home", "AdminHome", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Calendar", "AdminCalendar", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            @Html.ActionLink("Communications", "Communications", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Volunteers", "Volunteers", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+}
+<br />
+<br />
+<br />
+
+<center>
+    <div class="container">
+        <div class="col-xs-12 col-md-12">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#EmailAllModal">Email All Volunteers</button>
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="container">
+        <div class="col-xs-12 col-md-12">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#EmailWorkingModal">Email All Volunteers Working Today</button>
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="container">
+        <div class="col-xs-12 col-md-12">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#TextVolunteersModal">Text All Volunteers</button>
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+<div class="container">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5 text-right text-phoneCenter">
+                <label for="reminderTime" class="col-md-6 col-lg-6">Auto Reminders:</label>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 text-left">
+                <select class="form-control col-md-6 col-lg-6" id="reminderTime">
+                    <option value="0">12:00am</option>
+                    <option value="1">1:00am</option>
+                    <option value="2">2:00am</option>
+                    <option value="3">3:00am</option>
+                    <option value="4">4:00am</option>
+                    <option value="5">5:00am</option>
+                    <option value="6">6:00am</option>
+                    <option value="7">7:00am</option>
+                    <option value="8">8:00am</option>
+                    <option value="9">9:00am</option>
+                    <option value="10">10:00am</option>
+                    <option value="11">11:00am</option>
+                    <option value="12">12:00pm</option>
+                    <option value="13">1:00pm</option>
+                    <option value="14">2:00pm</option>
+                    <option value="15">3:00pm</option>
+                    <option value="16">4:00pm</option>
+                    <option value="17">5:00pm</option>
+                    <option value="18">6:00pm</option>
+                    <option value="19">7:00pm</option>
+                    <option value="20">8:00pm</option>
+                    <option value="21">9:00pm</option>
+                    <option value="22">10:00pm</option>
+                    <option value="23">11:00pm</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+    <div class="container">
+        <div class="col-xs-12 col-md-12">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#SaveChangesModal">Save Changes</button>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+</center>
