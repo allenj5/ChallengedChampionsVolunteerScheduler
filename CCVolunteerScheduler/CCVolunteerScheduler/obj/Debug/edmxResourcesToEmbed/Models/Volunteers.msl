@@ -4,6 +4,8 @@
     <EntitySetMapping Name="Volunteers">
       <EntityTypeMapping TypeName="VolunteersDBModel.Volunteer">
         <MappingFragment StoreEntitySet="Volunteer">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -15,5 +17,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Validate_User" FunctionName="VolunteersDBModel.Store.Validate_User" />
+    <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="VolunteersDBModel.Store.Validate_User" />
   </EntityContainerMapping>
 </Mapping>

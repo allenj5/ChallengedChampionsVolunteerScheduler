@@ -22,5 +22,7 @@ namespace CCVolunteerScheduler.Models
         public bool Active { get; set; }
         public Nullable<int> HoursWorked { get; set; }
         public bool EmailOptOut { get; set; }
+        public Nullable<bool> isAdmin { get; set; }
+        public string Password { get; set; }
     }
 }

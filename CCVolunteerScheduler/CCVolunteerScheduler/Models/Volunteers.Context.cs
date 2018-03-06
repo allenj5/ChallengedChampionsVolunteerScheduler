@@ -12,6 +12,9 @@ namespace CCVolunteerScheduler.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class VolunteersDBEntities : DbContext
     {
@@ -26,5 +29,31 @@ namespace CCVolunteerScheduler.Models
         }
     
         public DbSet<Volunteer> Volunteers { get; set; }
+    
+        public virtual ObjectResult<string> Validate_User(Nullable<int> userID, string password)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Validate_User", userIDParameter, passwordParameter);
+        }
+    
+        public virtual ObjectResult<string> ValidateUser(Nullable<int> userID, string password)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ValidateUser", userIDParameter, passwordParameter);
+        }
     }
 }
