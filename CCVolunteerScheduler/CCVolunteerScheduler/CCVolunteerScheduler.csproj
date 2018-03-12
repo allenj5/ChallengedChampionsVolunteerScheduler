@@ -174,7 +174,7 @@
     </Compile>
     <Compile Include="Models\CalendarModels.cs" />
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\LoginModels.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Volunteer.cs">
       <DependentUpon>Volunteers.tt</DependentUpon>
     </Compile>
@@ -363,7 +363,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>60379</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:61143/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
