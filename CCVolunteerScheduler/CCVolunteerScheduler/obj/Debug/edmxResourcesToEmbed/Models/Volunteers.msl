@@ -19,5 +19,6 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="Validate_User" FunctionName="VolunteersDBModel.Store.Validate_User" />
     <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="VolunteersDBModel.Store.Validate_User" />
+    <FunctionImportMapping FunctionImportName="Check_Admin" FunctionName="VolunteersDBModel.Store.Check_Admin" />
   </EntityContainerMapping>
 </Mapping>

@@ -35,7 +35,12 @@ namespace CCVolunteerScheduler.Controllers
             }
             else
             {
-                return RedirectToAction("Home");
+                string adminUser = _db.Check_Admin(user.Username).FirstOrDefault();
+
+                if (adminUser == "true")
+                    return RedirectToAction("AdminHome", "Home");
+                else
+                    return RedirectToAction("MySchedule", "Home");
             }
 
             ViewBag.Message = message;

@@ -15,6 +15,5 @@ namespace CCVolunteerScheduler.Models
 
         [Required(ErrorMessage = "Password required.")]
         public string Password { get; set; }
-
     }
 }

@@ -10,6 +10,9 @@
       <Parameter Name="UserID" Mode="In" Type="Int32" />
       <Parameter Name="Password" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="Check_Admin" ReturnType="Collection(String)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Volunteer">
     <Key>
