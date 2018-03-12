@@ -104,41 +104,6 @@ td:hover {
     cursor: pointer;
 }
 
-.changeemail, .forgotpwd, .changepwd, .changephone {
-    //background-color: rgba(224, 221, 216, 1);
-    //border: solid 2px black;
-    //margin: 0 auto;
-  //  margin-left: auto;
-   // margin-right: auto;
-    //width: 500px;
-    padding: 10px;
-    text-align: center;
-}
-
- .changeemail h2, .forgotpwd h2, .changepwd h2, .changephone h2 {
-        text-align: center;
-    }
-
-.changeemail p, .forgotpwd p, .changepwd p, .changephone p {
-        width:100%;
-       margin: auto;
-        padding-top:20px;
-    }
-
-input[type=submit] {
-    display:block;
-    margin-top:20px;
-    margin-left:auto;
-    margin-right:auto;
-}
-
-.changeemail_form, .forgotpwd_form, .changepwd_form, .changephone_form{
-    //margin: 0 auto;
-    background-color: rgba(224, 221, 216, 1);
-    border: solid 2px black;
-    padding: 10px;
-}
-
 @media only screen and (max-width: 768px) {
     .mobile-row {
         visibility: hidden;
@@ -154,4 +119,13 @@ input[type=submit] {
     .desktop-row {
         visibility: hidden;
     }
+}
+
+.changePhone label {
+    text-align: center !important;
+}
+
+.changePhone input[type=submit] {
+    display: block !important;
+    text-align: center;
 }

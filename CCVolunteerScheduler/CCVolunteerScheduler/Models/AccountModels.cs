@@ -115,6 +115,7 @@ namespace CCVolunteerScheduler.Models
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
         public string NewPassword { get; set; }
+       
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]

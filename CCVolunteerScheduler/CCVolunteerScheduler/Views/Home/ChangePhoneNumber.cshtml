@@ -6,13 +6,9 @@
 
 <h2>@ViewBag.Title</h2>
 
-<div class="col-md-8">
-    @Html.LabelFor(model => model.PhoneNumber)
-    @Html.EditorFor(model => model.PhoneNumber)
-    @Html.ValidationMessageFor(model => model.PhoneNumber)
-
-    @Html.LabelFor(model => model.Password)
-    @Html.EditorFor(model => model.Password)
-    @Html.ValidationMessageFor(model => model.Password)
+<div class="changePhone">
+    @Html.LabelFor(model => model.NewPhoneNumber)
+    @Html.EditorFor(model => model.NewPhoneNumber)
+    @Html.ValidationMessageFor(model => model.NewPhoneNumber)
+    <input type="submit" value="Save" />
 </div>
-<input type="submit" value="Save" />
