@@ -87,6 +87,17 @@ namespace CCVolunteerScheduler.Controllers
             return View();
         }
 
+        //ComputeHash code will be needed here to check the old password, and to hash/salt the new password entered
+        /* 
+             -make sure using CCVolunteerScheduler.Models is called in your file
+             -To hash the old password to check the database and hash the new password, add these 2 lines of code to your function:
+         
+                var salt = new Byte[16];
+                string hashedPassword = HashingSaltModel.ComputeHash(user.Password, new SHA256CryptoServiceProvider(), salt);
+        
+              
+         */
+
         public ActionResult ChangeEmailAddress()
         {
             return View();
@@ -110,6 +121,15 @@ namespace CCVolunteerScheduler.Controllers
             ViewData.Model = _db.Volunteers.ToList();
             return View();
         }
+
+        //function for volunteer table to Hash passwords for new accounts added by the admin
+        /*         
+              -make sure using CCVolunteerScheduler.Models is called in your file
+              -To hash the password for the new account before adding it to the database, add these two lines of code to your function:
+         
+              var salt = new Byte[16];
+              string hashedPassword = HashingSaltModel.ComputeHash(user.Password, new SHA256CryptoServiceProvider(), salt);         
+         */
 
 
 
