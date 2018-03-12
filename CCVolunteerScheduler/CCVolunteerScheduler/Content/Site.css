@@ -93,13 +93,14 @@ table {
 
 .volunteerTable {
     border-collapse: collapse;
+    width: 100%;
 }
 
 .volunteerTable, .volunteerTable th, .volunteerTable td {
     border: 1px solid black;
 }
 
-td:hover {
+calendar td:hover {
     border-width: 5px !important;
     cursor: pointer;
 }
