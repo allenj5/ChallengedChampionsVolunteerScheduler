@@ -9,7 +9,7 @@
 
         <h2>@ViewBag.Title</h2>
 
-        <table border="0" cellpadding="5" cellspacing="0">
+        <table border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td>
                     New Email Address
@@ -55,12 +55,12 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryval")
         @if (@ViewBag.Message != null)
-        {
-            <script type="text/javascript">
+    {
+        <script type="text/javascript">
             $(function () {
                 alert("@ViewBag.Message")
             });
-            </script>
-        }
+        </script>
+}
     </body>
 </center>
