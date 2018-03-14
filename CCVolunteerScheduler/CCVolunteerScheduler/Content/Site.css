@@ -18,9 +18,10 @@
     text-align: center;
 }
 
-#headerSpacing {
-    margin-top: 0px;
-    margin-bottom: 30px;
+.blackBackground {
+    background-color: #292B2C;
+    padding: 0 !important;
+    margin-right: 0 !important;
 }
 
 .bold-under {
@@ -40,7 +41,7 @@
 .calendar {
     border-spacing: 5px;
     border-collapse: separate;
-    width: 98%;
+    width: 90% !important;
 }
 
 .calendar-day {
