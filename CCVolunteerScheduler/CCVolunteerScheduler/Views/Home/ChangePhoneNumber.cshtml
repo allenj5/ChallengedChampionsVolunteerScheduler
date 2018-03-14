@@ -6,9 +6,11 @@
 
 <h2>@ViewBag.Title</h2>
 
+<center>
 <div class="changePhone">
     @Html.LabelFor(model => model.NewPhoneNumber)
     @Html.EditorFor(model => model.NewPhoneNumber)
     @Html.ValidationMessageFor(model => model.NewPhoneNumber)
     <input type="submit" value="Save" />
 </div>
+</center>
