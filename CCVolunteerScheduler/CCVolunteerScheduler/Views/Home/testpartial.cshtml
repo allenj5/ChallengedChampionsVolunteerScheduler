@@ -1,0 +1,30 @@
+﻿﻿@{
+    Layout = null;
+}
+<form>
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" id="firstName" value="@Html.Encode(Model.FirstName)" />
+        <br />
+
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" id="lastName" value="@Html.Encode(Model.LastName)" />
+        <br />
+
+        <label for="phone">Phone</label>
+        <input type="text" class="form-control" id="phone" value="@Html.Encode(Model.Phone)"/>
+        <br />
+
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" value="@Html.Encode(Model.Email)" />
+        <br />
+
+        <label for="active">Active</label>
+        <input type="text" class="form-control" id="active" value="@Html.Encode(Model.Active)" />
+        <br />
+
+        <label for="hoursWorked">Hours Worked</label>
+        <input type="text" class="form-control" id="hoursWorked" value="@Html.Encode(Model.HoursWorked)"/>
+        <br />
+    </div>
+</form>

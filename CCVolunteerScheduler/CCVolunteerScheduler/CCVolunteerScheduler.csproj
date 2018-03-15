@@ -340,6 +340,7 @@
     <Content Include="Views\Home\Communications.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ChangeEmailAddress.cshtml" />
+    <Content Include="Views\Home\testpartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
