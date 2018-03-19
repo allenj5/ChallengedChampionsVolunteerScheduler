@@ -126,7 +126,7 @@ namespace CCVolunteerScheduler.Controllers
             VolunteersDBEntities _db = new VolunteersDBEntities();
             var volunteerList = _db.Volunteers.ToList();
             var Model = volunteerList.Where(x => x.ID == id).FirstOrDefault();
-            return PartialView("testpartial", Model);
+            return PartialView("EditVolunteerPartial", Model);
         }
 
         //function for volunteer table to Hash passwords for new accounts added by the admin
