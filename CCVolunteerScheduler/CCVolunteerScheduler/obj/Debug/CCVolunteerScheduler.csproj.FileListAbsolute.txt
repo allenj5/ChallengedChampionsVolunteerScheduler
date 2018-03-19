@@ -287,3 +287,4 @@ C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerSche
 C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.dll
 C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.pdb
 C:\Users\frickc\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.csprojResolveAssemblyReference.cache
+C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler2\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.csproj.CopyComplete
