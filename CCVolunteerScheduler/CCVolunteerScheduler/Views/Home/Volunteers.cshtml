@@ -58,6 +58,9 @@
             <th>
                 Hours Worked
             </th>
+            <th>
+                Position
+            </th>
         </tr> 
     
     @foreach (var item in Model) {
@@ -82,7 +85,9 @@
             <td>
                 @Html.Encode(item.HoursWorked)
             </td>
-
+            <td>
+                @Html.Encode(item.Position)
+            </td>
             <td>
                 <!-- Trigger the modal with a button -->
                 <button type="button" class="btn btn-info" onclick="Open(@item.ID)" data-toggle="modal" data-target="#EditVolunteerModal">Edit</button>

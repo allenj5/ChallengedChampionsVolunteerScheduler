@@ -28,5 +28,6 @@
     <Property Name="EmailOptOut" Type="Boolean" Nullable="false" />
     <Property Name="isAdmin" Type="Boolean" />
     <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Position" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

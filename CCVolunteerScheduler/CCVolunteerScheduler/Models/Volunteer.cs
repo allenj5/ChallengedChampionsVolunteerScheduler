@@ -38,6 +38,8 @@ public partial class Volunteer
 
     public string Password { get; set; }
 
+    public string Position { get; set; }
+
 }
 
 }
