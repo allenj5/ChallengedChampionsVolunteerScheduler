@@ -175,7 +175,22 @@
     <Compile Include="Models\CalendarModels.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Event.cs">
-      <DependentUpon>Volunteers.tt</DependentUpon>
+      <DependentUpon>Events.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Events.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Events.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Events.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Events.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Events.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Events.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\HashingSaltModel.cs" />
     <Compile Include="Models\User.cs" />
@@ -260,8 +275,25 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Volunteers.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Models\Events.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Events.edmx</DependentUpon>
+      <LastGenOutput>Events.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Events.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Events.edmx</DependentUpon>
+      <LastGenOutput>Events.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\Volunteers.edmx.diagram">
       <DependentUpon>Volunteers.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\Events.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Events.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Events.edmx.diagram">
+      <DependentUpon>Events.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Models\Volunteers.Context.tt">
