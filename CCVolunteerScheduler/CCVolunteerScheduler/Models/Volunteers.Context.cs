@@ -38,6 +38,8 @@ public partial class VolunteersDBEntities : DbContext
 
     public DbSet<Volunteer> Volunteers { get; set; }
 
+    public DbSet<Event> Events { get; set; }
+
 
     public virtual ObjectResult<string> Validate_User(Nullable<int> userID, string password)
     {

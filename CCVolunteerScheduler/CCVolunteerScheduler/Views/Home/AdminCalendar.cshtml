@@ -138,7 +138,6 @@
 
                         <label for="eventDesc">Event Description</label>
                         <textarea class="form-control" rows="3" id="eventDesc"></textarea>
-                        <small id="eventDescTime" class="form-text text-muted">Please include event start and end time in description.</small>
                         <br />
 
                         <label for="datepicker">Event Date</label>
@@ -148,6 +147,15 @@
                                 uiLibrary: 'bootstrap4'
                             });
                         </script>
+                        <br />
+
+                        <small id="eventTimeDesc" class="form-text text-muted">Please format times as follows: HH:MM (6:00 for 6:00 AM or 18:00 for 6:00 PM)</small>
+                        <label for="eventStart">Start Time</label>
+                        <input type="text" class="form-control" id="eventStart" />
+                        <br />
+
+                        <label for="eventEnd">End Time</label>
+                        <input type="text" class="form-control" id="eventEnd" />
                     </div>
                 </form>
             </div>

@@ -174,6 +174,9 @@
     </Compile>
     <Compile Include="Models\CalendarModels.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Event.cs">
+      <DependentUpon>Volunteers.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HashingSaltModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Volunteer.cs">

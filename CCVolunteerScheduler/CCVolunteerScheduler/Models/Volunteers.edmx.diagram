@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="2aab8fc9e60e41eb9372fce9c0ee84a3" Name="Diagram1">
         <EntityTypeShape EntityType="VolunteersDBModel.Volunteer" Width="1.5" PointX="0.625" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VolunteersDBModel.Event" Width="1.5" PointX="2.875" PointY="1.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
