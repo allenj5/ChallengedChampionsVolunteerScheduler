@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using CCVolunteerScheduler.Models;
 using System.Web.Security;
+using System.Security.Cryptography; 
 
 namespace CCVolunteerScheduler.Controllers
 {
@@ -25,7 +26,12 @@ namespace CCVolunteerScheduler.Controllers
         public ActionResult Login(User user)
         {
             VolunteersDBEntities _db = new VolunteersDBEntities();
-            string userId = _db.ValidateUser(user.Username, user.Password).FirstOrDefault();
+
+            //ComputeHash code here to check with the database
+            var salt = new Byte[16];
+            string hashedPassword = HashingSaltModel.ComputeHash(user.Password, new SHA256CryptoServiceProvider(), salt);
+
+            string userId = _db.ValidateUser(user.Username, hashedPassword).FirstOrDefault();
 
             string message = string.Empty;
 
@@ -35,7 +41,12 @@ namespace CCVolunteerScheduler.Controllers
             }
             else
             {
-                return RedirectToAction("Home");
+                string adminUser = _db.Check_Admin(user.Username).FirstOrDefault();
+
+                if (adminUser == "true")
+                    return RedirectToAction("AdminHome", "Home");
+                else
+                    return RedirectToAction("MySchedule", "Home");
             }
 
             ViewBag.Message = message;

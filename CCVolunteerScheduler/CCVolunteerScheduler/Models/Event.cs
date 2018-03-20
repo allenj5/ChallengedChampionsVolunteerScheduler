@@ -15,30 +15,20 @@ namespace CCVolunteerScheduler.Models
 using System;
     using System.Collections.Generic;
     
-public partial class Volunteer
+public partial class Event
 {
 
-    public int ID { get; set; }
+    public int Event_ID { get; set; }
 
-    public string FirstName { get; set; }
+    public string Event_Title { get; set; }
 
-    public string LastName { get; set; }
+    public string Event_Description { get; set; }
 
-    public Nullable<int> Phone { get; set; }
+    public System.DateTime Event_Date { get; set; }
 
-    public string Email { get; set; }
+    public System.TimeSpan Start_Time { get; set; }
 
-    public bool Active { get; set; }
-
-    public Nullable<int> HoursWorked { get; set; }
-
-    public bool EmailOptOut { get; set; }
-
-    public Nullable<bool> isAdmin { get; set; }
-
-    public string Password { get; set; }
-
-    public string Position { get; set; }
+    public System.TimeSpan End_Time { get; set; }
 
 }
 

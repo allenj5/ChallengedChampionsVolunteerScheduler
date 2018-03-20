@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Volunteers";
 }
@@ -58,6 +58,9 @@
             <th>
                 Hours Worked
             </th>
+            <th>
+                Position
+            </th>
         </tr> 
     
     @foreach (var item in Model) {
@@ -82,9 +85,89 @@
             <td>
                 @Html.Encode(item.HoursWorked)
             </td>
+            <td>
+                @Html.Encode(item.Position)
+            </td>
+            <td>
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn btn-info" onclick="Open(@item.ID)" data-toggle="modal" data-target="#EditVolunteerModal">Edit</button>
+            </td>
         </tr>
 
     } 
 
     </table> 
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#AddVolunteerModal">Add Volunteer</button>
 </div>
+
+<!-- Modal -->
+<div id="AddVolunteerModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Volunteer</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" />
+                        <br />
+
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" />
+                        <br />
+
+                        <label for="phone">Phone</label>
+                        <input type="text" class="form-control" id="phone" />
+                        <br />
+
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" />
+                        <br />
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="EditVolunteerModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Volunteer</h4>
+            </div>
+            <div class="modal-body" id="Preview">
+                @*PartialView*@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function Open(currentId) {
+        jQuery.noConflict();
+        (function ($) {
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("GetDetail", "home")',
+                data: { id: currentId },
+                success: function (data) {
+                    $('#Preview').html(data);
+                }
+            })
+        })(jQuery);
+    }
+</script>

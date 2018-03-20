@@ -10,11 +10,10 @@ namespace CCVolunteerScheduler.Models
     {
         public int UserID { get; set; }
 
-        [Required(ErrorMessage ="Username required.")]
+        [Required(ErrorMessage = "Username required.")]
         public int Username { get; set; }
 
         [Required(ErrorMessage = "Password required.")]
         public string Password { get; set; }
-
     }
 }

@@ -5,32 +5,28 @@
 
 
 @section navbar {
-    <div class="row container">
-        <div class="col-xs-12 col-md-12">
-            <nav class="navbar navbar-toggleable navbar-inverse bg-inverse">
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <a class="navbar-brand headerSpacing" href="#"></a>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            @Html.ActionLink("Home", "AdminHome", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span>
-                        </li>
-                        <li class="nav-item active">
-                            @Html.ActionLink("Calendar", "AdminCalendar", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span>
-                        </li>
-                        <li class="nav-item">
-                            @Html.ActionLink("Communications", "Communications", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span>
-                        </li>
-                        <li class="nav-item">
-                            @Html.ActionLink("Volunteers", "Volunteers", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse rounded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand headerSpacing" href="#"></a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    @Html.ActionLink("Home", "AdminHome", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    @Html.ActionLink("Calendar", "AdminCalendar", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Communications", "Communications", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Volunteers", "Volunteers", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
         </div>
-    </div>
+    </nav>
 }
 <br />
 <center>
@@ -142,7 +138,6 @@
 
                         <label for="eventDesc">Event Description</label>
                         <textarea class="form-control" rows="3" id="eventDesc"></textarea>
-                        <small id="eventDescTime" class="form-text text-muted">Please include event start and end time in description.</small>
                         <br />
 
                         <label for="datepicker">Event Date</label>
@@ -152,6 +147,15 @@
                                 uiLibrary: 'bootstrap4'
                             });
                         </script>
+                        <br />
+
+                        <small id="eventTimeDesc" class="form-text text-muted">Please format times as follows: HH:MM (6:00 for 6:00 AM or 18:00 for 6:00 PM)</small>
+                        <label for="eventStart">Start Time</label>
+                        <input type="text" class="form-control" id="eventStart" />
+                        <br />
+
+                        <label for="eventEnd">End Time</label>
+                        <input type="text" class="form-control" id="eventEnd" />
                     </div>
                 </form>
             </div>

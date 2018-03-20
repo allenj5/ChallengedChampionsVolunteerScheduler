@@ -5,6 +5,23 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="VolunteersDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view '480-ChallengedChampions-18.dbo.Events' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="Event ID" />
+            <PropertyRef Name="Event Title" />
+            <PropertyRef Name="Event Date" />
+            <PropertyRef Name="Start Time" />
+            <PropertyRef Name="End Time" />
+          </Key>
+          <Property Name="Event ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Event Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Event Description" Type="varchar" MaxLength="200" />
+          <Property Name="Event Date" Type="date" Nullable="false" />
+          <Property Name="Start Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="End Time" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
         <EntityType Name="Volunteer">
           <Key>
             <PropertyRef Name="ID" />
@@ -19,13 +36,27 @@
           <Property Name="EmailOptOut" Type="bit" Nullable="false" />
           <Property Name="isAdmin" Type="bit" />
           <Property Name="Password" Type="text" />
+          <Property Name="Position" Type="varchar" MaxLength="30" />
         </EntityType>
+        <Function Name="Check_Admin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
         <Function Name="Validate_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
           <Parameter Name="Password" Type="text" Mode="In" />
         </Function>
         <EntityContainer Name="VolunteersDBModelStoreContainer">
           <EntitySet Name="Volunteer" EntityType="Self.Volunteer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Events].[Event ID] AS [Event ID], 
+[Events].[Event Title] AS [Event Title], 
+[Events].[Event Description] AS [Event Description], 
+[Events].[Event Date] AS [Event Date], 
+[Events].[Start Time] AS [Start Time], 
+[Events].[End Time] AS [End Time]
+FROM [dbo].[Events] AS [Events]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -41,6 +72,10 @@
             <Parameter Name="UserID" Mode="In" Type="Int32" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="Check_Admin" ReturnType="Collection(String)">
+          <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Events" EntityType="VolunteersDBModel.Event" />
         </EntityContainer>
         <EntityType Name="Volunteer">
           <Key>
@@ -56,6 +91,22 @@
           <Property Name="EmailOptOut" Type="Boolean" Nullable="false" />
           <Property Name="isAdmin" Type="Boolean" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Position" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Event_ID" />
+            <PropertyRef Name="Event_Title" />
+            <PropertyRef Name="Event_Date" />
+            <PropertyRef Name="Start_Time" />
+            <PropertyRef Name="End_Time" />
+          </Key>
+          <Property Name="Event_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Event_Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Event_Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Event_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Start_Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="End_Time" Type="Time" Nullable="false" Precision="7" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -66,6 +117,7 @@
           <EntitySetMapping Name="Volunteers">
             <EntityTypeMapping TypeName="VolunteersDBModel.Volunteer">
               <MappingFragment StoreEntitySet="Volunteer">
+                <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -81,6 +133,19 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Validate_User" FunctionName="VolunteersDBModel.Store.Validate_User" />
           <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="VolunteersDBModel.Store.Validate_User" />
+          <FunctionImportMapping FunctionImportName="Check_Admin" FunctionName="VolunteersDBModel.Store.Check_Admin" />
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="VolunteersDBModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="End_Time" ColumnName="End Time" />
+                <ScalarProperty Name="Start_Time" ColumnName="Start Time" />
+                <ScalarProperty Name="Event_Date" ColumnName="Event Date" />
+                <ScalarProperty Name="Event_Description" ColumnName="Event Description" />
+                <ScalarProperty Name="Event_Title" ColumnName="Event Title" />
+                <ScalarProperty Name="Event_ID" ColumnName="Event ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
