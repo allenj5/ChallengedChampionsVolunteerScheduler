@@ -36,17 +36,17 @@ public partial class VolunteersDBEntities : DbContext
     }
 
 
-    public DbSet<Volunteer> Volunteers { get; set; }
-
     public DbSet<Event> Events { get; set; }
 
+    public DbSet<Volunteer> Volunteers { get; set; }
 
-    public virtual ObjectResult<string> Validate_User(Nullable<int> userID, string password)
+
+    public virtual ObjectResult<string> Validate_User(Nullable<long> userID, string password)
     {
 
         var userIDParameter = userID.HasValue ?
             new ObjectParameter("UserID", userID) :
-            new ObjectParameter("UserID", typeof(int));
+            new ObjectParameter("UserID", typeof(long));
 
 
         var passwordParameter = password != null ?
@@ -58,12 +58,12 @@ public partial class VolunteersDBEntities : DbContext
     }
 
 
-    public virtual ObjectResult<string> ValidateUser(Nullable<int> userID, string password)
+    public virtual ObjectResult<string> ValidateUser(Nullable<long> userID, string password)
     {
 
         var userIDParameter = userID.HasValue ?
             new ObjectParameter("UserID", userID) :
-            new ObjectParameter("UserID", typeof(int));
+            new ObjectParameter("UserID", typeof(long));
 
 
         var passwordParameter = password != null ?
@@ -84,6 +84,75 @@ public partial class VolunteersDBEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Check_Admin", userIDParameter);
+    }
+
+
+    public virtual int Insert_Event(string event_Title, string event_Description, Nullable<System.DateTime> event_Date, Nullable<System.TimeSpan> start_Time, Nullable<System.TimeSpan> end_Time)
+    {
+
+        var event_TitleParameter = event_Title != null ?
+            new ObjectParameter("Event_Title", event_Title) :
+            new ObjectParameter("Event_Title", typeof(string));
+
+
+        var event_DescriptionParameter = event_Description != null ?
+            new ObjectParameter("Event_Description", event_Description) :
+            new ObjectParameter("Event_Description", typeof(string));
+
+
+        var event_DateParameter = event_Date.HasValue ?
+            new ObjectParameter("Event_Date", event_Date) :
+            new ObjectParameter("Event_Date", typeof(System.DateTime));
+
+
+        var start_TimeParameter = start_Time.HasValue ?
+            new ObjectParameter("Start_Time", start_Time) :
+            new ObjectParameter("Start_Time", typeof(System.TimeSpan));
+
+
+        var end_TimeParameter = end_Time.HasValue ?
+            new ObjectParameter("End_Time", end_Time) :
+            new ObjectParameter("End_Time", typeof(System.TimeSpan));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_Event", event_TitleParameter, event_DescriptionParameter, event_DateParameter, start_TimeParameter, end_TimeParameter);
+    }
+
+
+    public virtual int Update_Volunteer(Nullable<int> userID, string firstName, string lastName, string phone, string email, Nullable<int> hoursWorked)
+    {
+
+        var userIDParameter = userID.HasValue ?
+            new ObjectParameter("UserID", userID) :
+            new ObjectParameter("UserID", typeof(int));
+
+
+        var firstNameParameter = firstName != null ?
+            new ObjectParameter("FirstName", firstName) :
+            new ObjectParameter("FirstName", typeof(string));
+
+
+        var lastNameParameter = lastName != null ?
+            new ObjectParameter("LastName", lastName) :
+            new ObjectParameter("LastName", typeof(string));
+
+
+        var phoneParameter = phone != null ?
+            new ObjectParameter("Phone", phone) :
+            new ObjectParameter("Phone", typeof(string));
+
+
+        var emailParameter = email != null ?
+            new ObjectParameter("Email", email) :
+            new ObjectParameter("Email", typeof(string));
+
+
+        var hoursWorkedParameter = hoursWorked.HasValue ?
+            new ObjectParameter("HoursWorked", hoursWorked) :
+            new ObjectParameter("HoursWorked", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_Volunteer", userIDParameter, firstNameParameter, lastNameParameter, phoneParameter, emailParameter, hoursWorkedParameter);
     }
 
 }
