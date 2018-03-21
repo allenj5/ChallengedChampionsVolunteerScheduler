@@ -29,7 +29,7 @@
     </nav>
 }
 <br />
-<center>
+<center onload="setActiveCell()">
     <div class="table-responsive">
         <table class="calendar">
             <thead>
@@ -66,29 +66,21 @@
                         <tr>
                             @for (int i = daysToAdd; i > 0; i--)
                             {
-                                if (DateTime.Compare(curDay.AddDays(-i).Date, DateTime.Today) == 0)
-                                {
-                                    <td class="calendar-day cell-active">@curDay.AddDays(-i).ToString("dd") </td>
-                                }
-                                else
-                                {
-                                    <td class="calendar-day cell-inactive">@curDay.AddDays(-i).ToString("dd") </td>
-                                }
+                                <td class="calendar-day cell-inactive" >@curDay.AddDays(-i).ToString("dd")
+                                    <!--- no need for events since not current month --->
+                                </td>
 
                             }
                             @for (int i = 0; i < Model.NumberOfDays - daysToAdd; i++)
                             {
-                                if (DateTime.Compare(curDay.AddDays(i).Date, DateTime.Today) == 0)
-                                {
-                                    <td class="calendar-day cell-active">@curDay.AddDays(i).ToString("dd") </td>
-                                }
-                                else
-                                {
-                                    <td class="calendar-day cell-inactive">@curDay.AddDays(i).ToString("dd") </td>
-                                }
+                                <td class="calendar-day cell-inactive" >@curDay.AddDays(i).ToString("dd")
+                                    <div id="@("date" + curDay.AddDays(i).ToString("dd"))" onload="getEvents(@(curDay.AddDays(i).ToString("dd")))"> 
+                                        @*PartialView*@
+                                    </div>
+                                </td>
                             }
-                        </tr>
-                        curDay = curDay.AddDays(Model.NumberOfDays - daysToAdd);
+                         </tr>
+                         curDay = curDay.AddDays(Model.NumberOfDays - daysToAdd);
                     }
                     for (int i = 0; i < Model.NumberOfDays; i++)
                     {
@@ -97,14 +89,10 @@
                             <tr>
                                 @for (int j = 0; j < Model.NumberOfDays; j++)
                                 {
-                                    if (DateTime.Compare(curDay.AddDays(j).Date, DateTime.Today) == 0)
-                                    {
-                                        <td class="calendar-day cell-active">@curDay.AddDays(j).ToString("dd") </td>
-                                    }
-                                    else
-                                    {
-                                        <td class="calendar-day cell-inactive">@curDay.AddDays(j).ToString("dd") </td>
-                                    }
+                                    <!--- check if current month, and if not, do not display events --->
+                                    <td class="calendar-day cell-inactive" id="@("date" + curDay.AddDays(j).ToString("dd"))" onload="getEvents(@(curDay.AddDays(j).ToString("dd")))">
+                                        @*PartialView*@        
+                                    </td>
                                 }
                             </tr>
 
@@ -165,3 +153,48 @@
         </div>
     </div>
 </div>
+
+<!-- used for getting events for each day -->
+<script type="text/javascript">
+    function getEvents(currentDay) {
+        jQuery.noConflict();
+        (function ($) {
+            var myDay = "" + @Model.StartDate.ToString("yyyy") + "-0" + @Model.StartDate.ToString("MM") + "-" + currentDay;
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("AdminGetEventsForDay", "home")',
+                data: { day: myDay },
+                success: function (data) {
+                    $('#datecurrentDay').html(data);
+                }
+            })
+        })(jQuery);
+    }
+</script>
+       
+<!-- for styling active day cell -->                                                        
+<script type="text/javascript">
+    function setActiveCell() {
+        jQuery.noConflict();
+        (function ($) {
+            //document.getElementById("date" + @DateTime.Today.ToString("dd") + "").classList.remove("calendar-day cell-inactive");
+            //document.getElementById("date" + @DateTime.Today.ToString("dd") + "").classList.add("calendar-day cell-active");
+            //document.getElementById("date20").classList.remove("cell-inactive");
+            //document.getElementById("date20").className = "calendar-day cell-active"
+            $('#date20').addClass("cell-active");
+            $('#date20').removeClass("cell-inactive");
+        })(jQuery);
+    }
+</script>          
+
+<!--
+    okay so the scripts aren't working, no idea why.
+
+    I'm thinking that i need to change the id's for each cell because could potentially have two with 'date01' etc
+    since has overlap with another month.
+
+    would like to refactor this so that the variable curday is updated for every time we have a td and then we
+    would not need the .addDay function anywhere.
+
+
+    --->                     

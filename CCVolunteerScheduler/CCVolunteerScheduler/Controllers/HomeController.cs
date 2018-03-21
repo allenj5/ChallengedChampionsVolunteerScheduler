@@ -40,6 +40,14 @@ namespace CCVolunteerScheduler.Controllers
             };
             return View(model);
         }
+        public ActionResult AdminGetEventsForDay(string day)
+        {
+            EventDBEntities _db = new EventDBEntities();
+            var EventList = _db.Events.ToList();
+            var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
+            return PartialView("AdminEventsForDay", Model);
+        }
+
 
         public ActionResult AdminHome()
         {
@@ -126,7 +134,7 @@ namespace CCVolunteerScheduler.Controllers
             var Model = volunteerList.Where(x => x.ID == id).FirstOrDefault();
             return PartialView("EditVolunteerPartial", Model);
         }
-
+        
         //function for volunteer table to Hash passwords for new accounts added by the admin
         /*         
               -make sure using CCVolunteerScheduler.Models is called in your file
