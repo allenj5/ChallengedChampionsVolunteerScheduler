@@ -29,7 +29,7 @@
     </nav>
 }
 <br />
-<center onload="setActiveCell()">
+<center>
     <div class="table-responsive">
         <table class="calendar">
             <thead>
@@ -67,7 +67,7 @@
                             @for (int i = daysToAdd; i > 0; i--)
                             {
                                 <td class="calendar-day cell-inactive" >@curDay.AddDays(-i).ToString("dd")
-                                    <!--- no need for events since not current month --->
+                                    
                                 </td>
 
                             }
@@ -89,7 +89,7 @@
                             <tr>
                                 @for (int j = 0; j < Model.NumberOfDays; j++)
                                 {
-                                    <!--- check if current month, and if not, do not display events --->
+                                    
                                     <td class="calendar-day cell-inactive" id="@("date" + curDay.AddDays(j).ToString("dd"))" onload="getEvents(@(curDay.AddDays(j).ToString("dd")))">
                                         @*PartialView*@        
                                     </td>
@@ -160,33 +160,28 @@
         jQuery.noConflict();
         (function ($) {
             var myDay = "" + @Model.StartDate.ToString("yyyy") + "-0" + @Model.StartDate.ToString("MM") + "-" + currentDay;
+            var myID = 'date' + currentDay;
             $.ajax({
                 type: "Get",
                 url: '@Url.Action("AdminGetEventsForDay", "home")',
                 data: { day: myDay },
                 success: function (data) {
-                    $('#datecurrentDay').html(data);
+                    document.getElementById(myID).innerHTML = data;
                 }
             })
         })(jQuery);
     }
 </script>
-       
+
 <!-- for styling active day cell -->                                                        
 <script type="text/javascript">
-    function setActiveCell() {
-        jQuery.noConflict();
-        (function ($) {
-            //document.getElementById("date" + @DateTime.Today.ToString("dd") + "").classList.remove("calendar-day cell-inactive");
-            //document.getElementById("date" + @DateTime.Today.ToString("dd") + "").classList.add("calendar-day cell-active");
-            //document.getElementById("date20").classList.remove("cell-inactive");
-            //document.getElementById("date20").className = "calendar-day cell-active"
-            $('#date20').addClass("cell-active");
-            $('#date20').removeClass("cell-inactive");
-        })(jQuery);
+    window.onload = function(){
+        document.getElementById("@("date" + DateTime.Today.ToString("dd"))").classList = "calendar-day cell-active";
     }
 </script>          
 
+                                    <!--- no need for events since not current month --->
+<!--- check if current month, and if not, do not display events --->
 <!--
     okay so the scripts aren't working, no idea why.
 
