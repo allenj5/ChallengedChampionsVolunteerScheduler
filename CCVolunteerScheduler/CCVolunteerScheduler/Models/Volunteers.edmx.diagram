@@ -5,8 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2aab8fc9e60e41eb9372fce9c0ee84a3" Name="Diagram1">
-        <EntityTypeShape EntityType="VolunteersDBModel.Volunteer" Width="1.5" PointX="0.625" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="VolunteersDBModel.Event" Width="1.5" PointX="2.875" PointY="1.375" />
+        <EntityTypeShape EntityType="VolunteersDBModel.Event" Width="1.5" PointX="0.5" PointY="0.625" />
+        <EntityTypeShape EntityType="VolunteersDBModel.Volunteer" Width="1.5" PointX="4.25" PointY="0.625" />
+        <AssociationConnector Association="VolunteersDBModel.VolunteerEventInstance" ManuallyRouted="true" >
+          <ConnectorPoint PointX="2" PointY="1.8074446614583337" />
+          <ConnectorPoint PointX="4.25" PointY="1.8074446614583337" />
+        </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

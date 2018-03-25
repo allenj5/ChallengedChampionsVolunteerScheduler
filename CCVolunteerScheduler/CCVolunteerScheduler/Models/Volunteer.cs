@@ -18,27 +18,39 @@ using System;
 public partial class Volunteer
 {
 
-    public int ID { get; set; }
+    public Volunteer()
+    {
+
+        this.Events = new HashSet<Event>();
+
+    }
+
+
+    public long ID { get; set; }
 
     public string FirstName { get; set; }
 
     public string LastName { get; set; }
 
-    public Nullable<int> Phone { get; set; }
+    public string Phone { get; set; }
 
     public string Email { get; set; }
 
-    public bool Active { get; set; }
+    public Nullable<bool> Active { get; set; }
 
-    public Nullable<int> HoursWorked { get; set; }
+    public Nullable<long> HoursWorked { get; set; }
 
-    public bool EmailOptOut { get; set; }
+    public Nullable<bool> EmailOptOut { get; set; }
 
     public Nullable<bool> isAdmin { get; set; }
 
     public string Password { get; set; }
 
     public string Position { get; set; }
+
+
+
+    public virtual ICollection<Event> Events { get; set; }
 
 }
 

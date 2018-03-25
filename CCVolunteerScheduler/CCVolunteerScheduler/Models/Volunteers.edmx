@@ -5,147 +5,223 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="VolunteersDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view '480-ChallengedChampions-18.dbo.Events' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Events">
           <Key>
-            <PropertyRef Name="Event ID" />
-            <PropertyRef Name="Event Title" />
-            <PropertyRef Name="Event Date" />
-            <PropertyRef Name="Start Time" />
-            <PropertyRef Name="End Time" />
+            <PropertyRef Name="EventID" />
           </Key>
-          <Property Name="Event ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Event Title" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Event Description" Type="varchar" MaxLength="200" />
-          <Property Name="Event Date" Type="date" Nullable="false" />
-          <Property Name="Start Time" Type="time" Precision="7" Nullable="false" />
-          <Property Name="End Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EventDescription" Type="varchar" MaxLength="200" />
+          <Property Name="EventDate" Type="date" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
         </EntityType>
-        <EntityType Name="Volunteer">
+        <EntityType Name="VolunteerEventInstance">
+          <Key>
+            <PropertyRef Name="VolunteerID" />
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="VolunteerID" Type="bigint" Nullable="false" />
+          <Property Name="EventID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Volunteers">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="char" MaxLength="25" Nullable="false" />
-          <Property Name="LastName" Type="char" MaxLength="25" Nullable="false" />
-          <Property Name="Phone" Type="int" />
-          <Property Name="Email" Type="char" MaxLength="50" Nullable="false" />
-          <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="HoursWorked" Type="int" />
-          <Property Name="EmailOptOut" Type="bit" Nullable="false" />
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="FirstName" Type="char" MaxLength="25" />
+          <Property Name="LastName" Type="char" MaxLength="25" />
+          <Property Name="Phone" Type="char" MaxLength="25" />
+          <Property Name="Email" Type="char" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="HoursWorked" Type="bigint" />
+          <Property Name="EmailOptOut" Type="bit" />
           <Property Name="isAdmin" Type="bit" />
           <Property Name="Password" Type="text" />
-          <Property Name="Position" Type="varchar" MaxLength="30" />
+          <Property Name="Position" Type="char" MaxLength="30" />
         </EntityType>
+        <Association Name="FK__Volunteer__Event__398D8EEE">
+          <End Role="Events" Type="Self.Events" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VolunteerEventInstance" Type="Self.VolunteerEventInstance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventID" />
+            </Principal>
+            <Dependent Role="VolunteerEventInstance">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Volunteer__Volun__3A81B327">
+          <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VolunteerEventInstance" Type="Self.VolunteerEventInstance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Volunteers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VolunteerEventInstance">
+              <PropertyRef Name="VolunteerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="Check_Admin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
         </Function>
-        <Function Name="Validate_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="Insert_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Event_Title" Type="varchar" Mode="In" />
+          <Parameter Name="Event_Description" Type="varchar" Mode="In" />
+          <Parameter Name="Event_Date" Type="date" Mode="In" />
+          <Parameter Name="Start_Time" Type="time" Mode="In" />
+          <Parameter Name="End_Time" Type="time" Mode="In" />
+        </Function>
+        <Function Name="Update_Volunteer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="FirstName" Type="char" Mode="In" />
+          <Parameter Name="LastName" Type="char" Mode="In" />
+          <Parameter Name="Phone" Type="char" Mode="In" />
+          <Parameter Name="Email" Type="char" Mode="In" />
+          <Parameter Name="HoursWorked" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Validate_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="bigint" Mode="In" />
           <Parameter Name="Password" Type="text" Mode="In" />
         </Function>
         <EntityContainer Name="VolunteersDBModelStoreContainer">
-          <EntitySet Name="Volunteer" EntityType="Self.Volunteer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Events" EntityType="Self.Events" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[Events].[Event ID] AS [Event ID], 
-[Events].[Event Title] AS [Event Title], 
-[Events].[Event Description] AS [Event Description], 
-[Events].[Event Date] AS [Event Date], 
-[Events].[Start Time] AS [Start Time], 
-[Events].[End Time] AS [End Time]
-FROM [dbo].[Events] AS [Events]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VolunteerEventInstance" EntityType="Self.VolunteerEventInstance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Volunteers" EntityType="Self.Volunteers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Volunteer__Event__398D8EEE" Association="Self.FK__Volunteer__Event__398D8EEE">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="VolunteerEventInstance" EntitySet="VolunteerEventInstance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Volunteer__Volun__3A81B327" Association="Self.FK__Volunteer__Volun__3A81B327">
+            <End Role="Volunteers" EntitySet="Volunteers" />
+            <End Role="VolunteerEventInstance" EntitySet="VolunteerEventInstance" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VolunteersDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="VolunteersDBEntities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="Volunteers" EntityType="VolunteersDBModel.Volunteer" />
           <FunctionImport Name="Validate_User" ReturnType="Collection(String)">
-            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          <Parameter Name="UserID" Mode="In" Type="Int64" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ValidateUser" ReturnType="Collection(String)">
-            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          <Parameter Name="UserID" Mode="In" Type="Int64" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Check_Admin" ReturnType="Collection(String)">
           <Parameter Name="UserID" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Events" EntityType="VolunteersDBModel.Event" />
+          <EntitySet Name="Volunteers" EntityType="VolunteersDBModel.Volunteer" />
+          <AssociationSet Name="VolunteerEventInstance" Association="VolunteersDBModel.VolunteerEventInstance">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Volunteer" EntitySet="Volunteers" />
+          </AssociationSet>
+          <FunctionImport Name="Insert_Event">
+            <Parameter Name="Event_Title" Mode="In" Type="String" />
+            <Parameter Name="Event_Description" Mode="In" Type="String" />
+            <Parameter Name="Event_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Start_Time" Mode="In" Type="Time" />
+            <Parameter Name="End_Time" Mode="In" Type="Time" />
+          </FunctionImport>
+          <FunctionImport Name="Update_Volunteer">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="HoursWorked" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Volunteers" Relationship="VolunteersDBModel.VolunteerEventInstance" FromRole="Event" ToRole="Volunteer" />
+        </EntityType>
         <EntityType Name="Volunteer">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="true" />
-          <Property Name="Phone" Type="Int32" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="true" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="HoursWorked" Type="Int32" />
-          <Property Name="EmailOptOut" Type="Boolean" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="HoursWorked" Type="Int64" />
+          <Property Name="EmailOptOut" Type="Boolean" />
           <Property Name="isAdmin" Type="Boolean" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Position" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Position" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Events" Relationship="VolunteersDBModel.VolunteerEventInstance" FromRole="Volunteer" ToRole="Event" />
         </EntityType>
-        <EntityType Name="Event">
-          <Key>
-            <PropertyRef Name="Event_ID" />
-            <PropertyRef Name="Event_Title" />
-            <PropertyRef Name="Event_Date" />
-            <PropertyRef Name="Start_Time" />
-            <PropertyRef Name="End_Time" />
-          </Key>
-          <Property Name="Event_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Event_Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Event_Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Event_Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Start_Time" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="End_Time" Type="Time" Nullable="false" Precision="7" />
-        </EntityType>
+        <Association Name="VolunteerEventInstance">
+          <End Type="VolunteersDBModel.Event" Role="Event" Multiplicity="*" />
+          <End Type="VolunteersDBModel.Volunteer" Role="Volunteer" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="VolunteersDBModelStoreContainer" CdmEntityContainer="VolunteersDBEntities">
-          <EntitySetMapping Name="Volunteers">
-            <EntityTypeMapping TypeName="VolunteersDBModel.Volunteer">
-              <MappingFragment StoreEntitySet="Volunteer">
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
-                <ScalarProperty Name="EmailOptOut" ColumnName="EmailOptOut" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Validate_User" FunctionName="VolunteersDBModel.Store.Validate_User" />
           <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="VolunteersDBModel.Store.Validate_User" />
           <FunctionImportMapping FunctionImportName="Check_Admin" FunctionName="VolunteersDBModel.Store.Check_Admin" />
           <EntitySetMapping Name="Events">
             <EntityTypeMapping TypeName="VolunteersDBModel.Event">
               <MappingFragment StoreEntitySet="Events">
-                <ScalarProperty Name="End_Time" ColumnName="End Time" />
-                <ScalarProperty Name="Start_Time" ColumnName="Start Time" />
-                <ScalarProperty Name="Event_Date" ColumnName="Event Date" />
-                <ScalarProperty Name="Event_Description" ColumnName="Event Description" />
-                <ScalarProperty Name="Event_Title" ColumnName="Event Title" />
-                <ScalarProperty Name="Event_ID" ColumnName="Event ID" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="EventDescription" ColumnName="EventDescription" />
+                <ScalarProperty Name="EventTitle" ColumnName="EventTitle" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Volunteers">
+            <EntityTypeMapping TypeName="VolunteersDBModel.Volunteer">
+              <MappingFragment StoreEntitySet="Volunteers">
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+                <ScalarProperty Name="EmailOptOut" ColumnName="EmailOptOut" />
+                <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="VolunteerEventInstance" TypeName="VolunteersDBModel.VolunteerEventInstance" StoreEntitySet="VolunteerEventInstance">
+            <EndProperty Name="Volunteer">
+              <ScalarProperty Name="ID" ColumnName="VolunteerID" />
+            </EndProperty>
+            <EndProperty Name="Event">
+              <ScalarProperty Name="EventID" ColumnName="EventID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="Insert_Event" FunctionName="VolunteersDBModel.Store.Insert_Event" />
+          <FunctionImportMapping FunctionImportName="Update_Volunteer" FunctionName="VolunteersDBModel.Store.Update_Volunteer" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
