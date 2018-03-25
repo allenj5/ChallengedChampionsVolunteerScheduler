@@ -73,8 +73,9 @@
                             }
                             @for (int i = 0; i < Model.NumberOfDays - daysToAdd; i++)
                             {
-                                <td class="calendar-day cell-inactive" >@curDay.AddDays(i).ToString("dd")
+                                <td class="calendar-day cell-inactive" >
                                     <div id="@("date" + curDay.AddDays(i).ToString("dd"))"> 
+                                        @curDay.AddDays(i).ToString("dd")
                                         @*PartialView*@
                                     </div>
                                 </td>
@@ -91,6 +92,7 @@
                                 {
                                     
                                     <td class="calendar-day cell-inactive" id="@("date" + curDay.AddDays(j).ToString("dd"))">
+                                        @curDay.AddDays(j).ToString("dd")
                                         @*PartialView*@        
                                     </td>
                                 }
@@ -167,7 +169,7 @@
                 data: { day: myDay },
                 success: function (data) {
                     if (data.trim()!='') {
-                        document.getElementById(myID).innerHTML = data;
+                        document.getElementById(myID).innerHTML += data;
                     }
                 }
             })
