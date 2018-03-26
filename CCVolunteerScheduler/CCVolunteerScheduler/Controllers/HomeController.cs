@@ -54,6 +54,14 @@ namespace CCVolunteerScheduler.Controllers
             var Model = volunteerList.Where(x => x.EventID == id).FirstOrDefault();
             return PartialView("CopyEventPartial", Model);
         }
+        public ActionResult AddEvent(string eventTitle, string eventDesc, String eventDate, String eventStart, String eventEnd){
+            InsertEvent x = new InsertEvent();
+            DateTime date = DateTime.Parse(eventDate);
+            TimeSpan start = TimeSpan.Parse(eventStart);
+            TimeSpan end = TimeSpan.Parse(eventEnd);
+            x.Insert_Event(eventTitle, eventDesc, date, start, end);
+            return View();
+        }
 
 
         public ActionResult AdminHome()

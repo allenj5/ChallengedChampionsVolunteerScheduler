@@ -172,6 +172,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddEvent.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddEvent.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AddEvent.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddEvent.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AddEvent.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddEvent.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\CalendarModels.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Event.cs">
@@ -275,6 +290,16 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Volunteers.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Models\AddEvent.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AddEvent.edmx</DependentUpon>
+      <LastGenOutput>AddEvent.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AddEvent.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AddEvent.edmx</DependentUpon>
+      <LastGenOutput>AddEvent.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\Events.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Events.edmx</DependentUpon>
@@ -294,6 +319,13 @@
     </EntityDeploy>
     <Content Include="Models\Events.edmx.diagram">
       <DependentUpon>Events.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\AddEvent.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AddEvent.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AddEvent.edmx.diagram">
+      <DependentUpon>AddEvent.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Models\Volunteers.Context.tt">
