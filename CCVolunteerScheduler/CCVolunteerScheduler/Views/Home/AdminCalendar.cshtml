@@ -194,3 +194,29 @@
         getAllEvents();
     }
 </script>     
+
+<!-- Modal -->
+<div id="CopyEventModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" id="Preview">
+            @*PartialView*@
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function Open(currentId) {
+        jQuery.noConflict();
+        (function ($) {
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("GetEventDetail", "home")',
+                data: { id: currentId },
+                success: function (data) {
+                    $('#Preview').html(data);
+                }
+            })
+        })(jQuery);
+    }
+</script>

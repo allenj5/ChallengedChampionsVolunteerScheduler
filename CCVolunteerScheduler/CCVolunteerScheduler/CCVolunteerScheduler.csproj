@@ -377,6 +377,7 @@
     <Content Include="Views\Account\ChangeEmailAddress.cshtml" />
     <Content Include="Views\Home\EditVolunteerPartial.cshtml" />
     <Content Include="Views\Home\AdminEventsForDay.cshtml" />
+    <Content Include="Views\Home\CopyEventPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
