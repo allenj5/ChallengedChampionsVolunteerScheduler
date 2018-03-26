@@ -84,6 +84,13 @@ namespace CCVolunteerScheduler.Controllers
             };
             return View(model);
         }
+        public ActionResult MyScheduleGetEventsForDay(string day)
+        {
+            EventDBEntities _db = new EventDBEntities();
+            var EventList = _db.Events.ToList();
+            var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
+            return PartialView("VolunteerEventsForDay", Model);
+        }
 
         public ActionResult VolunteerCalendar()
         {
