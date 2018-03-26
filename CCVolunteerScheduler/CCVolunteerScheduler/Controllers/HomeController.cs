@@ -34,18 +34,32 @@ namespace CCVolunteerScheduler.Controllers
         {
             Models.CalendarViewModel model = new Models.CalendarViewModel
             {
+                CurrentMonth = DateTime.Now,
                 NumberOfDays = 7,
                 StartDate = DateTime.Now,
                 DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year,DateTime.Now.Month)
             };
-            return View(model);
+            return View("AdminCalendar", model);
+        }
+        [HttpPost]
+        public ActionResult AdminCalendarOffset(int offset)
+        {
+            Models.CalendarViewModel model = new Models.CalendarViewModel
+            {
+                MonthOffset = offset,
+                CurrentMonth = DateTime.Now,
+                NumberOfDays = 7,
+                StartDate = DateTime.Now,
+                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)
+            };
+            return View("AdminEventsForDay", model);
         }
         public ActionResult AdminGetEventsForDay(string day)
         {
             EventDBEntities _db = new EventDBEntities();
             var EventList = _db.Events.ToList();
             var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
-            return PartialView("AdminEventsForDay", Model);
+            return PartialView(Model);
         }
         public ActionResult GetEventDetail(int id)
         {
