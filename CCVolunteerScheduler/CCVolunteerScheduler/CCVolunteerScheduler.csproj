@@ -378,6 +378,7 @@
     <Content Include="Views\Home\EditVolunteerPartial.cshtml" />
     <Content Include="Views\Home\AdminEventsForDay.cshtml" />
     <Content Include="Views\Home\CopyEventPartial.cshtml" />
+    <Content Include="Views\Home\VolunteerEventsForDay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

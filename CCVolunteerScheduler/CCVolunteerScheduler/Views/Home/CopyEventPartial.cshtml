@@ -1,0 +1,36 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">Copy Event</h4>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="form-group">
+            <label for="eventTitle">Event Title</label>
+            <input type="text" class="form-control" id="eventTitle" value="@Model.EventTitle" />
+            <br />
+
+            <label for="eventDesc">Event Description</label>
+            <textarea class="form-control" rows="3" id="eventDesc">@Model.EventDescription</textarea>
+            <br />
+
+            <label for="datepicker">Event Date</label>
+            <input id="datepicker" width="276" />
+            <script>
+                $('#datepicker').datepicker({
+                    uiLibrary: 'bootstrap4'
+                });
+            </script>
+            <br />
+
+            <small id="eventTimeDesc" class="form-text text-muted">Please format times as follows: HH:MM (6:00 for 6:00 AM or 18:00 for 6:00 PM)</small>
+            <label for="eventStart">Start Time</label>
+            <input type="text" class="form-control" id="eventStart" value="@Model.StartTime" />
+            <br />
+
+            <label for="eventEnd">End Time</label>
+            <input type="text" class="form-control" id="eventEnd" value="@Model.EndTime" />
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-info" data-dismiss="modal">Save</button>
+</div>
