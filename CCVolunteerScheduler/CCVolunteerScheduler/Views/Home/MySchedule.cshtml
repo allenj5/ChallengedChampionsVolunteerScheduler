@@ -68,29 +68,22 @@
                         <tr>
                             @for (int i = daysToAdd; i > 0; i--)
                             {
-                                if (DateTime.Compare(curDay.AddDays(-i).Date, DateTime.Today) == 0)
-                                {
-                                    <td class="calendar-day cell-active">@curDay.AddDays(-i).ToString("dd") </td>
-                                }
-                                else
-                                {
-                                    <td class="calendar-day cell-inactive">@curDay.AddDays(-i).ToString("dd") </td>
-                                }
+                                <td class="calendar-day cell-inactive" >@curDay.AddDays(-i).ToString("dd")
+                                    
+                                </td>
 
                             }
                             @for (int i = 0; i < Model.NumberOfDays - daysToAdd; i++)
                             {
-                                if (DateTime.Compare(curDay.AddDays(i).Date, DateTime.Today) == 0)
-                                {
-                                    <td class="calendar-day cell-active">@curDay.AddDays(i).ToString("dd") </td>
-                                }
-                                else
-                                {
-                                    <td class="calendar-day cell-inactive">@curDay.AddDays(i).ToString("dd") </td>
-                                }
+                                <td class="calendar-day cell-inactive" >
+                                    <div id="@("date" + curDay.AddDays(i).ToString("dd"))"> 
+                                        @curDay.AddDays(i).ToString("dd")
+                                        @*PartialView*@
+                                    </div>
+                                </td>
                             }
-                        </tr>
-                        curDay = curDay.AddDays(Model.NumberOfDays - daysToAdd);
+                         </tr>
+                         curDay = curDay.AddDays(Model.NumberOfDays - daysToAdd);
                     }
                     for (int i = 0; i < Model.NumberOfDays; i++)
                     {
@@ -99,14 +92,11 @@
                             <tr>
                                 @for (int j = 0; j < Model.NumberOfDays; j++)
                                 {
-                                    if (DateTime.Compare(curDay.AddDays(j).Date, DateTime.Today) == 0)
-                                    {
-                                        <td class="calendar-day cell-active">@curDay.AddDays(j).ToString("dd") </td>
-                                    }
-                                    else
-                                    {
-                                        <td class="calendar-day cell-inactive">@curDay.AddDays(j).ToString("dd") </td>
-                                    }
+                                    
+                                    <td class="calendar-day cell-inactive" id="@("date" + curDay.AddDays(j).ToString("dd"))">
+                                        @curDay.AddDays(j).ToString("dd")
+                                        @*PartialView*@        
+                                    </td>
                                 }
                             </tr>
 
@@ -120,3 +110,42 @@
     <br />
 </center>
 <br />
+
+<!-- used for getting events for a day -->
+<script type="text/javascript">
+    function getEvents(currentDay) {
+        jQuery.noConflict();
+        (function ($) {
+            var myDay = "" + @Model.StartDate.ToString("yyyy") + "-0" + @Model.StartDate.ToString("MM") + "-" + currentDay;
+            var myID = 'date' + currentDay;
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("MyScheduleGetEventsForDay", "home")',
+                data: { day: myDay },
+                success: function (data) {
+                    if (data.trim()!='') {
+                        document.getElementById(myID).innerHTML += data;
+                    }
+                }
+            })
+        })(jQuery);
+    }
+</script>
+<script type="text/javascript">
+    function getAllEvents() {
+        for (var i = 1; i < 10; i++) {
+            getEvents("0" + i);
+        }
+        for(var i = 10; i < 32; i++ ){
+            getEvents(i);
+        }
+    }
+</script>
+
+<!-- for styling active day cell -->                                                        
+<script type="text/javascript">
+    window.onload = function(){
+        document.getElementById("@("date" + DateTime.Today.ToString("dd"))").classList = "calendar-day cell-active";
+        getAllEvents();
+    }
+</script>

@@ -34,12 +34,49 @@ namespace CCVolunteerScheduler.Controllers
         {
             Models.CalendarViewModel model = new Models.CalendarViewModel
             {
+                CurrentMonth = DateTime.Now,
                 NumberOfDays = 7,
                 StartDate = DateTime.Now,
                 DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year,DateTime.Now.Month)
             };
-            return View(model);
+            return View("AdminCalendar", model);
         }
+        [HttpPost]
+        public ActionResult AdminCalendarOffset(int offset)
+        {
+            Models.CalendarViewModel model = new Models.CalendarViewModel
+            {
+                MonthOffset = offset,
+                CurrentMonth = DateTime.Now,
+                NumberOfDays = 7,
+                StartDate = DateTime.Now,
+                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)
+            };
+            return View("AdminEventsForDay", model);
+        }
+        public ActionResult AdminGetEventsForDay(string day)
+        {
+            EventDBEntities _db = new EventDBEntities();
+            var EventList = _db.Events.ToList();
+            var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
+            return PartialView(Model);
+        }
+        public ActionResult GetEventDetail(int id)
+        {
+            EventDBEntities _db = new EventDBEntities();
+            var volunteerList = _db.Events.ToList();
+            var Model = volunteerList.Where(x => x.EventID == id).FirstOrDefault();
+            return PartialView("CopyEventPartial", Model);
+        }
+        public ActionResult AddEvent(string eventTitle, string eventDesc, String eventDate, String eventStart, String eventEnd){
+            InsertEvent x = new InsertEvent();
+            DateTime date = DateTime.Parse(eventDate);
+            TimeSpan start = TimeSpan.Parse(eventStart);
+            TimeSpan end = TimeSpan.Parse(eventEnd);
+            x.Insert_Event(eventTitle, eventDesc, date, start, end);
+            return View();
+        }
+
 
         public ActionResult AdminHome()
         {
@@ -69,6 +106,13 @@ namespace CCVolunteerScheduler.Controllers
             };
             return View(model);
         }
+        public ActionResult MyScheduleGetEventsForDay(string day)
+        {
+            EventDBEntities _db = new EventDBEntities();
+            var EventList = _db.Events.ToList();
+            var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
+            return PartialView("VolunteerEventsForDay", Model);
+        }
 
         public ActionResult VolunteerCalendar()
         {
@@ -79,6 +123,13 @@ namespace CCVolunteerScheduler.Controllers
                 DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)
             };
             return View(model);
+        }
+        public ActionResult VolunteerGetEventsForDay(string day)
+        {
+            EventDBEntities _db = new EventDBEntities();
+            var EventList = _db.Events.ToList();
+            var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
+            return PartialView("VolunteerEventsForDay", Model);
         }
 
 
@@ -108,8 +159,6 @@ namespace CCVolunteerScheduler.Controllers
             return View();
         }
 
-
-
         public ActionResult ForgotPassword()
         {
             return View();
@@ -128,7 +177,7 @@ namespace CCVolunteerScheduler.Controllers
             var Model = volunteerList.Where(x => x.ID == id).FirstOrDefault();
             return PartialView("EditVolunteerPartial", Model);
         }
-
+        
         //function for volunteer table to Hash passwords for new accounts added by the admin
         /*         
               -make sure using CCVolunteerScheduler.Models is called in your file

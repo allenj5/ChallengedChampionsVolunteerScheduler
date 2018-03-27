@@ -31,10 +31,15 @@
 <br />
 <center>
     <div class="table-responsive">
+        @using (Html.BeginForm("AdminCalendarOffset", "Home"))
+        {
+            <input type="submit" value ="-1"name="offset"/>
+            <input type="submit" value ="1" name="offset"/>
+        }
         <table class="calendar">
             <thead>
                 <tr>
-                    <th colspan="7" class="txt-center"><h2>@DateTime.Now.ToString("MMMMMMMMMMMMM")</h2></th>
+                    <th colspan="7" class="txt-center"><h2>@Model.CurrentMonth.AddMonths(Model.MonthOffset).ToString("MMMMMMMMMMMMM")</h2></th>
                 </tr>
             </thead>
             <tbody>
@@ -66,29 +71,22 @@
                         <tr>
                             @for (int i = daysToAdd; i > 0; i--)
                             {
-                                if (DateTime.Compare(curDay.AddDays(-i).Date, DateTime.Today) == 0)
-                                {
-                                    <td class="calendar-day cell-active">@curDay.AddDays(-i).ToString("dd") </td>
-                                }
-                                else
-                                {
-                                    <td class="calendar-day cell-inactive">@curDay.AddDays(-i).ToString("dd") </td>
-                                }
+                                <td class="calendar-day cell-inactive" >@curDay.AddDays(-i).ToString("dd")
+                                    
+                                </td>
 
                             }
                             @for (int i = 0; i < Model.NumberOfDays - daysToAdd; i++)
                             {
-                                if (DateTime.Compare(curDay.AddDays(i).Date, DateTime.Today) == 0)
-                                {
-                                    <td class="calendar-day cell-active">@curDay.AddDays(i).ToString("dd") </td>
-                                }
-                                else
-                                {
-                                    <td class="calendar-day cell-inactive">@curDay.AddDays(i).ToString("dd") </td>
-                                }
+                                <td class="calendar-day cell-inactive" >
+                                    <div id="@("date" + curDay.AddDays(i).ToString("dd"))"> 
+                                        @curDay.AddDays(i).ToString("dd")
+                                        @*PartialView*@
+                                    </div>
+                                </td>
                             }
-                        </tr>
-                        curDay = curDay.AddDays(Model.NumberOfDays - daysToAdd);
+                         </tr>
+                         curDay = curDay.AddDays(Model.NumberOfDays - daysToAdd);
                     }
                     for (int i = 0; i < Model.NumberOfDays; i++)
                     {
@@ -97,14 +95,11 @@
                             <tr>
                                 @for (int j = 0; j < Model.NumberOfDays; j++)
                                 {
-                                    if (DateTime.Compare(curDay.AddDays(j).Date, DateTime.Today) == 0)
-                                    {
-                                        <td class="calendar-day cell-active">@curDay.AddDays(j).ToString("dd") </td>
-                                    }
-                                    else
-                                    {
-                                        <td class="calendar-day cell-inactive">@curDay.AddDays(j).ToString("dd") </td>
-                                    }
+                                    
+                                    <td class="calendar-day cell-inactive" id="@("date" + curDay.AddDays(j).ToString("dd"))">
+                                        @curDay.AddDays(j).ToString("dd")
+                                        @*PartialView*@        
+                                    </td>
                                 }
                             </tr>
 
@@ -133,35 +128,121 @@
                 <form>
                     <div class="form-group">
                         <label for="eventTitle">Event Title</label>
-                        <input type="text" class="form-control" id="eventTitle" />
+                        <input type="text" class="form-control" id="eventTitle" name="eventTitle"/>
                         <br />
 
                         <label for="eventDesc">Event Description</label>
-                        <textarea class="form-control" rows="3" id="eventDesc"></textarea>
+                        <textarea class="form-control" rows="3" id="eventDesc" name="eventDesc"></textarea>
                         <br />
 
                         <label for="datepicker">Event Date</label>
                         <input id="datepicker" width="276" />
                         <script>
                             $('#datepicker').datepicker({
-                                uiLibrary: 'bootstrap4'
+                                uiLibrary: 'bootstrap4',
+                                format: 'yyyy-mm-dd'
                             });
                         </script>
                         <br />
 
                         <small id="eventTimeDesc" class="form-text text-muted">Please format times as follows: HH:MM (6:00 for 6:00 AM or 18:00 for 6:00 PM)</small>
                         <label for="eventStart">Start Time</label>
-                        <input type="text" class="form-control" id="eventStart" />
+                        <input type="text" class="form-control" id="eventStart" name="eventStart"/>
                         <br />
 
                         <label for="eventEnd">End Time</label>
-                        <input type="text" class="form-control" id="eventEnd" />
+                        <input type="text" class="form-control" id="eventEnd" name="eventEnd"/>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal" onclick="AddEvent(eventTitle, eventDesc, $('#datepicker').val(), eventStart, eventEnd)">Save</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- used for getting events for a day -->
+<script type="text/javascript">
+    function getEvents(currentDay) {
+        jQuery.noConflict();
+        (function ($) {
+            var myDay = "" + @Model.StartDate.ToString("yyyy") + "-0" + @Model.StartDate.ToString("MM") + "-" + currentDay;
+            var myID = 'date' + currentDay;
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("AdminGetEventsForDay", "home")',
+                data: { day: myDay },
+                success: function (data) {
+                    if (data.trim()!='') {
+                        document.getElementById(myID).innerHTML += data;
+                    }
+                }
+            })
+        })(jQuery);
+    }
+</script>
+<script type="text/javascript">
+    function getAllEvents() {
+        for (var i = 1; i < 10; i++) {
+            getEvents("0" + i);
+        }
+        for(var i = 10; i < 32; i++ ){
+            getEvents(i);
+        }
+    }
+</script>
+
+<!-- for styling active day cell -->                                                        
+<script type="text/javascript">
+    window.onload = function(){
+        document.getElementById("@("date" + DateTime.Today.ToString("dd"))").classList = "calendar-day cell-active";
+        getAllEvents();
+    }
+</script>     
+
+<!-- Modal -->
+<div id="CopyEventModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" id="Preview">
+            @*PartialView*@
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function Open(currentId) {
+        jQuery.noConflict();
+        (function ($) {
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("GetEventDetail", "home")',
+                data: { id: currentId },
+                success: function (data) {
+                    $('#Preview').html(data);
+                }
+            })
+        })(jQuery);
+    }
+</script>
+
+<!-- add event --->
+<script type="text/javascript">
+    function AddEvent(eventTitle, eventDesc, eventDate, eventStart, eventEnd) {
+        jQuery.noConflict();
+        (function ($) {
+            $.ajax({
+                type: "Post",
+                url: '@Url.Action("AddEvent", "home")',
+                data: {
+                    title: eventTitle.value,
+                    description: eventDesc.value,
+                    date: eventDate,
+                    start: eventStart.value,
+                    end: eventEnd.value
+                }
+            })
+        })(jQuery);
+    }
+</script>

@@ -1,33 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="VolunteersDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="VolunteersDBEntities" p1:LazyLoadingEnabled="true">
-    <EntitySet Name="Volunteers" EntityType="VolunteersDBModel.Volunteer" />
     <FunctionImport Name="Validate_User" ReturnType="Collection(String)">
-      <Parameter Name="UserID" Mode="In" Type="Int32" />
+      <Parameter Name="UserID" Mode="In" Type="Int64" />
       <Parameter Name="Password" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="ValidateUser" ReturnType="Collection(String)">
-      <Parameter Name="UserID" Mode="In" Type="Int32" />
+      <Parameter Name="UserID" Mode="In" Type="Int64" />
       <Parameter Name="Password" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="Check_Admin" ReturnType="Collection(String)">
       <Parameter Name="UserID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="Events" EntityType="VolunteersDBModel.Event" />
+    <EntitySet Name="Volunteers" EntityType="VolunteersDBModel.Volunteer" />
+    <AssociationSet Name="VolunteerEventInstance" Association="VolunteersDBModel.VolunteerEventInstance">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="Volunteer" EntitySet="Volunteers" />
+    </AssociationSet>
+    <FunctionImport Name="Insert_Event">
+      <Parameter Name="Event_Title" Mode="In" Type="String" />
+      <Parameter Name="Event_Description" Mode="In" Type="String" />
+      <Parameter Name="Event_Date" Mode="In" Type="DateTime" />
+      <Parameter Name="Start_Time" Mode="In" Type="Time" />
+      <Parameter Name="End_Time" Mode="In" Type="Time" />
+    </FunctionImport>
+    <FunctionImport Name="Update_Volunteer">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="HoursWorked" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="EventID" />
+    </Key>
+    <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EventDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+    <NavigationProperty Name="Volunteers" Relationship="VolunteersDBModel.VolunteerEventInstance" FromRole="Event" ToRole="Volunteer" />
+  </EntityType>
   <EntityType Name="Volunteer">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="true" />
-    <Property Name="LastName" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="true" />
-    <Property Name="Phone" Type="Int32" />
-    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="true" />
-    <Property Name="Active" Type="Boolean" Nullable="false" />
-    <Property Name="HoursWorked" Type="Int32" />
-    <Property Name="EmailOptOut" Type="Boolean" Nullable="false" />
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="HoursWorked" Type="Int64" />
+    <Property Name="EmailOptOut" Type="Boolean" />
     <Property Name="isAdmin" Type="Boolean" />
     <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Position" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Position" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="Events" Relationship="VolunteersDBModel.VolunteerEventInstance" FromRole="Volunteer" ToRole="Event" />
   </EntityType>
+  <Association Name="VolunteerEventInstance">
+    <End Type="VolunteersDBModel.Event" Role="Event" Multiplicity="*" />
+    <End Type="VolunteersDBModel.Volunteer" Role="Volunteer" Multiplicity="*" />
+  </Association>
 </Schema>

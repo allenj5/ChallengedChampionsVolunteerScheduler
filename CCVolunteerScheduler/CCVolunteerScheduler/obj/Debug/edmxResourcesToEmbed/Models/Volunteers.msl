@@ -1,25 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="VolunteersDBModelStoreContainer" CdmEntityContainer="VolunteersDBEntities">
-    <EntitySetMapping Name="Volunteers">
-      <EntityTypeMapping TypeName="VolunteersDBModel.Volunteer">
-        <MappingFragment StoreEntitySet="Volunteer">
-          <ScalarProperty Name="Position" ColumnName="Position" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
-          <ScalarProperty Name="EmailOptOut" ColumnName="EmailOptOut" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="Validate_User" FunctionName="VolunteersDBModel.Store.Validate_User" />
     <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="VolunteersDBModel.Store.Validate_User" />
     <FunctionImportMapping FunctionImportName="Check_Admin" FunctionName="VolunteersDBModel.Store.Check_Admin" />
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="VolunteersDBModel.Event">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventDescription" ColumnName="EventDescription" />
+          <ScalarProperty Name="EventTitle" ColumnName="EventTitle" />
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Volunteers">
+      <EntityTypeMapping TypeName="VolunteersDBModel.Volunteer">
+        <MappingFragment StoreEntitySet="Volunteers">
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+          <ScalarProperty Name="EmailOptOut" ColumnName="EmailOptOut" />
+          <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="VolunteerEventInstance" TypeName="VolunteersDBModel.VolunteerEventInstance" StoreEntitySet="VolunteerEventInstance">
+      <EndProperty Name="Volunteer">
+        <ScalarProperty Name="ID" ColumnName="VolunteerID" />
+      </EndProperty>
+      <EndProperty Name="Event">
+        <ScalarProperty Name="EventID" ColumnName="EventID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="Insert_Event" FunctionName="VolunteersDBModel.Store.Insert_Event" />
+    <FunctionImportMapping FunctionImportName="Update_Volunteer" FunctionName="VolunteersDBModel.Store.Update_Volunteer" />
   </EntityContainerMapping>
 </Mapping>
