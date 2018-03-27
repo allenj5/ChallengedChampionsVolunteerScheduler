@@ -30,30 +30,44 @@ namespace CCVolunteerScheduler.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult AdminCalendar(string requestedDate)
+        {
+            DateTime newDate = DateTime.Now;
+
+            if(requestedDate == "Back One Month")
+            {
+                newDate = newDate.AddMonths(-1);
+            }
+            else if(requestedDate == "Forward One Month")
+            {
+                newDate = newDate.AddMonths(1);
+            }
+
+            Models.CalendarViewModel model = new Models.CalendarViewModel
+            {
+                NumberOfDays = 7,
+                StartDate = newDate,
+                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month),
+                Month = newDate
+            };
+            return View("AdminCalendar", model);
+        }
+
+        [HttpGet]
         public ActionResult AdminCalendar()
         {
             Models.CalendarViewModel model = new Models.CalendarViewModel
             {
-                CurrentMonth = DateTime.Now,
                 NumberOfDays = 7,
                 StartDate = DateTime.Now,
-                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year,DateTime.Now.Month)
+                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month),
+                Month = DateTime.Now
             };
             return View("AdminCalendar", model);
         }
-        [HttpPost]
-        public ActionResult AdminCalendarOffset(int offset)
-        {
-            Models.CalendarViewModel model = new Models.CalendarViewModel
-            {
-                MonthOffset = offset,
-                CurrentMonth = DateTime.Now,
-                NumberOfDays = 7,
-                StartDate = DateTime.Now,
-                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)
-            };
-            return View("AdminEventsForDay", model);
-        }
+
+
         public ActionResult AdminGetEventsForDay(string day)
         {
             EventDBEntities _db = new EventDBEntities();

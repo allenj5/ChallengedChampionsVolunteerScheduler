@@ -31,15 +31,15 @@
 <br />
 <center>
     <div class="table-responsive">
-        @using (Html.BeginForm("AdminCalendarOffset", "Home"))
+        @using(Html.BeginForm("AdminCalendar", "Home"))
         {
-            <input type="submit" value ="-1"name="offset"/>
-            <input type="submit" value ="1" name="offset"/>
+            <input type="submit" name="requestedDate" value="Back One Month" id="backOne"/>
+            <input type="submit" name="requestedDate" value="Forward One Month" id="forwardOne"/>
         }
         <table class="calendar">
             <thead>
                 <tr>
-                    <th colspan="7" class="txt-center"><h2>@Model.CurrentMonth.AddMonths(Model.MonthOffset).ToString("MMMMMMMMMMMMM")</h2></th>
+                    <th colspan="7" class="txt-center"><h2>@Model.Month.ToString("MMMMMMMMMMMMM")</h2></th>
                 </tr>
             </thead>
             <tbody>
