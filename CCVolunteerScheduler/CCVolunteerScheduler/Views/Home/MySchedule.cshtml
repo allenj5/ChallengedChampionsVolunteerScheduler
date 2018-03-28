@@ -33,10 +33,16 @@
 </div>
 <center>
     <div class="table-responsive">
+        @using (Html.BeginForm("MySchedule", "Home"))
+        {
+            <input type="submit" name="requestedDate" value="Back One Month" id="backOne" />
+            <input type="submit" name="requestedDate" value="Forward One Month" id="forwardOne" />
+            <input type="hidden" name="userMonth" value="@Model.Month.ToString("MMMMMMMMMMMMM")" id="userMonth" />
+        }
         <table class="calendar">
             <thead>
                 <tr>
-                    <th colspan="7" class="txt-center"><h2>@DateTime.Now.ToString("MMMMMMMMMMMMM")</h2></th>
+                    <th colspan="7" class="txt-center"><h2>@Model.Month.ToString("MMMMMMMMMMMMM")</h2></th>
                 </tr>
             </thead>
             <tbody>
@@ -68,22 +74,23 @@
                         <tr>
                             @for (int i = daysToAdd; i > 0; i--)
                             {
-                                <td class="calendar-day cell-inactive" >@curDay.AddDays(-i).ToString("dd")
-                                    
+                                <td class="calendar-day cell-inactive">
+                                    @curDay.AddDays(-i).ToString("dd")
+
                                 </td>
 
                             }
                             @for (int i = 0; i < Model.NumberOfDays - daysToAdd; i++)
                             {
-                                <td class="calendar-day cell-inactive" >
-                                    <div id="@("date" + curDay.AddDays(i).ToString("dd"))"> 
+                                <td class="calendar-day cell-inactive">
+                                    <div id="@("date" + curDay.AddDays(i).ToString("dd"))">
                                         @curDay.AddDays(i).ToString("dd")
                                         @*PartialView*@
                                     </div>
                                 </td>
                             }
-                         </tr>
-                         curDay = curDay.AddDays(Model.NumberOfDays - daysToAdd);
+                        </tr>
+                        curDay = curDay.AddDays(Model.NumberOfDays - daysToAdd);
                     }
                     for (int i = 0; i < Model.NumberOfDays; i++)
                     {
@@ -91,11 +98,11 @@
                         {
                             <tr>
                                 @for (int j = 0; j < Model.NumberOfDays; j++)
-                                {
-                                    
+                    {
+
                                     <td class="calendar-day cell-inactive" id="@("date" + curDay.AddDays(j).ToString("dd"))">
                                         @curDay.AddDays(j).ToString("dd")
-                                        @*PartialView*@        
+                                        @*PartialView*@
                                     </td>
                                 }
                             </tr>
@@ -108,6 +115,10 @@
         </table>
     </div>
     <br />
+    @if (Model.StartDate.Month == DateTime.Now.Month && Model.StartDate.Year == DateTime.Now.Year)
+    {
+        <script>document.getElementById("@("date" + DateTime.Today.ToString("dd"))").classList = "calendar-day cell-active";</script>
+    }
 </center>
 <br />
 
@@ -145,7 +156,7 @@
 <!-- for styling active day cell -->                                                        
 <script type="text/javascript">
     window.onload = function(){
-        document.getElementById("@("date" + DateTime.Today.ToString("dd"))").classList = "calendar-day cell-active";
+        document.getElementById("@("date" + DateTime.Today.ToString("dd"))").classList = "calendar-day";
         getAllEvents();
     }
 </script>
