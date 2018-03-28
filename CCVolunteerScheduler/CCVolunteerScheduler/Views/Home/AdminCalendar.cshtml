@@ -164,6 +164,10 @@
     </div>
 </div>
 
+@if(Model.StartDate.Month == DateTime.Now.Month && Model.StartDate.Year == DateTime.Now.Year){
+            <script>document.getElementById("@("date" + DateTime.Today.ToString("dd"))").classList = "calendar-day cell-active";</script>
+}
+
 <!-- used for getting events for a day -->
 <script type="text/javascript">
     function getEvents(currentDay) {
@@ -195,10 +199,9 @@
     }
 </script>
 
-<!-- for styling active day cell -->                                                        
+<!-- for populating events on calendar -->                                                        
 <script type="text/javascript">
-    window.onload = function(){
-        document.getElementById("@("date" + DateTime.Today.ToString("dd"))").classList = "calendar-day cell-active";
+    window.onload = function () {
         getAllEvents();
     }
 </script>     
