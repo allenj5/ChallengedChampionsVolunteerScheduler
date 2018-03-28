@@ -38,11 +38,12 @@
             <input type="submit" name="requestedDate" value="Back One Month" id="backOne" />
             <input type="submit" name="requestedDate" value="Forward One Month" id="forwardOne" />
             <input type="hidden" name="userMonth" value="@Model.Month.ToString("MMMMMMMMMMMMM")" id="userMonth" />
+            <input type="hidden" name="userYear" value="@Model.Month.ToString("yyyy")" id="userYear" />
         }
         <table class="calendar">
             <thead>
                 <tr>
-                    <th colspan="7" class="txt-center"><h2>@Model.Month.ToString("MMMMMMMMMMMMM")</h2></th>
+                    <th colspan="7" class="txt-center"><h2>@Model.Month.ToString("MMMMMMMMMMMMM yyyy")</h2></th>
                 </tr>
             </thead>
             <tbody>
@@ -156,7 +157,6 @@
 <!-- for styling active day cell -->                                                        
 <script type="text/javascript">
     window.onload = function(){
-        document.getElementById("@("date" + DateTime.Today.ToString("dd"))").classList = "calendar-day";
         getAllEvents();
     }
 </script>
