@@ -135,7 +135,7 @@
                         <script>
                             $('#datepicker').datepicker({
                                 uiLibrary: 'bootstrap4',
-                                format: 'yyyy-mm-dd'
+                                format: "yyyy-mm-dd"
                             });
                         </script>
                         <br />
@@ -151,7 +151,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal" onclick="AddEvent(eventTitle, eventDesc, $('#datepicker').val(), eventStart, eventEnd)">Save</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal" onclick="AddEvent(eventTitle.value, eventDesc.value, $('#datepicker').val(), eventStart.value, eventEnd.value)">Save</button>
             </div>
         </div>
     </div>
@@ -228,14 +228,11 @@
         jQuery.noConflict();
         (function ($) {
             $.ajax({
-                type: "Post",
-                url: '@Url.Action("AddEvent", "home")',
-                data: {
-                    title: eventTitle.value,
-                    description: eventDesc.value,
-                    date: eventDate,
-                    start: eventStart.value,
-                    end: eventEnd.value
+                type: "Get",
+                url: '@Url.Action("AddEvent", "home")?title=' + eventTitle + '&description=' + eventDesc + '&date=' + eventDate + '&start=' + eventStart + '&end=' + eventEnd,
+                success: function () {
+                    //refresh page after event is added
+                    location.reload();
                 }
             })
         })(jQuery);

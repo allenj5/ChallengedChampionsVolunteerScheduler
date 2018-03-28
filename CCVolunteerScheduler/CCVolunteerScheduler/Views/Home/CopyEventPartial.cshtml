@@ -4,33 +4,34 @@
 <div class="modal-body">
     <form>
         <div class="form-group">
-            <label for="eventTitle">Event Title</label>
-            <input type="text" class="form-control" id="eventTitle" value="@Model.EventTitle" />
+            <label for="eventTitleCopy">Event Title</label>
+            <input type="text" class="form-control" id="eventTitleCopy" name="eventTitleCopy" value="@Model.EventTitle" />
             <br />
 
-            <label for="eventDesc">Event Description</label>
-            <textarea class="form-control" rows="3" id="eventDesc">@Model.EventDescription</textarea>
+            <label for="eventDescCopy">Event Description</label>
+            <textarea class="form-control" rows="3" id="eventDescCopy" name="eventDescCopy">@Model.EventDescription</textarea>
             <br />
 
-            <label for="datepicker">Event Date</label>
-            <input id="datepicker" width="276" />
+            <label for="datepickerCopy">Event Date</label>
+            <input id="datepickerCopy" name="datepickerCopy" width="276" />
             <script>
-                $('#datepicker').datepicker({
+                var $j = jQuery.noConflict(); /* fixes bug with datepicker not showing up */
+                $j('#datepickerCopy').datepicker({
                     uiLibrary: 'bootstrap4'
                 });
             </script>
             <br />
 
-            <small id="eventTimeDesc" class="form-text text-muted">Please format times as follows: HH:MM (6:00 for 6:00 AM or 18:00 for 6:00 PM)</small>
-            <label for="eventStart">Start Time</label>
-            <input type="text" class="form-control" id="eventStart" value="@Model.StartTime" />
+            <small id="eventTimeDescCopy" class="form-text text-muted">Please format times as follows: HH:MM (6:00 for 6:00 AM or 18:00 for 6:00 PM)</small>
+            <label for="eventStartCopy">Start Time</label>
+            <input type="text" class="form-control" id="eventStartCopy" name="eventStartCopy" value="@Model.StartTime" />
             <br />
 
-            <label for="eventEnd">End Time</label>
-            <input type="text" class="form-control" id="eventEnd" value="@Model.EndTime" />
+            <label for="eventEndCopy">End Time</label>
+            <input type="text" class="form-control" id="eventEndCopy" name="eventEndCopy" value="@Model.EndTime" />
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-info" data-dismiss="modal">Save</button>
+    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="AddEvent(eventTitleCopy.value, eventDescCopy.value, $('#datepickerCopy').val(), eventStartCopy.value, eventEndCopy.value)">Save</button>
 </div>
