@@ -31,9 +31,52 @@ namespace CCVolunteerScheduler.Controllers
         }
 
         [HttpPost]
-        public ActionResult AdminCalendar(string requestedDate)
+        public ActionResult AdminCalendar(string requestedDate, string userMonth)
         {
-            DateTime newDate = DateTime.Now;
+            int month = 0;
+
+            switch(userMonth)
+            {
+                case "January":
+                    month = 1;
+                    break;
+                case "February":
+                    month = 2;
+                    break;
+                case "March":
+                    month = 3;
+                    break;
+                case "April":
+                    month = 4;
+                    break;
+                case "May":
+                    month = 5;
+                    break;
+                case "June":
+                    month = 6;
+                    break;
+                case "July":
+                    month = 7;
+                    break;
+                case "August":
+                    month = 8;
+                    break;
+                case "September":
+                    month = 9;
+                    break;
+                case "October":
+                    month = 10;
+                    break;
+                case "November":
+                    month = 11;
+                    break;
+                case "December":
+                    month = 12;
+                    break;
+
+            }
+
+            DateTime newDate = new DateTime(DateTime.Now.Year, month, DateTime.Now.Day);
 
             if(requestedDate == "Back One Month")
             {

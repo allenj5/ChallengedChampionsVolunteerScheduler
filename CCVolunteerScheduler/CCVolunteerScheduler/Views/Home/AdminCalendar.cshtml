@@ -31,11 +31,12 @@
 <br />
 <center>
     <div class="table-responsive">
-        @using(Html.BeginForm("AdminCalendar", "Home"))
-        {
-            <input type="submit" name="requestedDate" value="Back One Month" id="backOne"/>
-            <input type="submit" name="requestedDate" value="Forward One Month" id="forwardOne"/>
-        }
+        @using (Html.BeginForm("AdminCalendar", "Home"))
+    {
+        <input type="submit" name="requestedDate" value="Back One Month" id="backOne" />
+        <input type="submit" name="requestedDate" value="Forward One Month" id="forwardOne" />
+        <input type="hidden" name="userMonth" value="@Model.Month.ToString("MMMMMMMMMMMMM")" id="userMonth" />
+}
         <table class="calendar">
             <thead>
                 <tr>
@@ -62,50 +63,51 @@
                     <td><h6>S</h6></td>
                 </tr>
                 @{
-                    var curDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, 1);
-                    var lastDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, DateTime.DaysInMonth(Model.StartDate.Year, Model.StartDate.Month));
+                var curDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, 1);
+                var lastDay = new DateTime(Model.StartDate.Year, Model.StartDate.Month, DateTime.DaysInMonth(Model.StartDate.Year, Model.StartDate.Month));
 
-                    int daysToAdd = (int)curDay.DayOfWeek;
-                    if (daysToAdd > 0)
+                int daysToAdd = (int)curDay.DayOfWeek;
+                if (daysToAdd > 0)
+                {
+                    <tr>
+                        @for (int i = daysToAdd; i > 0; i--)
                     {
-                        <tr>
-                            @for (int i = daysToAdd; i > 0; i--)
-                            {
-                                <td class="calendar-day cell-inactive" >@curDay.AddDays(-i).ToString("dd")
-                                    
-                                </td>
+                        <td class="calendar-day cell-inactive">
+                            @curDay.AddDays(-i).ToString("dd")
 
-                            }
-                            @for (int i = 0; i < Model.NumberOfDays - daysToAdd; i++)
-                            {
-                                <td class="calendar-day cell-inactive" >
-                                    <div id="@("date" + curDay.AddDays(i).ToString("dd"))"> 
-                                        @curDay.AddDays(i).ToString("dd")
-                                        @*PartialView*@
-                                    </div>
-                                </td>
-                            }
-                         </tr>
-                         curDay = curDay.AddDays(Model.NumberOfDays - daysToAdd);
-                    }
-                    for (int i = 0; i < Model.NumberOfDays; i++)
+                    </td>
+
+            }
+                        @for (int i = 0; i < Model.NumberOfDays - daysToAdd; i++)
                     {
-                        if (curDay.CompareTo(lastDay) <= 0)
-                        {
-                            <tr>
-                                @for (int j = 0; j < Model.NumberOfDays; j++)
-                                {
-                                    
-                                    <td class="calendar-day cell-inactive" id="@("date" + curDay.AddDays(j).ToString("dd"))">
-                                        @curDay.AddDays(j).ToString("dd")
-                                        @*PartialView*@        
-                                    </td>
-                                }
-                            </tr>
+                        <td class="calendar-day cell-inactive">
+                            <div id="@("date" + curDay.AddDays(i).ToString("dd"))">
+                                @curDay.AddDays(i).ToString("dd")
+                                @*PartialView*@
+                            </div>
+                        </td>
+                }
+                    </tr>
+                curDay = curDay.AddDays(Model.NumberOfDays - daysToAdd);
+            }
+            for (int i = 0; i < Model.NumberOfDays; i++)
+            {
+                if (curDay.CompareTo(lastDay) <= 0)
+                {
+                    <tr>
+                        @for (int j = 0; j < Model.NumberOfDays; j++)
+                    {
 
-                            curDay = curDay.AddDays(Model.NumberOfDays);
-                        }
-                    }
+                        <td class="calendar-day cell-inactive" id="@("date" + curDay.AddDays(j).ToString("dd"))">
+                            @curDay.AddDays(j).ToString("dd")
+                            @*PartialView*@
+                        </td>
+                }
+                    </tr>
+
+                curDay = curDay.AddDays(Model.NumberOfDays);
+            }
+        }
                 }
             </tbody>
         </table>
