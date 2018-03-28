@@ -123,10 +123,10 @@
     function getEvents(currentDay) {
         jQuery.noConflict();
         (function ($) {
-            var myDay = "" + @Model.StartDate.ToString("yyyy");
+            var myDay = "" + @Model.StartDate.ToString("yyyy") + "-";
             var month = @Model.StartDate.ToString("MM") + 0;
             if (month < 10) {
-                myDay += "-0";
+                myDay += "0";
             }
             myDay += + @Model.StartDate.ToString("MM") + "-" + currentDay;
 
