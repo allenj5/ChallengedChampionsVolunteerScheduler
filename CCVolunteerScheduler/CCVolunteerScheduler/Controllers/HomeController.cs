@@ -156,15 +156,83 @@ namespace CCVolunteerScheduler.Controllers
             return View();
         }
 
+        public ActionResult MySchedule(string requestedDate, string userMonth)
+        {
+            int month = 0;
+
+            switch (userMonth)
+            {
+                case "January":
+                    month = 1;
+                    break;
+                case "February":
+                    month = 2;
+                    break;
+                case "March":
+                    month = 3;
+                    break;
+                case "April":
+                    month = 4;
+                    break;
+                case "May":
+                    month = 5;
+                    break;
+                case "June":
+                    month = 6;
+                    break;
+                case "July":
+                    month = 7;
+                    break;
+                case "August":
+                    month = 8;
+                    break;
+                case "September":
+                    month = 9;
+                    break;
+                case "October":
+                    month = 10;
+                    break;
+                case "November":
+                    month = 11;
+                    break;
+                case "December":
+                    month = 12;
+                    break;
+
+            }
+
+            DateTime newDate = new DateTime(DateTime.Now.Year, month, DateTime.Now.Day);
+
+            if (requestedDate == "Back One Month")
+            {
+                newDate = newDate.AddMonths(-1);
+            }
+            else if (requestedDate == "Forward One Month")
+            {
+                newDate = newDate.AddMonths(1);
+            }
+
+            Models.CalendarViewModel model = new Models.CalendarViewModel
+            {
+                NumberOfDays = 7,
+                StartDate = newDate,
+                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month),
+                Month = newDate
+            };
+            return View("MySchedule", model);
+        }
+
+        [HttpGet]
         public ActionResult MySchedule()
         {
             Models.CalendarViewModel model = new Models.CalendarViewModel
             {
                 NumberOfDays = 7,
                 StartDate = DateTime.Now,
-                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)
+                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month),
+                Month = DateTime.Now
             };
-            return View(model);
+            return View("MySchedule", model);
         }
         public ActionResult MyScheduleGetEventsForDay(string day)
         {
@@ -174,15 +242,83 @@ namespace CCVolunteerScheduler.Controllers
             return PartialView("VolunteerEventsForDay", Model);
         }
 
+        public ActionResult VolunteerCalendar(string requestedDate, string userMonth)
+        {
+            int month = 0;
+
+            switch (userMonth)
+            {
+                case "January":
+                    month = 1;
+                    break;
+                case "February":
+                    month = 2;
+                    break;
+                case "March":
+                    month = 3;
+                    break;
+                case "April":
+                    month = 4;
+                    break;
+                case "May":
+                    month = 5;
+                    break;
+                case "June":
+                    month = 6;
+                    break;
+                case "July":
+                    month = 7;
+                    break;
+                case "August":
+                    month = 8;
+                    break;
+                case "September":
+                    month = 9;
+                    break;
+                case "October":
+                    month = 10;
+                    break;
+                case "November":
+                    month = 11;
+                    break;
+                case "December":
+                    month = 12;
+                    break;
+
+            }
+
+            DateTime newDate = new DateTime(DateTime.Now.Year, month, DateTime.Now.Day);
+
+            if (requestedDate == "Back One Month")
+            {
+                newDate = newDate.AddMonths(-1);
+            }
+            else if (requestedDate == "Forward One Month")
+            {
+                newDate = newDate.AddMonths(1);
+            }
+
+            Models.CalendarViewModel model = new Models.CalendarViewModel
+            {
+                NumberOfDays = 7,
+                StartDate = newDate,
+                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month),
+                Month = newDate
+            };
+            return View("VolunteerCalendar", model);
+        }
+
+        [HttpGet]
         public ActionResult VolunteerCalendar()
         {
             Models.CalendarViewModel model = new Models.CalendarViewModel
             {
                 NumberOfDays = 7,
                 StartDate = DateTime.Now,
-                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)
+                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month),
+                Month = DateTime.Now
             };
-            return View(model);
+            return View("VolunteerCalendar", model);
         }
         public ActionResult VolunteerGetEventsForDay(string day)
         {
