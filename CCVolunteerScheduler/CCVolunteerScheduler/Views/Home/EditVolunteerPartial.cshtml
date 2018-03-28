@@ -1,30 +1,43 @@
 ﻿﻿@{
     Layout = null;
 }
-<form>
-    <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input type="text" class="form-control" id="firstName" value="@Html.Encode(Model.FirstName)" />
-        <br />
 
-        <label for="lastName">Last Name</label>
-        <input type="text" class="form-control" id="lastName" value="@Html.Encode(Model.LastName)" />
-        <br />
+<div class="modal-header">
+    <h4 class="modal-title">Edit Volunteer</h4>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="form-group">
+            <label for="firstNameEdit">First Name</label>
+            <input type="text" class="form-control" id="firstNameEdit" value="@Html.Encode(Model.FirstName)" />
+            <br />
 
-        <label for="phone">Phone</label>
-        <input type="text" class="form-control" id="phone" value="@Html.Encode(Model.Phone)"/>
-        <br />
+            <label for="lastNameEdit">Last Name</label>
+            <input type="text" class="form-control" id="lastNameEdit" value="@Html.Encode(Model.LastName)" />
+            <br />
 
-        <label for="email">Email</label>
-        <input type="text" class="form-control" id="email" value="@Html.Encode(Model.Email)" />
-        <br />
+            <label for="phoneEdit">Phone</label>
+            <input type="text" class="form-control" id="phoneEdit" value="@Html.Encode(Model.Phone)"/>
+            <br />
 
-        <label for="active">Active</label>
-        <input type="text" class="form-control" id="active" value="@Html.Encode(Model.Active)" />
-        <br />
+            <label for="emailEdit">Email</label>
+            <input type="text" class="form-control" id="emailEdit" value="@Html.Encode(Model.Email)" />
+            <br />
 
-        <label for="hoursWorked">Hours Worked</label>
-        <input type="text" class="form-control" id="hoursWorked" value="@Html.Encode(Model.HoursWorked)"/>
-        <br />
-    </div>
-</form>
+            <label for="activeEdit">Active</label>
+            <input type="text" class="form-control" id="activeEdit" value="@Html.Encode(Model.Active)" />
+            <br />
+
+            <label for="hoursWorkedEdit">Hours Worked</label>
+            <input type="text" class="form-control" id="hoursWorkedEdit" value="@Html.Encode(Model.HoursWorked)"/>
+            <br />
+
+            <label for="positionEdit">Position</label>
+            <input type="text" class="form-control" id="positionEdit" value="@Html.Encode(Model.Position)"/>
+            <br />
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="UpdateVolunteer(@Model.ID, firstNameEdit.value, lastNameEdit.value, phoneEdit.value, emailEdit.value, activeEdit.value, hoursWorkedEdit.value, positionEdit.value)">Save</button>
+</div>

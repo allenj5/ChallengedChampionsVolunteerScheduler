@@ -138,16 +138,8 @@
 <div id="EditVolunteerModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Edit Volunteer</h4>
-            </div>
-            <div class="modal-body" id="Preview">
+        <div class="modal-content" id="Preview">
                 @*PartialView*@
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">Save</button>
-            </div>
         </div>
     </div>
 </div>
@@ -162,6 +154,21 @@
                 data: { id: currentId },
                 success: function (data) {
                     $('#Preview').html(data);
+                }
+            })
+        })(jQuery);
+    }
+</script>
+
+<script type="text/javascript">
+    function UpdateVolunteer(id, firstName, lastName, phone, email, active, hoursWorked, position) {
+        jQuery.noConflict();
+        (function ($) {
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("UpdateVolunteer", "home")?id=' + id + '&firstName=' + firstName + '&lastName=' + lastName + '&phone=' + phone + '&email=' + email + '&active=' + active + '&hoursWorked=' + hoursWorked + '&position=' + position,
+                success: function () {
+                    location.reload();
                 }
             })
         })(jQuery);

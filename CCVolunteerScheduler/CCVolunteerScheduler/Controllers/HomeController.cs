@@ -383,6 +383,23 @@ namespace CCVolunteerScheduler.Controllers
             ViewData.Model = _db.Volunteers.ToList();
             return View();
         }
+        public ActionResult UpdateVolunteer(string id, string firstName, string lastName, string phone, string email, string active, string hoursWorked, string position)
+        {
+            int myID = Int32.Parse(id);
+            int myHoursWorked = Int32.Parse(hoursWorked);
+
+            bool myActive = false;
+            if (active == "True" || active == "true")
+            {
+                myActive = true;
+            }
+
+            UpdateVolunteer x = new UpdateVolunteer();
+            x.Update_Volunteer(myID, firstName, lastName, phone, email, myActive, myHoursWorked, position);
+
+            return new EmptyResult();
+        }
+
         public ActionResult GetDetail(int id)
         {
             VolunteersDBEntities _db = new VolunteersDBEntities();
