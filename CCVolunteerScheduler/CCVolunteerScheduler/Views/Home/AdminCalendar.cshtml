@@ -173,7 +173,7 @@
             var myID = 'date' + currentDay;
             $.ajax({
                 type: "Get",
-                url: '@Url.Action("AdminGetEventsForDay", "home")',
+                url: '@Url.Action("AdminEventsForDay", "home")',
                 data: { day: myDay },
                 success: function (data) {
                     if (data.trim()!='') {

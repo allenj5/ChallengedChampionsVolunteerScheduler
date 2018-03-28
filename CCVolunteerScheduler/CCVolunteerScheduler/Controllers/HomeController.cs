@@ -111,7 +111,7 @@ namespace CCVolunteerScheduler.Controllers
         }
 
 
-        public ActionResult AdminGetEventsForDay(string day)
+        public ActionResult AdminEventsForDay(string day)
         {
             EventDBEntities _db = new EventDBEntities();
             var EventList = _db.Events.ToList();
