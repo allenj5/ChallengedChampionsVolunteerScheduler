@@ -118,11 +118,18 @@
 <br />
 
 <!-- used for getting events for a day -->
+<!-- used for getting events for a day -->
 <script type="text/javascript">
     function getEvents(currentDay) {
         jQuery.noConflict();
         (function ($) {
-            var myDay = "" + @Model.StartDate.ToString("yyyy") + "-0" + @Model.StartDate.ToString("MM") + "-" + currentDay;
+            var myDay = "" + @Model.StartDate.ToString("yyyy");
+            var month = @Model.StartDate.ToString("MM") + 0;
+            if (month < 10) {
+                myDay += "-0";
+            }
+            myDay += + @Model.StartDate.ToString("MM") + "-" + currentDay;
+
             var myID = 'date' + currentDay;
             $.ajax({
                 type: "Get",
