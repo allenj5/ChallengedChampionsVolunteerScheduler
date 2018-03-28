@@ -30,22 +30,93 @@ namespace CCVolunteerScheduler.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult AdminCalendar(string requestedDate, string userMonth)
+        {
+            int month = 0;
+
+            switch(userMonth)
+            {
+                case "January":
+                    month = 1;
+                    break;
+                case "February":
+                    month = 2;
+                    break;
+                case "March":
+                    month = 3;
+                    break;
+                case "April":
+                    month = 4;
+                    break;
+                case "May":
+                    month = 5;
+                    break;
+                case "June":
+                    month = 6;
+                    break;
+                case "July":
+                    month = 7;
+                    break;
+                case "August":
+                    month = 8;
+                    break;
+                case "September":
+                    month = 9;
+                    break;
+                case "October":
+                    month = 10;
+                    break;
+                case "November":
+                    month = 11;
+                    break;
+                case "December":
+                    month = 12;
+                    break;
+
+            }
+
+            DateTime newDate = new DateTime(DateTime.Now.Year, month, DateTime.Now.Day);
+
+            if(requestedDate == "Back One Month")
+            {
+                newDate = newDate.AddMonths(-1);
+            }
+            else if(requestedDate == "Forward One Month")
+            {
+                newDate = newDate.AddMonths(1);
+            }
+
+            Models.CalendarViewModel model = new Models.CalendarViewModel
+            {
+                NumberOfDays = 7,
+                StartDate = newDate,
+                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month),
+                Month = newDate
+            };
+            return View("AdminCalendar", model);
+        }
+
+        [HttpGet]
         public ActionResult AdminCalendar()
         {
             Models.CalendarViewModel model = new Models.CalendarViewModel
             {
                 NumberOfDays = 7,
                 StartDate = DateTime.Now,
-                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year,DateTime.Now.Month)
+                DaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month),
+                Month = DateTime.Now
             };
-            return View(model);
+            return View("AdminCalendar", model);
         }
+
+
         public ActionResult AdminGetEventsForDay(string day)
         {
             EventDBEntities _db = new EventDBEntities();
             var EventList = _db.Events.ToList();
             var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
-            return PartialView("AdminEventsForDay", Model);
+            return PartialView(Model);
         }
         public ActionResult GetEventDetail(int id)
         {
