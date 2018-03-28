@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UpdateVolunteerModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="UpdateVolunteer" p1:LazyLoadingEnabled="true">
+    <FunctionImport Name="Update_Volunteer">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="ActiveStatus" Mode="In" Type="Boolean" />
+      <Parameter Name="HoursWorked" Mode="In" Type="Int32" />
+      <Parameter Name="VolunteerRole" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

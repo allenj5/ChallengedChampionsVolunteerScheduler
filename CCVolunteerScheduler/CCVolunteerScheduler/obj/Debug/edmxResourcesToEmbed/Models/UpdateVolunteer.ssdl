@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UpdateVolunteerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="UpdateVolunteerModelStoreContainer" />
+  <Function Name="Update_Volunteer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="FirstName" Type="char" Mode="In" />
+    <Parameter Name="LastName" Type="char" Mode="In" />
+    <Parameter Name="Phone" Type="char" Mode="In" />
+    <Parameter Name="Email" Type="char" Mode="In" />
+    <Parameter Name="ActiveStatus" Type="bit" Mode="In" />
+    <Parameter Name="HoursWorked" Type="int" Mode="In" />
+    <Parameter Name="VolunteerRole" Type="char" Mode="In" />
+  </Function>
+</Schema>
