@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AddVolunteer" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="AddVolunteerEntities" p1:LazyLoadingEnabled="true">
+    <FunctionImport Name="Insert_Volunteer">
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="HoursWorked" Mode="In" Type="Int32" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="Position" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>
