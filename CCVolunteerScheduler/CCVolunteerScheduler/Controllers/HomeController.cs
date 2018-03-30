@@ -31,7 +31,7 @@ namespace CCVolunteerScheduler.Controllers
         }
 
         [HttpPost]
-        public ActionResult AdminCalendar(string requestedDate, string userMonth)
+        public ActionResult AdminCalendar(string requestedDate, string userMonth, string userYear)
         {
             int month = 0;
 
@@ -76,15 +76,20 @@ namespace CCVolunteerScheduler.Controllers
 
             }
 
-            DateTime newDate = new DateTime(DateTime.Now.Year, month, DateTime.Now.Day);
+            DateTime newDate = new DateTime(Int32.Parse(userYear), month, DateTime.Now.Day);
 
             if(requestedDate == "Back One Month")
             {
                 newDate = newDate.AddMonths(-1);
+                if (month == 1)
+                    newDate.AddYears(-1);
             }
             else if(requestedDate == "Forward One Month")
             {
                 newDate = newDate.AddMonths(1);
+                if (month == 12)
+                    newDate.AddYears(1);
+
             }
 
             Models.CalendarViewModel model = new Models.CalendarViewModel
@@ -155,8 +160,9 @@ namespace CCVolunteerScheduler.Controllers
 
             return View();
         }
-
-        public ActionResult MySchedule(string requestedDate, string userMonth)
+        
+        [HttpPost]
+        public ActionResult MySchedule(string requestedDate, string userMonth, string userYear)
         {
             int month = 0;
 
@@ -201,15 +207,20 @@ namespace CCVolunteerScheduler.Controllers
 
             }
 
-            DateTime newDate = new DateTime(DateTime.Now.Year, month, DateTime.Now.Day);
+            DateTime newDate = new DateTime(Int32.Parse(userYear), month, DateTime.Now.Day);
 
             if (requestedDate == "Back One Month")
             {
                 newDate = newDate.AddMonths(-1);
+                if (month == 1)
+                    newDate.AddYears(-1);
             }
             else if (requestedDate == "Forward One Month")
             {
                 newDate = newDate.AddMonths(1);
+                if (month == 12)
+                    newDate.AddYears(1);
+
             }
 
             Models.CalendarViewModel model = new Models.CalendarViewModel
@@ -242,7 +253,8 @@ namespace CCVolunteerScheduler.Controllers
             return PartialView("VolunteerEventsForDay", Model);
         }
 
-        public ActionResult VolunteerCalendar(string requestedDate, string userMonth)
+        [HttpPost]
+        public ActionResult VolunteerCalendar(string requestedDate, string userMonth, string userYear)
         {
             int month = 0;
 
@@ -287,15 +299,20 @@ namespace CCVolunteerScheduler.Controllers
 
             }
 
-            DateTime newDate = new DateTime(DateTime.Now.Year, month, DateTime.Now.Day);
+            DateTime newDate = new DateTime(Int32.Parse(userYear), month, DateTime.Now.Day);
 
             if (requestedDate == "Back One Month")
             {
                 newDate = newDate.AddMonths(-1);
+                if (month == 1)
+                    newDate.AddYears(-1);
             }
             else if (requestedDate == "Forward One Month")
             {
                 newDate = newDate.AddMonths(1);
+                if (month == 12)
+                    newDate.AddYears(1);
+
             }
 
             Models.CalendarViewModel model = new Models.CalendarViewModel
