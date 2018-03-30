@@ -383,6 +383,16 @@ namespace CCVolunteerScheduler.Controllers
             ViewData.Model = _db.Volunteers.ToList();
             return View();
         }
+        public ActionResult AddVolunteer(string firstName, string lastName, string phone, string email, string position)
+        {
+            int hoursWorked = 0;
+            string password = "newDefalutPassword"; //should change this
+
+            AddVolunteerEntities x = new AddVolunteerEntities();
+            x.Insert_Volunteer(firstName, lastName, phone, email, hoursWorked, password, position);
+
+            return new EmptyResult();
+        }
         public ActionResult UpdateVolunteer(string id, string firstName, string lastName, string phone, string email, string active, string hoursWorked, string position)
         {
             int myID = Int32.Parse(id);

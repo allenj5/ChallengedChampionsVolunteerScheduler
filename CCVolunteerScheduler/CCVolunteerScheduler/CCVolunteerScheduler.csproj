@@ -187,6 +187,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AddEvent.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddVolunteer.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddVolunteer.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AddVolunteer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddVolunteer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AddVolunteer.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddVolunteer.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\CalendarModels.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Event.cs">
@@ -315,6 +330,16 @@
       <DependentUpon>AddEvent.edmx</DependentUpon>
       <LastGenOutput>AddEvent.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\AddVolunteer.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AddVolunteer.edmx</DependentUpon>
+      <LastGenOutput>AddVolunteer.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AddVolunteer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AddVolunteer.edmx</DependentUpon>
+      <LastGenOutput>AddVolunteer.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\Events.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Events.edmx</DependentUpon>
@@ -358,6 +383,13 @@
     </EntityDeploy>
     <Content Include="Models\UpdateVolunteer.edmx.diagram">
       <DependentUpon>UpdateVolunteer.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\AddVolunteer.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AddVolunteer.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AddVolunteer.edmx.diagram">
+      <DependentUpon>AddVolunteer.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Models\Volunteers.Context.tt">

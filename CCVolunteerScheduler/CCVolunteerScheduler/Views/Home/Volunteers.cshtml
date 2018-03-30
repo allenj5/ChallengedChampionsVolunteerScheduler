@@ -124,11 +124,15 @@
                         <input type="text" class="form-control" id="email" />
                         <br />
 
+                        <label for="position">Position</label>
+                        <input type="text" class="form-control" id="position" />
+                        <br />
+
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal" onclick="AddVolunteer(firstName.value, lastName.value, phone.value, email.value, position.value)">Save</button>
             </div>
         </div>
     </div>
@@ -167,6 +171,21 @@
             $.ajax({
                 type: "Get",
                 url: '@Url.Action("UpdateVolunteer", "home")?id=' + id + '&firstName=' + firstName + '&lastName=' + lastName + '&phone=' + phone + '&email=' + email + '&active=' + active + '&hoursWorked=' + hoursWorked + '&position=' + position,
+                success: function () {
+                    location.reload();
+                }
+            })
+        })(jQuery);
+    }
+</script>
+
+<script type="text/javascript">
+    function AddVolunteer(firstName, lastName, phone, email, position){
+        jQuery.noConflict();
+        (function ($) {
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("AddVolunteer", "home")?firstName=' + firstName + '&lastName=' + lastName + '&phone=' + phone + '&email=' + email + '&position=' + position,
                 success: function () {
                     location.reload();
                 }
