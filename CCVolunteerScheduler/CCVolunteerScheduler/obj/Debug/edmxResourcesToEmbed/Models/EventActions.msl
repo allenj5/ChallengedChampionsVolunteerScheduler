@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EventSPModelStoreContainer" CdmEntityContainer="EventSPEntities">
+    <FunctionImportMapping FunctionImportName="Delete_Event" FunctionName="EventSPModel.Store.Delete_Event" />
+    <FunctionImportMapping FunctionImportName="Insert_Event" FunctionName="EventSPModel.Store.Insert_Event" />
+    <FunctionImportMapping FunctionImportName="Update_Event" FunctionName="EventSPModel.Store.Update_Event" />
+  </EntityContainerMapping>
+</Mapping>

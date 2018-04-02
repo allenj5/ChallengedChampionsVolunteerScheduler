@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EventSPModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="EventSPModelStoreContainer" />
+        <Function Name="Delete_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Insert_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Event_Title" Type="varchar" Mode="In" />
+          <Parameter Name="Event_Description" Type="varchar" Mode="In" />
+          <Parameter Name="Event_Date" Type="date" Mode="In" />
+          <Parameter Name="Start_Time" Type="time" Mode="In" />
+          <Parameter Name="End_Time" Type="time" Mode="In" />
+        </Function>
+        <Function Name="Update_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+          <Parameter Name="Date" Type="date" Mode="In" />
+          <Parameter Name="Start" Type="time" Mode="In" />
+          <Parameter Name="End" Type="time" Mode="In" />
+        </Function>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EventSPModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EventSPEntities" p1:LazyLoadingEnabled="true" >
+          <FunctionImport Name="Delete_Event">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Insert_Event">
+            <Parameter Name="Event_Title" Mode="In" Type="String" />
+            <Parameter Name="Event_Description" Mode="In" Type="String" />
+            <Parameter Name="Event_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Start_Time" Mode="In" Type="Time" />
+            <Parameter Name="End_Time" Mode="In" Type="Time" />
+          </FunctionImport>
+          <FunctionImport Name="Update_Event">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Start" Mode="In" Type="Time" />
+            <Parameter Name="End" Mode="In" Type="Time" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EventSPModelStoreContainer" CdmEntityContainer="EventSPEntities" >
+          <FunctionImportMapping FunctionImportName="Delete_Event" FunctionName="EventSPModel.Store.Delete_Event" />
+          <FunctionImportMapping FunctionImportName="Insert_Event" FunctionName="EventSPModel.Store.Insert_Event" />
+          <FunctionImportMapping FunctionImportName="Update_Event" FunctionName="EventSPModel.Store.Update_Event" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
