@@ -33,5 +33,7 @@
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="AddEvent(eventTitleCopy.value, eventDescCopy.value, $('#datepickerCopy').val(), eventStartCopy.value, eventEndCopy.value)">Save</button>
+    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="DeleteEvent(@Model.EventID)">Delete</button>
+    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="UpdateEvent(@Model.EventID, eventTitleCopy.value, eventDescCopy.value, $('#datepickerCopy').val(), eventStartCopy.value, eventEndCopy.value)">Update</button>
+    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="AddEvent(eventTitleCopy.value, eventDescCopy.value, $('#datepickerCopy').val(), eventStartCopy.value, eventEndCopy.value)">Copy</button>
 </div>

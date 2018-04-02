@@ -172,21 +172,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AddEvent.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AddEvent.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AddEvent.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AddEvent.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AddEvent.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AddEvent.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\AddVolunteer.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -206,6 +191,21 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Event.cs">
       <DependentUpon>Events.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventActions.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventActions.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventActions.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventActions.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventActions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventActions.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Events.Context.cs">
       <AutoGen>True</AutoGen>
@@ -320,16 +320,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Volunteers.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\AddEvent.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AddEvent.edmx</DependentUpon>
-      <LastGenOutput>AddEvent.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\AddEvent.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AddEvent.edmx</DependentUpon>
-      <LastGenOutput>AddEvent.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\AddVolunteer.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AddVolunteer.edmx</DependentUpon>
@@ -339,6 +329,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AddVolunteer.edmx</DependentUpon>
       <LastGenOutput>AddVolunteer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EventActions.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EventActions.edmx</DependentUpon>
+      <LastGenOutput>EventActions.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EventActions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EventActions.edmx</DependentUpon>
+      <LastGenOutput>EventActions.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Events.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -370,13 +370,6 @@
     <Content Include="Models\Events.edmx.diagram">
       <DependentUpon>Events.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\AddEvent.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AddEvent.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\AddEvent.edmx.diagram">
-      <DependentUpon>AddEvent.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\UpdateVolunteer.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>UpdateVolunteer.Designer.cs</LastGenOutput>
@@ -390,6 +383,13 @@
     </EntityDeploy>
     <Content Include="Models\AddVolunteer.edmx.diagram">
       <DependentUpon>AddVolunteer.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\EventActions.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EventActions.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EventActions.edmx.diagram">
+      <DependentUpon>EventActions.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Models\Volunteers.Context.tt">

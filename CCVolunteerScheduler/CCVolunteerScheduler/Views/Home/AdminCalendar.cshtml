@@ -255,3 +255,37 @@
         })(jQuery);
     }
 </script>
+
+<!-- update event --->
+<script type="text/javascript">
+    function UpdateEvent(eventID, eventTitle, eventDesc, eventDate, eventStart, eventEnd) {
+        jQuery.noConflict();
+        (function ($) {
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("UpdateEvent", "home")?id=' + eventID + '&title=' + eventTitle + '&description=' + eventDesc + '&date=' + eventDate + '&start=' + eventStart + '&end=' + eventEnd,
+                success: function () {
+                    //refresh page after event is updated
+                    location.reload();
+                }
+            })
+        })(jQuery);
+    }
+</script>
+
+<!-- delete event --->
+<script type="text/javascript">
+    function DeleteEvent(eventID) {
+        jQuery.noConflict();
+        (function ($) {
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("DeleteEvent", "home")?id=' + eventID,
+                success: function () {
+                    //refresh page after event is deleted
+                    location.reload();
+                }
+            })
+        })(jQuery);
+    }
+</script>

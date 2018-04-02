@@ -136,8 +136,26 @@ namespace CCVolunteerScheduler.Controllers
             TimeSpan myStart = TimeSpan.Parse(start);
             TimeSpan myEnd = TimeSpan.Parse(end);
 
-            InsertEvent x = new InsertEvent();
+            EventSPEntities x = new EventSPEntities();
             x.Insert_Event(title, description, myDate, myStart, myEnd);
+
+            return new EmptyResult();
+        }
+        public ActionResult DeleteEvent(int id)
+        {
+            EventSPEntities x = new EventSPEntities();
+            x.Delete_Event(id);
+
+            return new EmptyResult();
+        }
+        public ActionResult UpdateEvent(int id, string title, string description, string date, string start, string end)
+        {
+            DateTime myDate = DateTime.Parse(date);
+            TimeSpan myStart = TimeSpan.Parse(start);
+            TimeSpan myEnd = TimeSpan.Parse(end);
+
+            EventSPEntities x = new EventSPEntities();
+            x.Update_Event(id, title, description, myDate, myStart, myEnd);
 
             return new EmptyResult();
         }
