@@ -59,7 +59,7 @@ namespace CCVolunteerScheduler.Controllers
             ViewBag.Message = message;
             return View(user);
         }
-        private string HashPassword(string Password)
+        public string HashPassword(string Password)
         {
             //you can change salt
             string salt = "Salt87978adfadfHJHU";

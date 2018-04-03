@@ -388,8 +388,10 @@ namespace CCVolunteerScheduler.Controllers
         }
         public ActionResult AddVolunteer(string firstName, string lastName, string phone, string email, string position)
         {
+            var Hashing = new LoginController();
+
             int hoursWorked = 0;
-            string password = "newDefalutPassword"; //should change this
+            string password = Hashing.HashPassword("ChalChampVolunteer"); //should change this
 
             AddVolunteerEntities x = new AddVolunteerEntities();
             x.Insert_Volunteer(firstName, lastName, phone, email, hoursWorked, password, position);
