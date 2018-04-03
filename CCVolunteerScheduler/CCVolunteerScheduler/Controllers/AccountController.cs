@@ -10,11 +10,14 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using CCVolunteerScheduler.Filters;
 using CCVolunteerScheduler.Models;
+using System.Security.Cryptography;
+using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace CCVolunteerScheduler.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
+    //[InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
@@ -43,6 +46,140 @@ namespace CCVolunteerScheduler.Controllers
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
             return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (VolunteersDBEntities db = new VolunteersDBEntities())
+                {
+
+                    Volunteer forgetUser = db.Volunteers.FirstOrDefault(u => u.Email == model.Email);
+                    if (forgetUser != null)
+                    {
+                        forgetUser.GUID = Guid.NewGuid().ToString();
+                        db.SaveChanges();
+                        SendEmail(forgetUser.Email, "Reset Password", "Your reset password link is http://" + Request.Url.Authority + "/Account/ResetPassword?code=" + forgetUser.GUID);
+                        return View("ForgotPasswordConfirmation");
+                    }
+                }
+            }
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult ChangeEmail()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeEmail(ChangeEmailViewModel model)
+        {
+            using (VolunteersDBEntities db = new VolunteersDBEntities())
+            {
+                string hashPassword = HashPassword(model.Password);
+                Volunteer currentUser = db.Volunteers.FirstOrDefault(u => u.Email == User.Identity.Name && u.Password == hashPassword);
+                if (currentUser != null)
+                {
+                    currentUser.Email = model.Email;
+                    db.SaveChanges();
+                    FormsAuthentication.SetAuthCookie(currentUser.Email, true);
+                    return View("ChangeEmailConfirmation");
+                }
+            }
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            using (VolunteersDBEntities db = new VolunteersDBEntities())
+            {
+                string hashPassword = HashPassword(model.OldPassword);
+                Volunteer currentUser = db.Volunteers.FirstOrDefault(u => u.Email == User.Identity.Name && u.Password == hashPassword);
+                if (currentUser != null)
+                {
+                    currentUser.Password = HashPassword(model.NewPassword);
+                    db.SaveChanges();
+                    return View("ChangePasswordConfirmation");
+                }
+            }
+            return View();
+        }
+
+        public ActionResult ResetPassword(string code)
+        {
+            ResetPasswordViewModel model = new ResetPasswordViewModel();
+            using (VolunteersDBEntities db = new VolunteersDBEntities())
+            {
+                Volunteer currentUser = db.Volunteers.FirstOrDefault(u => u.GUID == code);
+                if (currentUser != null)
+                {
+                    model.Code = currentUser.GUID;
+                }
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(ResetPasswordViewModel model)
+        {
+            using (VolunteersDBEntities db = new VolunteersDBEntities())
+            {
+                Volunteer currentUser = db.Volunteers.FirstOrDefault(u => u.GUID == model.Code);
+                if (currentUser != null)
+                {
+                    currentUser.Password = HashPassword(model.Password);
+                    db.SaveChanges();
+                    return View("ResetPasswordConfirmation");
+                }
+            }
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult ChangePhone()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePhone(ChangePhoneViewModel model)
+        {
+            using (VolunteersDBEntities db = new VolunteersDBEntities())
+            {
+                Volunteer currentUser = db.Volunteers.FirstOrDefault(u => u.Email == User.Identity.Name);
+                if (currentUser != null)
+                {
+                    currentUser.Phone = model.Phone;
+                    db.SaveChanges();
+                    return View("ChangeEmailConfirmation");
+                }
+            }
+            return View();
         }
 
         //
@@ -122,16 +259,16 @@ namespace CCVolunteerScheduler.Controllers
             return RedirectToAction("Manage", new { Message = message });
         }
 
-        [AllowAnonymous]
-        public ActionResult ForgotPassword()
-        {
-            return View();
-        }
+        //[AllowAnonymous]
+        //public ActionResult ForgotPassword()
+        //{
+        //    return View();
+        //}
 
-        public ActionResult ChangePassword()
-        {
-            return View();
-        }
+        //public ActionResult ChangePassword()
+        //{
+        //    return View();
+        //}
 
         public ActionResult ChangePhoneNumber()
         {
@@ -417,6 +554,40 @@ namespace CCVolunteerScheduler.Controllers
 
                 default:
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+            }
+        }
+        private string HashPassword(string Password)
+        {
+
+            //you can change salt
+            string salt = "Salt87978adfadfHJHU";
+            Password += salt;
+            SHA256CryptoServiceProvider hashProvider = new SHA256CryptoServiceProvider();
+            byte[] bytePassword = System.Text.Encoding.ASCII.GetBytes(Password);
+            byte[] hashBytePassword = hashProvider.ComputeHash(bytePassword);
+            var hashedPassword = BitConverter.ToString(hashBytePassword);
+
+            return hashedPassword;
+        }
+        private bool SendEmail(string To, string Subject, string Message)
+        {
+            try
+            {
+                var smtp = new SmtpClient();
+                var credential = (System.Net.NetworkCredential)smtp.Credentials;
+                using (var message = new MailMessage(credential.UserName.ToString(), To)
+                {
+                    Subject = Subject,
+                    Body = Message
+                })
+                {
+                    smtp.Send(message);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
         #endregion

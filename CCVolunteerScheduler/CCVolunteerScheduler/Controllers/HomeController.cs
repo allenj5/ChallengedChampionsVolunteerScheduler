@@ -380,21 +380,6 @@ namespace CCVolunteerScheduler.Controllers
               
          */
 
-        public ActionResult ChangeEmailAddress()
-        {
-            return View();
-        }
-
-        public ActionResult ChangePhoneNumber()
-        {
-            return View();
-        }
-
-        public ActionResult ForgotPassword()
-        {
-            return View();
-        }
-
         public ActionResult Volunteers()
         {
             VolunteersDBEntities _db = new VolunteersDBEntities();

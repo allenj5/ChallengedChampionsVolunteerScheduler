@@ -31,7 +31,9 @@
       <Parameter Name="LastName" Mode="In" Type="String" />
       <Parameter Name="Phone" Mode="In" Type="String" />
       <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="ActiveStatus" Mode="In" Type="Boolean" />
       <Parameter Name="HoursWorked" Mode="In" Type="Int32" />
+      <Parameter Name="VolunteerRole" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
   <EntityType Name="Event">
@@ -59,9 +61,10 @@
     <Property Name="HoursWorked" Type="Int64" />
     <Property Name="EmailOptOut" Type="Boolean" />
     <Property Name="isAdmin" Type="Boolean" />
-    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Position" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Position" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
     <NavigationProperty Name="Events" Relationship="VolunteersDBModel.VolunteerEventInstance" FromRole="Volunteer" ToRole="Event" />
+    <Property Name="GUID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="VolunteerEventInstance">
     <End Type="VolunteersDBModel.Event" Role="Event" Multiplicity="*" />

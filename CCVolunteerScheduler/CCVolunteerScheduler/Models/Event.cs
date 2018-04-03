@@ -12,33 +12,20 @@ namespace CCVolunteerScheduler.Models
     using System;
     using System.Collections.Generic;
     
-public partial class Event
-{
-
-    public Event()
+    public partial class Event
     {
-
-        this.Volunteers = new HashSet<Volunteer>();
-
+        public Event()
+        {
+            this.Volunteers = new HashSet<Volunteer>();
+        }
+    
+        public int EventID { get; set; }
+        public string EventTitle { get; set; }
+        public string EventDescription { get; set; }
+        public System.DateTime EventDate { get; set; }
+        public System.TimeSpan StartTime { get; set; }
+        public System.TimeSpan EndTime { get; set; }
+    
+        public virtual ICollection<Volunteer> Volunteers { get; set; }
     }
-
-
-    public int EventID { get; set; }
-
-    public string EventTitle { get; set; }
-
-    public string EventDescription { get; set; }
-
-    public System.DateTime EventDate { get; set; }
-
-    public System.TimeSpan StartTime { get; set; }
-
-    public System.TimeSpan EndTime { get; set; }
-
-
-
-    public virtual ICollection<Volunteer> Volunteers { get; set; }
-
-}
-
 }

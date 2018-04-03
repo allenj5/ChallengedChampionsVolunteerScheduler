@@ -28,7 +28,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="char" MaxLength="25" />
           <Property Name="LastName" Type="char" MaxLength="25" />
           <Property Name="Phone" Type="char" MaxLength="25" />
@@ -37,8 +37,9 @@
           <Property Name="HoursWorked" Type="bigint" />
           <Property Name="EmailOptOut" Type="bit" />
           <Property Name="isAdmin" Type="bit" />
-          <Property Name="Password" Type="text" />
-          <Property Name="Position" Type="char" MaxLength="30" />
+          <Property Name="Password" Type="nvarchar" MaxLength="200" />
+          <Property Name="Position" Type="char" MaxLength="25" />
+          <Property Name="GUID" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <Association Name="FK__Volunteer__Event__398D8EEE">
           <End Role="Events" Type="Self.Events" Multiplicity="1">
@@ -51,20 +52,6 @@
             </Principal>
             <Dependent Role="VolunteerEventInstance">
               <PropertyRef Name="EventID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Volunteer__Volun__3A81B327">
-          <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="VolunteerEventInstance" Type="Self.VolunteerEventInstance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Volunteers">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="VolunteerEventInstance">
-              <PropertyRef Name="VolunteerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -84,7 +71,9 @@
           <Parameter Name="LastName" Type="char" Mode="In" />
           <Parameter Name="Phone" Type="char" Mode="In" />
           <Parameter Name="Email" Type="char" Mode="In" />
+          <Parameter Name="ActiveStatus" Type="bit" Mode="In" />
           <Parameter Name="HoursWorked" Type="int" Mode="In" />
+          <Parameter Name="VolunteerRole" Type="char" Mode="In" />
         </Function>
         <Function Name="Validate_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="bigint" Mode="In" />
@@ -98,10 +87,6 @@
             <End Role="Events" EntitySet="Events" />
             <End Role="VolunteerEventInstance" EntitySet="VolunteerEventInstance" />
           </AssociationSet>
-          <AssociationSet Name="FK__Volunteer__Volun__3A81B327" Association="Self.FK__Volunteer__Volun__3A81B327">
-            <End Role="Volunteers" EntitySet="Volunteers" />
-            <End Role="VolunteerEventInstance" EntitySet="VolunteerEventInstance" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -109,11 +94,11 @@
       <Schema Namespace="VolunteersDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="VolunteersDBEntities" p1:LazyLoadingEnabled="true">
           <FunctionImport Name="Validate_User" ReturnType="Collection(String)">
-          <Parameter Name="UserID" Mode="In" Type="Int64" />
+            <Parameter Name="UserID" Mode="In" Type="Int64" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ValidateUser" ReturnType="Collection(String)">
-          <Parameter Name="UserID" Mode="In" Type="Int64" />
+            <Parameter Name="UserID" Mode="In" Type="Int64" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Check_Admin" ReturnType="Collection(String)">
@@ -138,7 +123,9 @@
             <Parameter Name="LastName" Mode="In" Type="String" />
             <Parameter Name="Phone" Mode="In" Type="String" />
             <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="ActiveStatus" Mode="In" Type="Boolean" />
             <Parameter Name="HoursWorked" Mode="In" Type="Int32" />
+            <Parameter Name="VolunteerRole" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Event">
@@ -166,9 +153,10 @@
           <Property Name="HoursWorked" Type="Int64" />
           <Property Name="EmailOptOut" Type="Boolean" />
           <Property Name="isAdmin" Type="Boolean" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Position" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="Events" Relationship="VolunteersDBModel.VolunteerEventInstance" FromRole="Volunteer" ToRole="Event" />
+          <Property Name="GUID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="VolunteerEventInstance">
           <End Type="VolunteersDBModel.Event" Role="Event" Multiplicity="*" />
@@ -198,6 +186,7 @@
           <EntitySetMapping Name="Volunteers">
             <EntityTypeMapping TypeName="VolunteersDBModel.Volunteer">
               <MappingFragment StoreEntitySet="Volunteers">
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
                 <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />

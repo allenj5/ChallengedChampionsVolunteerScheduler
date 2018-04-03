@@ -1,7 +1,5 @@
-﻿@model CCVolunteerScheduler.Models.ForgotPasswordViewModel
-@{
-    ViewBag.Title = "Forgot Password";
-}
+﻿@model CCVolunteerScheduler.Models.ChangePhoneViewModel
+
 @section navbar {
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse rounded">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,27 +31,26 @@
         </div>
     </nav>
 }
-
-<h2>ViewBag.Title</h2>
-
-@using (Html.BeginForm("ForgotPassword", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("ChangePhone", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Enter your Email Address.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+    <div class="form-group text-center">
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        @Html.LabelFor(m => m.Phone, new { @class = "control-label" })
+        <br /><br />
+        <div class=" text-center">
+            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @style = "display: inline;" })
+            <br />
+            @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Email Link" />
+    <div class="form-group text-center">
+        <div class="">
+            <input type="submit" class="btn btn-default" value="Save" />
         </div>
     </div>
 }
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

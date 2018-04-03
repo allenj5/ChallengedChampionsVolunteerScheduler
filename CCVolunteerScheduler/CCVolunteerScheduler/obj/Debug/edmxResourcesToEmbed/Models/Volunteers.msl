@@ -19,6 +19,7 @@
     <EntitySetMapping Name="Volunteers">
       <EntityTypeMapping TypeName="VolunteersDBModel.Volunteer">
         <MappingFragment StoreEntitySet="Volunteers">
+          <ScalarProperty Name="GUID" ColumnName="GUID" />
           <ScalarProperty Name="Position" ColumnName="Position" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />

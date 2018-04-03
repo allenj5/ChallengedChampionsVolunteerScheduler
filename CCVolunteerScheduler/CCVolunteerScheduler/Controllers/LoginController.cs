@@ -23,25 +23,32 @@ namespace CCVolunteerScheduler.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login(User user)
+        public ActionResult Login(Volunteer user)
         {
             VolunteersDBEntities _db = new VolunteersDBEntities();
 
             //ComputeHash code here to check with the database
             var salt = new Byte[16];
-            string hashedPassword = HashingSaltModel.ComputeHash(user.Password, new SHA256CryptoServiceProvider(), salt);
+            string hashedPassword = HashPassword(user.Password);
 
-            string userId = _db.ValidateUser(user.Username, hashedPassword).FirstOrDefault();
+            Volunteer currentUser = _db.Volunteers.FirstOrDefault(v => v.Email == user.Email);
+            long currentUserId = 0;
+            if (currentUser != null)
+            {
+                currentUserId = currentUser.ID;
+            }
+            string userId = _db.ValidateUser(currentUserId, hashedPassword).FirstOrDefault();
 
             string message = string.Empty;
 
-            if(userId == "false")
+            if (userId == "false")
             {
                 message = "Username and/or password is incorrect.";
             }
             else
             {
-                string adminUser = _db.Check_Admin(user.Username).FirstOrDefault();
+                FormsAuthentication.SetAuthCookie(user.Email, true);
+                string adminUser = _db.Check_Admin((int)currentUserId).FirstOrDefault();
 
                 if (adminUser == "true")
                     return RedirectToAction("AdminHome", "Home");
@@ -51,6 +58,18 @@ namespace CCVolunteerScheduler.Controllers
 
             ViewBag.Message = message;
             return View(user);
+        }
+        private string HashPassword(string Password)
+        {
+            //you can change salt
+            string salt = "Salt87978adfadfHJHU";
+            Password += salt;
+            SHA256CryptoServiceProvider hashProvider = new SHA256CryptoServiceProvider();
+            byte[] bytePassword = System.Text.Encoding.ASCII.GetBytes(Password);
+            byte[] hashBytePassword = hashProvider.ComputeHash(bytePassword);
+            var hashedPassword = BitConverter.ToString(hashBytePassword);
+
+            return hashedPassword;
         }
     }
 }

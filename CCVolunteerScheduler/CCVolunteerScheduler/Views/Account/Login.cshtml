@@ -1,59 +1,60 @@
-﻿@model CCVolunteerScheduler.Models.User
-
+﻿@model CCVolunteerScheduler.Models.Volunteer
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Login";
 }
+<center>
+    <body>
+        @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+        {
+            <table border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th colspan="3">
+                        Login
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        Username
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.Email)
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "error" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Password
+                    </td>
+                    <td>
+                        @Html.PasswordFor(m => m.Password)
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Submit" />
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
-
-<section id="loginForm">
-    <h2>Use a local account to log in.</h2>
-    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-
-        <fieldset>
-            <legend>Log in Form</legend>
-            <ol>
-                <li>
-                    @Html.LabelFor(m => m.UserName)
-                    @Html.TextBoxFor(m => m.UserName)
-                    @Html.ValidationMessageFor(m => m.UserName)
-                </li>
-                <li>
-                    @Html.LabelFor(m => m.Password)
-                    @Html.PasswordFor(m => m.Password)
-                    @Html.ValidationMessageFor(m => m.Password)
-                </li>
-                <li>
-                    @Html.CheckBoxFor(m => m.RememberMe)
-                    @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-                </li>
-            </ol>
-            <input type="submit" value="Log in" />
-        </fieldset>
-        <p>
-            @Html.ActionLink("Register", "Register") if you don't have an account.
-        </p>
-    }
-    @if (@ViewBag.Message != null)
-    {
-        <script type="text/javascript">
+            <br />
+            <br />
+        }
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")
+        @if (@ViewBag.Message != null)
+        {
+            <script type="text/javascript">
             $(function () {
                 alert("@ViewBag.Message")
             });
-        </script>
-    }
-</section>
-
-<section class="social" id="socialLoginForm">
-    <h2>Use another service to log in.</h2>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+            </script>
+        }
+    </body>
+</center>

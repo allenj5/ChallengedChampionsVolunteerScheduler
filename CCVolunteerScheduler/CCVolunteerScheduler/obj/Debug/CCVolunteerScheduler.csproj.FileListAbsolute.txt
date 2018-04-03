@@ -288,3 +288,6 @@ C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerSche
 C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.pdb
 C:\Users\frickc\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.csprojResolveAssemblyReference.cache
 C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler2\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.csproj.CopyComplete
+C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.csproj.CopyComplete
+C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\Microsoft.AspNet.Identity.Core.xml
