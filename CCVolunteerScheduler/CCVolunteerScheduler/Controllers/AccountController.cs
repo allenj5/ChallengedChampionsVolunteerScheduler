@@ -176,7 +176,7 @@ namespace CCVolunteerScheduler.Controllers
                 {
                     currentUser.Phone = model.Phone;
                     db.SaveChanges();
-                    return View("ChangeEmailConfirmation");
+                    return View("ChangePhoneConfirmation");
                 }
             }
             return View();

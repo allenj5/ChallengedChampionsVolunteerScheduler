@@ -291,3 +291,5 @@ C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler2\CCVolunteerSch
 C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.csproj.CopyComplete
 C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\Microsoft.AspNet.Identity.Core.dll
 C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler2\CCVolunteerScheduler\CCVolunteerScheduler\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler2\CCVolunteerScheduler\CCVolunteerScheduler\bin\Microsoft.AspNet.Identity.Core.xml
