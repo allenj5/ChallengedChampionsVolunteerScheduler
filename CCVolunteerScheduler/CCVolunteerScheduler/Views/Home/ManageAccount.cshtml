@@ -31,7 +31,7 @@
 <center>
     <div class="container">
         <div class="col-xs-12 col-md-12">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ChangePasswordModal">Change Password</button>
+            <button type="button" class="btn btn-info" onclick="location.href='@Url.Action("ChangePassword", "Account")';return false;">Change Password</button>
         </div>
     </div>
 
@@ -39,7 +39,7 @@
 
     <div class="container">
         <div class="col-xs-12 col-md-12">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ChangeEmailModal">Change Email</button>
+            <button type="button" class="btn btn-info" onclick="location.href='@Url.Action("ChangeEmail", "Account")';return false;">Change Email</button>
         </div>
     </div>
 
@@ -47,7 +47,7 @@
 
     <div class="container">
         <div class="col-xs-12 col-md-12">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ChangePhoneModal">Change Phone #</button>
+            <button type="button" class="btn btn-info" onclick="location.href = '@Url.Action("ChangePhone", "Account")'; return false;">Change Phone #</button>
         </div>
     </div>
 
