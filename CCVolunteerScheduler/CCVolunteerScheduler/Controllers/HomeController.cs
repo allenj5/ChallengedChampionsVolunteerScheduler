@@ -9,6 +9,12 @@ namespace CCVolunteerScheduler.Controllers
 {
     public class HomeController : Controller
     {
+        long currentUserId = 0;
+        public void ChangeUser(long id)
+        {
+            currentUserId = id;
+        }
+
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
@@ -161,10 +167,18 @@ namespace CCVolunteerScheduler.Controllers
         }
 
 
-        public ActionResult AdminHome()
+        public ActionResult AdminHome(long id = -1)
         {
+            if (id != -1)
+            {
+                ChangeUser(id);
+            }
 
-            return View();
+            VolunteersDBEntities _db = new VolunteersDBEntities();
+            var volunteerList = _db.Volunteers.ToList();
+            var Model = volunteerList.Where(x => x.ID == currentUserId).FirstOrDefault();
+
+            return View(Model);
         }
 
         public ActionResult Communications()
@@ -252,8 +266,12 @@ namespace CCVolunteerScheduler.Controllers
         }
 
         [HttpGet]
-        public ActionResult MySchedule()
+        public ActionResult MySchedule(long id = -1)
         {
+            if (id != -1)
+            {
+                ChangeUser(id);
+            }
             Models.CalendarViewModel model = new Models.CalendarViewModel
             {
                 NumberOfDays = 7,
