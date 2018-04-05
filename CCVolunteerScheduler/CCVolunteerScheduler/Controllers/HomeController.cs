@@ -9,6 +9,20 @@ namespace CCVolunteerScheduler.Controllers
 {
     public class HomeController : Controller
     {
+        public static long currentUserId = 0;
+
+        public static long currentUser
+        {
+            get
+            {
+                return currentUserId;
+            }
+            set
+            {
+                currentUserId = value;
+            }
+        }
+
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
@@ -160,10 +174,19 @@ namespace CCVolunteerScheduler.Controllers
             return new EmptyResult();
         }
 
-        [ChildActionOnly]
-        public ActionResult AdminHome()
+
+        public ActionResult AdminHome(long id = -1)
         {
-                return View();
+            if (id != -1)
+            {
+                currentUser = id;
+            }
+
+            VolunteersDBEntities _db = new VolunteersDBEntities();
+            var volunteerList = _db.Volunteers.ToList();
+            var Model = volunteerList.Where(x => x.ID == currentUserId).FirstOrDefault();
+
+            return View(Model);
         }
 
         public ActionResult Communications()
@@ -251,8 +274,12 @@ namespace CCVolunteerScheduler.Controllers
         }
 
         [HttpGet]
-        public ActionResult MySchedule()
+        public ActionResult MySchedule(long id = -1)
         {
+            if (id != -1)
+            {
+                currentUser = id;
+            }
             Models.CalendarViewModel model = new Models.CalendarViewModel
             {
                 NumberOfDays = 7,
@@ -264,8 +291,8 @@ namespace CCVolunteerScheduler.Controllers
         }
         public ActionResult MyScheduleGetEventsForDay(string day)
         {
-            EventDBEntities _db = new EventDBEntities();
-            var EventList = _db.Events.ToList();
+            VolunteerEventInstanceDBEntities _db = new VolunteerEventInstanceDBEntities();
+            var EventList = _db.VolunteerEvents(currentUser).ToList();
             var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
             return PartialView("VolunteerEventsForDay", Model);
         }
