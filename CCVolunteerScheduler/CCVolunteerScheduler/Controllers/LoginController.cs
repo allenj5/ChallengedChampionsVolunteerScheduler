@@ -32,6 +32,7 @@ namespace CCVolunteerScheduler.Controllers
             string hashedPassword = HashPassword(user.Password);
 
             Volunteer currentUser = _db.Volunteers.FirstOrDefault(v => v.Email == user.Email);
+
             long currentUserId = 0;
             if (currentUser != null)
             {
@@ -51,9 +52,13 @@ namespace CCVolunteerScheduler.Controllers
                 string adminUser = _db.Check_Admin((int)currentUserId).FirstOrDefault();
 
                 if (adminUser == "true")
+                {
                     return RedirectToAction("AdminHome", "Home");
+                }
                 else
+                {
                     return RedirectToAction("MySchedule", "Home");
+                }
             }
 
             ViewBag.Message = message;

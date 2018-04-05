@@ -160,11 +160,10 @@ namespace CCVolunteerScheduler.Controllers
             return new EmptyResult();
         }
 
-
+        [ChildActionOnly]
         public ActionResult AdminHome()
         {
-
-            return View();
+                return View();
         }
 
         public ActionResult Communications()
