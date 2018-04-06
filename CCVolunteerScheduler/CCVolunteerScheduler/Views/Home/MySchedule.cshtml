@@ -166,3 +166,19 @@
         getAllEvents();
     }
 </script>
+
+<script>
+    function UnScheduleVolunteer(eventID) {
+        jQuery.noConflict();
+        (function ($) {
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("UnScheduleVolunteer", "home")?id=' + eventID,
+                success: function () {
+                    //refresh page
+                    location.reload();
+                }
+            })
+        })(jQuery);
+    }
+</script>

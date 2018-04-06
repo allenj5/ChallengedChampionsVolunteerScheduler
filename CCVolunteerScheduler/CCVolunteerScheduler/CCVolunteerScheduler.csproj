@@ -227,6 +227,21 @@
       <DependentUpon>Events.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\HashingSaltModel.cs" />
+    <Compile Include="Models\ScheduleVolunteer.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScheduleVolunteer.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScheduleVolunteer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScheduleVolunteer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScheduleVolunteer.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScheduleVolunteer.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\UpdateVolunteer.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -372,6 +387,16 @@
       <DependentUpon>Events.edmx</DependentUpon>
       <LastGenOutput>Events.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\ScheduleVolunteer.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ScheduleVolunteer.edmx</DependentUpon>
+      <LastGenOutput>ScheduleVolunteer.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ScheduleVolunteer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ScheduleVolunteer.edmx</DependentUpon>
+      <LastGenOutput>ScheduleVolunteer.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\UpdateVolunteer.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UpdateVolunteer.edmx</DependentUpon>
@@ -429,6 +454,13 @@
     </EntityDeploy>
     <Content Include="Models\VolunteerEventInstance.edmx.diagram">
       <DependentUpon>VolunteerEventInstance.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ScheduleVolunteer.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ScheduleVolunteer.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ScheduleVolunteer.edmx.diagram">
+      <DependentUpon>ScheduleVolunteer.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Models\Volunteers.Context.tt">
@@ -518,6 +550,7 @@
     <Content Include="Views\Account\ChangeEmail.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\ChangePhone.cshtml" />
+    <Content Include="Views\Home\MyScheduleEventsPerDay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

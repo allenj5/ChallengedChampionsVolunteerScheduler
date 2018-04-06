@@ -294,7 +294,13 @@ namespace CCVolunteerScheduler.Controllers
             VolunteerEventInstanceDBEntities _db = new VolunteerEventInstanceDBEntities();
             var EventList = _db.VolunteerEvents(currentUser).ToList();
             var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
-            return PartialView("VolunteerEventsForDay", Model);
+            return PartialView("MyScheduleEventsPerDay", Model);
+        }
+        public ActionResult UnScheduleVolunteer(int id)
+        {
+            ScheduleVolunteerDBEntities x = new ScheduleVolunteerDBEntities();
+            x.unSchedule_Volunteer(Convert.ToInt32(currentUser), id);     //we need to revisit inconsistencies in DB with bigint / int for id column datatypes
+            return new EmptyResult();
         }
 
         [HttpPost]
@@ -388,7 +394,13 @@ namespace CCVolunteerScheduler.Controllers
             var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
             return PartialView("VolunteerEventsForDay", Model);
         }
-
+        public ActionResult ScheduleVolunteer(int id)
+        {
+            //still need to check if already signed up
+            ScheduleVolunteerDBEntities x = new ScheduleVolunteerDBEntities();
+            x.Schedule_Volunteer(Convert.ToInt32(currentUser), id);     //we need to revisit inconsistencies in DB with bigint / int for id column datatypes
+            return new EmptyResult();
+        }     
 
         public ActionResult ChangePassword()
         {

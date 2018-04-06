@@ -162,3 +162,19 @@
         getAllEvents();
     }
 </script>     
+
+<script>
+    function ScheduleVolunteer(eventID) {
+        jQuery.noConflict();
+        (function ($) {
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("ScheduleVolunteer", "home")?id=' + eventID,
+                success: function () {
+                    //refresh page
+                    location.reload();
+                }
+            })
+        })(jQuery);
+    }
+</script>

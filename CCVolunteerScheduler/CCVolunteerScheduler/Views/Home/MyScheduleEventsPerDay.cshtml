@@ -2,6 +2,6 @@
     <div class="event">
         <p>@Html.Encode(item.EventTitle)</p>
         <p>@Html.Encode(item.StartTime)</p>
-        <button class="btn btn-info" onclick="ScheduleVolunteer(@item.EventID)">Sign Up</button>
+        <button class="btn btn-info" onclick="UnScheduleVolunteer(@item.EventID)">De-Commit</button>
     </div>
 }
