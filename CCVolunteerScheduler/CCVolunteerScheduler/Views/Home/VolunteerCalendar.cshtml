@@ -170,9 +170,12 @@
             $.ajax({
                 type: "Get",
                 url: '@Url.Action("ScheduleVolunteer", "home")?id=' + eventID,
-                success: function () {
+                success: function (data) {
                     //refresh page
                     location.reload();
+                },
+                error: function(){
+                    window.alert("You have already signed up for this event.");
                 }
             })
         })(jQuery);

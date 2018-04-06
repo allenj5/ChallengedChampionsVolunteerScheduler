@@ -396,10 +396,17 @@ namespace CCVolunteerScheduler.Controllers
         }
         public ActionResult ScheduleVolunteer(int id)
         {
-            //still need to check if already signed up
-            ScheduleVolunteerDBEntities x = new ScheduleVolunteerDBEntities();
-            x.Schedule_Volunteer(Convert.ToInt32(currentUser), id);     //we need to revisit inconsistencies in DB with bigint / int for id column datatypes
-            return new EmptyResult();
+            //Check if already signed up
+            try
+            {
+                ScheduleVolunteerDBEntities x = new ScheduleVolunteerDBEntities();
+                x.Schedule_Volunteer(Convert.ToInt32(currentUser), id);     //we need to revisit inconsistencies in DB with bigint / int for id column datatypes
+                return new EmptyResult();
+            }
+            catch(Exception e)
+            {
+                return Json(new {status="error", message="already signed up for this event"});
+            }
         }     
 
         public ActionResult ChangePassword()
