@@ -60,6 +60,14 @@
     background-color: white;
 }
 
+.hide {
+    display: none;
+}
+
+.show {
+    display: show;
+}
+
 .chalchampbackgroundcolor {
     background-color: #F3F0EB;
 }

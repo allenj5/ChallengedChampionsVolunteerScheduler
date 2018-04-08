@@ -33,8 +33,8 @@
     <div class="table-responsive">
         @using (Html.BeginForm("AdminCalendar", "Home"))
     {
-        <input type="submit" name="requestedDate" value="Back One Month" id="backOne" />
-        <input type="submit" name="requestedDate" value="Forward One Month" id="forwardOne" />
+        <input type="submit" name="requestedDate" value="Back One Month" id="backOne" class="btn btn-info" />
+        <input type="submit" name="requestedDate" value="Forward One Month" id="forwardOne" class="btn btn-info" />
         <input type="hidden" name="userMonth" value="@Model.Month.ToString("MMMMMMMMMMMMM")" id="userMonth" />
         <input type="hidden" name="userYear" value="@Model.Month.ToString("yyyy")" id="userYear" />
 }
@@ -287,5 +287,20 @@
                 }
             })
         })(jQuery);
+    }
+</script>
+
+<script>
+    function ToggleDescription(eventID) {
+        var myID = "event" + eventID;
+        var description = document.getElementById(myID);
+        if (description.classList.contains("hide")) {
+            description.classList.remove("hide");
+            description.classList.add("show");
+        }
+        else {
+            description.classList.remove("show");
+            description.classList.add("hide");
+        }
     }
 </script>

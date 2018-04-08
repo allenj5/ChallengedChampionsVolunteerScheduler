@@ -1,7 +1,10 @@
 ﻿@foreach (var item in Model){
-    <div class="event">
+    <div class="event" onclick="ToggleDescription(@item.EventID)">
         <p>@Html.Encode(item.EventTitle)</p>
-        <p>@Html.Encode(item.StartTime)</p>
+        <p>@Html.Encode(item.StartTime) - @Html.Encode(item.EndTime)</p>
+        <div class="eventDescription hide" id="@("event" + item.EventID)">
+            <p>@Html.Encode(item.EventDescription)</p>
+        </div>
         <button class="btn btn-info" onclick="UnScheduleVolunteer(@item.EventID)">De-Commit</button>
     </div>
 }
