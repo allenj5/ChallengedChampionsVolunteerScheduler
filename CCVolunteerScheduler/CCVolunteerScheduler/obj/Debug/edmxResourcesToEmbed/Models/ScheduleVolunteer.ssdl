@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ScheduleVolunteerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ScheduleVolunteerModelStoreContainer" />
+  <Function Name="Schedule_Volunteer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="VolunteerID" Type="int" Mode="In" />
+    <Parameter Name="EventID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="unSchedule_Volunteer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="VolunteerID" Type="int" Mode="In" />
+    <Parameter Name="EventID" Type="int" Mode="In" />
+  </Function>
+</Schema>

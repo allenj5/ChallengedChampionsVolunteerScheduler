@@ -9,10 +9,18 @@ namespace CCVolunteerScheduler.Controllers
 {
     public class HomeController : Controller
     {
-        long currentUserId = 0;
-        public void ChangeUser(long id)
+        public static long currentUserId = 0;
+
+        public static long currentUser
         {
-            currentUserId = id;
+            get
+            {
+                return currentUserId;
+            }
+            set
+            {
+                currentUserId = value;
+            }
         }
 
         public ActionResult Index()
@@ -171,7 +179,7 @@ namespace CCVolunteerScheduler.Controllers
         {
             if (id != -1)
             {
-                ChangeUser(id);
+                currentUser = id;
             }
 
             VolunteersDBEntities _db = new VolunteersDBEntities();
@@ -270,7 +278,7 @@ namespace CCVolunteerScheduler.Controllers
         {
             if (id != -1)
             {
-                ChangeUser(id);
+                currentUser = id;
             }
             Models.CalendarViewModel model = new Models.CalendarViewModel
             {
@@ -283,10 +291,16 @@ namespace CCVolunteerScheduler.Controllers
         }
         public ActionResult MyScheduleGetEventsForDay(string day)
         {
-            EventDBEntities _db = new EventDBEntities();
-            var EventList = _db.Events.ToList();
+            VolunteerEventInstanceDBEntities _db = new VolunteerEventInstanceDBEntities();
+            var EventList = _db.VolunteerEvents(currentUser).ToList();
             var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
-            return PartialView("VolunteerEventsForDay", Model);
+            return PartialView("MyScheduleEventsPerDay", Model);
+        }
+        public ActionResult UnScheduleVolunteer(int id)
+        {
+            ScheduleVolunteerDBEntities x = new ScheduleVolunteerDBEntities();
+            x.unSchedule_Volunteer(Convert.ToInt32(currentUser), id);     //we need to revisit inconsistencies in DB with bigint / int for id column datatypes
+            return new EmptyResult();
         }
 
         [HttpPost]
@@ -380,7 +394,20 @@ namespace CCVolunteerScheduler.Controllers
             var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
             return PartialView("VolunteerEventsForDay", Model);
         }
-
+        public ActionResult ScheduleVolunteer(int id)
+        {
+            //Check if already signed up
+            try
+            {
+                ScheduleVolunteerDBEntities x = new ScheduleVolunteerDBEntities();
+                x.Schedule_Volunteer(Convert.ToInt32(currentUser), id);     //we need to revisit inconsistencies in DB with bigint / int for id column datatypes
+                return new EmptyResult();
+            }
+            catch(Exception e)
+            {
+                return Json(new {status="error", message="already signed up for this event"});
+            }
+        }     
 
         public ActionResult ChangePassword()
         {

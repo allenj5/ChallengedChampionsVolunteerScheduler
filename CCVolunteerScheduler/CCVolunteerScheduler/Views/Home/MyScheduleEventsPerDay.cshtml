@@ -4,7 +4,7 @@
         <p>@Html.Encode(item.StartTime.ToString(@"hh\:mm")) - @Html.Encode(item.EndTime.ToString(@"hh\:mm"))</p>
         <div class="eventDetails hide" id="@("event" + item.EventID)">
             <p>@Html.Encode(item.EventDescription)</p>
-            <button class="btn btn-info" onclick="ScheduleVolunteer(@item.EventID)">Sign Up</button>
+            <button class="btn btn-info" onclick="UnScheduleVolunteer(@item.EventID)">De-Commit</button>
         </div>
     </div>
 }

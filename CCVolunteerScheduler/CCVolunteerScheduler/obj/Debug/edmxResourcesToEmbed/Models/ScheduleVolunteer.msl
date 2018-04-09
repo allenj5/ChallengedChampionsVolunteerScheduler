@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ScheduleVolunteerModelStoreContainer" CdmEntityContainer="ScheduleVolunteerDBEntities">
+    <FunctionImportMapping FunctionImportName="Schedule_Volunteer" FunctionName="ScheduleVolunteerModel.Store.Schedule_Volunteer" />
+    <FunctionImportMapping FunctionImportName="unSchedule_Volunteer" FunctionName="ScheduleVolunteerModel.Store.unSchedule_Volunteer" />
+  </EntityContainerMapping>
+</Mapping>

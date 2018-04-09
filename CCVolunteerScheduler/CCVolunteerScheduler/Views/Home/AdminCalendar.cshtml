@@ -33,8 +33,8 @@
     <div class="table-responsive">
         @using (Html.BeginForm("AdminCalendar", "Home"))
     {
-        <input type="submit" name="requestedDate" value="Back One Month" id="backOne" />
-        <input type="submit" name="requestedDate" value="Forward One Month" id="forwardOne" />
+        <input type="submit" name="requestedDate" value="Back One Month" id="backOne" class="btn btn-info" />
+        <input type="submit" name="requestedDate" value="Forward One Month" id="forwardOne" class="btn btn-info" />
         <input type="hidden" name="userMonth" value="@Model.Month.ToString("MMMMMMMMMMMMM")" id="userMonth" />
         <input type="hidden" name="userYear" value="@Model.Month.ToString("yyyy")" id="userYear" />
 }
@@ -73,7 +73,7 @@
                     <tr>
                         @for (int i = daysToAdd; i > 0; i--)
                     {
-                        <td class="calendar-day cell-inactive">
+                        <td class="calendar-day cell-dif-month">
                             @curDay.AddDays(-i).ToString("dd")
 
                     </td>
@@ -98,12 +98,19 @@
                     <tr>
                         @for (int j = 0; j < Model.NumberOfDays; j++)
                     {
-
+                        if(@curDay.AddDays(j) > lastDay){
+                            <td class="calendar-day cell-dif-month">
+                            @curDay.AddDays(j).ToString("dd")
+                            @*PartialView*@
+                        </td>
+                        }
+                        else{
                         <td class="calendar-day cell-inactive" id="@("date" + curDay.AddDays(j).ToString("dd"))">
                             @curDay.AddDays(j).ToString("dd")
                             @*PartialView*@
                         </td>
-                }
+                        }
+                    }
                     </tr>
 
                 curDay = curDay.AddDays(Model.NumberOfDays);
@@ -287,5 +294,20 @@
                 }
             })
         })(jQuery);
+    }
+</script>
+
+<script>
+    function ToggleDescription(eventID) {
+        var myID = "event" + eventID;
+        var description = document.getElementById(myID);
+        if (description.classList.contains("hide")) {
+            description.classList.remove("hide");
+            description.classList.add("show");
+        }
+        else {
+            description.classList.remove("show");
+            description.classList.add("hide");
+        }
     }
 </script>
