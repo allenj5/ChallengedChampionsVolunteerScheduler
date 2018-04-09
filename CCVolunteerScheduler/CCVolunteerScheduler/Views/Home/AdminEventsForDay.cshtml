@@ -2,9 +2,9 @@
     <div class="event" onclick="ToggleDescription(@item.EventID)">
         <p>@Html.Encode(item.EventTitle)</p>
         <p>@Html.Encode(item.StartTime) - @Html.Encode(item.EndTime)</p>
-        <div class="eventDescription hide" id="@("event" + item.EventID)">
+        <div class="eventDetails hide" id="@("event" + item.EventID)">
             <p>@Html.Encode(item.EventDescription)</p>
+            <button type="button" class="btn btn-info" onclick="Open(@item.EventID)" data-toggle="modal" data-target="#CopyEventModal">Edit</button>
         </div>
-        <button type="button" class="btn btn-info" onclick="Open(@item.EventID)" data-toggle="modal" data-target="#CopyEventModal">Edit</button>
     </div>
 }

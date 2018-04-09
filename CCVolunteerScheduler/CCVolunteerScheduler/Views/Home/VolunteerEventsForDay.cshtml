@@ -2,9 +2,9 @@
     <div class="event" onclick="ToggleDescription(@item.EventID)">
         <p>@Html.Encode(item.EventTitle)</p>
         <p>@Html.Encode(item.StartTime) - @Html.Encode(item.EndTime)</p>
-        <div class="eventDescription hide" id="@("event" + item.EventID)">
+        <div class="eventDetails hide" id="@("event" + item.EventID)">
             <p>@Html.Encode(item.EventDescription)</p>
+            <button class="btn btn-info" onclick="ScheduleVolunteer(@item.EventID)">Sign Up</button>
         </div>
-        <button class="btn btn-info" onclick="ScheduleVolunteer(@item.EventID)">Sign Up</button>
     </div>
 }
