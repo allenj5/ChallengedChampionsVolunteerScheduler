@@ -70,7 +70,7 @@
                         <tr>
                             @for (int i = daysToAdd; i > 0; i--)
                             {
-                                <td class="calendar-day cell-inactive">
+                                <td class="calendar-day cell-dif-month">
                                     @curDay.AddDays(-i).ToString("dd")
 
                                 </td>
@@ -94,12 +94,19 @@
                         {
                             <tr>
                                 @for (int j = 0; j < Model.NumberOfDays; j++)
-                    {
-
+                                {
+                                    if(@curDay.AddDays(j) > lastDay){
+                                    <td class="calendar-day cell-dif-month">
+                                        @curDay.AddDays(j).ToString("dd")
+                                        @*PartialView*@
+                                    </td>
+                                    }
+                                    else{
                                     <td class="calendar-day cell-inactive" id="@("date" + curDay.AddDays(j).ToString("dd"))">
                                         @curDay.AddDays(j).ToString("dd")
                                         @*PartialView*@
                                     </td>
+                                    }
                                 }
                             </tr>
 

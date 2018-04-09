@@ -60,6 +60,10 @@
     background-color: white;
 }
 
+.cell-dif-month {
+    background-color: #8a8b8c; /* dark grey */
+}
+
 .hide {
     display: none;
 }
