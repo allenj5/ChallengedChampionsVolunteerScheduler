@@ -3,32 +3,34 @@
     ViewBag.Title = "Change Email Address";
 }
 @section navbar {
-<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse rounded">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand headerSpacing" href="#"></a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                @Html.ActionLink("Manage Account", "ManageAccount", new { controller = "Home" }, new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                @Html.ActionLink("View Calendar", "VolunteerCalendar", new { controller = "Home" }, new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                @Html.ActionLink("My Schedule", "MySchedule", new { controller = "Home" }, new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-    </div>
-</nav>
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse rounded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand headerSpacing" href="#"></a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    @Html.ActionLink("Manage Account", "ManageAccount", new { controller = "Home" }, new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("View Calendar", "VolunteerCalendar", new { controller = "Home" }, new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("My Schedule", "MySchedule", new { controller = "Home" }, new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 }
 
-<h1 class="text-center">@ViewBag.Title</h1>
+<h2 class="text-center">@ViewBag.Title</h2>
 <br />
 @using (Html.BeginForm("ChangeEmail", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
+    <h5>Fill in the form below to change your email address</h5>
+
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 col-md-offset-3 control-label" })

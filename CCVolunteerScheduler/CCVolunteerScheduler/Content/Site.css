@@ -123,12 +123,11 @@ calendar td:hover {
     }
 }
 
-.changePhone label {
-    display: block !important;
-    text-align: center;
+.col-md-2 {
+    text-align: left !important;
+    width:100%;
 }
 
-.changePhone input[type=submit] {
-    display: block !important;
-    text-align: center;
+.btn{
+    color:white !important;
 }
