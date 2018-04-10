@@ -45,8 +45,11 @@
             <th>
                 Phone
             </th>
-            <th>
+            <th class="rmRightBorder">
                 Email
+            </th>
+            <th class="rmLeftBorder">
+              <!--Leave this to fix email spacing in the table-->
             </th>
             <th>
                 Active
@@ -72,7 +75,7 @@
             <td>
                 @Html.Encode(item.Phone)
             </td>
-            <td>
+            <td colspan="2">
                 @Html.Encode(item.Email)
             </td>
             <td>

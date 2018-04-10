@@ -428,7 +428,7 @@ namespace CCVolunteerScheduler.Controllers
         public ActionResult Volunteers()
         {
             VolunteersDBEntities _db = new VolunteersDBEntities();
-            ViewData.Model = _db.Volunteers.ToList();
+            ViewData.Model = _db.Volunteers.OrderBy(x => x.Active).ThenByDescending(x => x.Position).ToList();
             return View();
         }
         public ActionResult AddVolunteer(string firstName, string lastName, string phone, string email, string position)

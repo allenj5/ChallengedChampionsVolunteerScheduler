@@ -94,6 +94,13 @@
     margin: 10px;
 }
 
+.rmLeftBorder {
+    border-left: hidden !important;
+}
+
+.rmRightBorder {
+    border-right: hidden !important;
+}
 label {
     text-align: right;
     margin-right: 10px;
