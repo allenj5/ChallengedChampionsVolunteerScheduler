@@ -88,7 +88,7 @@ namespace CCVolunteerScheduler.Models
         [Display(Name = "New Email Address")]
         public string Email { get; set; }
 
-        [Display(Name = "Confirm New Email Address")]
+        [Display(Name = "Confirm Email Address")]
         [Compare("Email", ErrorMessage = "The email and confirmation email do not match.")]
         public string ConfirmEmail { get; set; }
 
@@ -102,7 +102,7 @@ namespace CCVolunteerScheduler.Models
     public class ChangePhoneViewModel
     {
         [Required]
-        [Display(Name = "New Phone Number")]
+        [Display(Name = "Phone Number")]
         [StringLength(12, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 7)]
         public string Phone { get; set; }
     }
@@ -122,7 +122,7 @@ namespace CCVolunteerScheduler.Models
         public string NewPassword { get; set; }
 
         [Required]
-        [Display(Name = "Confirm New Password")]
+        [Display(Name = "Confirm Password")]
         [Compare("NewPassword", ErrorMessage = "The password and confirmation password do not match.")]
         [DataType(DataType.Password)]
         public string ConfirmNewPassword { get; set; }
