@@ -198,9 +198,19 @@ namespace CCVolunteerScheduler.Controllers
 
         public ActionResult ManageAccount()
         {
+            VolunteersDBEntities _db = new VolunteersDBEntities();
+            var volunteerList = _db.Volunteers.ToList();
+            var Model = volunteerList.Where(x => x.ID == currentUserId).FirstOrDefault();
 
-            return View();
+            return View(Model);
         }
+        public ActionResult ToggleAutoRemind()
+        {
+            ToggleAutoRemindAction x = new ToggleAutoRemindAction();
+            x.ToggleAutoRemindOptOut(currentUserId);
+            return new EmptyResult();
+        }
+
 
         [HttpPost]
         public ActionResult MySchedule(string requestedDate, string userMonth, string userYear)

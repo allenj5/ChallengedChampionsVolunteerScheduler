@@ -242,6 +242,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ScheduleVolunteer.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ToggleAutoRemind.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToggleAutoRemind.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ToggleAutoRemind.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToggleAutoRemind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ToggleAutoRemind.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToggleAutoRemind.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\UpdateVolunteer.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -397,6 +412,16 @@
       <DependentUpon>ScheduleVolunteer.edmx</DependentUpon>
       <LastGenOutput>ScheduleVolunteer.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\ToggleAutoRemind.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ToggleAutoRemind.edmx</DependentUpon>
+      <LastGenOutput>ToggleAutoRemind.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ToggleAutoRemind.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ToggleAutoRemind.edmx</DependentUpon>
+      <LastGenOutput>ToggleAutoRemind.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\UpdateVolunteer.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UpdateVolunteer.edmx</DependentUpon>
@@ -461,6 +486,13 @@
     </EntityDeploy>
     <Content Include="Models\ScheduleVolunteer.edmx.diagram">
       <DependentUpon>ScheduleVolunteer.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ToggleAutoRemind.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ToggleAutoRemind.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ToggleAutoRemind.edmx.diagram">
+      <DependentUpon>ToggleAutoRemind.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Models\Volunteers.Context.tt">
