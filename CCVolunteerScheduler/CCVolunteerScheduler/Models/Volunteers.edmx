@@ -32,7 +32,7 @@
           <Property Name="FirstName" Type="char" MaxLength="25" />
           <Property Name="LastName" Type="char" MaxLength="25" />
           <Property Name="Phone" Type="char" MaxLength="25" />
-          <Property Name="Email" Type="char" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="Active" Type="bit" />
           <Property Name="HoursWorked" Type="bigint" />
           <Property Name="EmailOptOut" Type="bit" />
@@ -65,6 +65,7 @@
           <Parameter Name="Start_Time" Type="time" Mode="In" />
           <Parameter Name="End_Time" Type="time" Mode="In" />
         </Function>
+        <Function Name="ResetHours" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Update_Volunteer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
           <Parameter Name="FirstName" Type="char" Mode="In" />
@@ -127,6 +128,7 @@
             <Parameter Name="HoursWorked" Mode="In" Type="Int32" />
             <Parameter Name="VolunteerRole" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="ResetHours" />
         </EntityContainer>
         <EntityType Name="Event">
           <Key>
@@ -148,7 +150,7 @@
           <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
           <Property Name="LastName" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
           <Property Name="Phone" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
           <Property Name="HoursWorked" Type="Int64" />
           <Property Name="EmailOptOut" Type="Boolean" />
@@ -211,6 +213,7 @@
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="Insert_Event" FunctionName="VolunteersDBModel.Store.Insert_Event" />
           <FunctionImportMapping FunctionImportName="Update_Volunteer" FunctionName="VolunteersDBModel.Store.Update_Volunteer" />
+          <FunctionImportMapping FunctionImportName="ResetHours" FunctionName="VolunteersDBModel.Store.ResetHours" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

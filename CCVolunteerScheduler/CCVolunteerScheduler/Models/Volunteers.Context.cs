@@ -127,5 +127,10 @@ namespace CCVolunteerScheduler.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_Volunteer", userIDParameter, firstNameParameter, lastNameParameter, phoneParameter, emailParameter, activeStatusParameter, hoursWorkedParameter, volunteerRoleParameter);
         }
+    
+        public virtual int ResetHours()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ResetHours");
+        }
     }
 }

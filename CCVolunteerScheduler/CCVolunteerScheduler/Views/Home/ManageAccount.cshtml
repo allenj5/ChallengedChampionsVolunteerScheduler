@@ -55,14 +55,19 @@
 
     <div class="container">
         <div class="col-xs-12 col-md-12">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ToggleRemindersModal">Toggle Automatic Reminders</button>
+            <button type="button" class="btn btn-info" onclick="ToggleReminders()">Toggle Automatic Reminders</button>
         </div>
     </div>
 
     @*Will need to be changed to display based on the user's current toggle settings*@
     <div class="container">
         <div class="col-xs-12 col-md-12">
-            <p>Currently: Enabled</p>
+            @if(Model.EmailOptOut){
+            <p>Currently: Disabled</p>
+            }
+            else{
+             <p>Currently: Enabled</p>   
+            }
         </div>
     </div>
 
@@ -70,3 +75,19 @@
     <br />
     <br />
 </center>
+
+<script>
+    function ToggleReminders() {
+        jQuery.noConflict();
+        (function ($) {
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("ToggleAutoRemind", "home")',
+                success: function () {
+                    //refresh page after event is deleted
+                    location.reload();
+                }
+            })
+        })(jQuery);
+    }
+</script>

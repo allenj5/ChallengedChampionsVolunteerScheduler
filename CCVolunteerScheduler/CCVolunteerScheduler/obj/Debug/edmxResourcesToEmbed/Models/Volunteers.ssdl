@@ -27,7 +27,7 @@
     <Property Name="FirstName" Type="char" MaxLength="25" />
     <Property Name="LastName" Type="char" MaxLength="25" />
     <Property Name="Phone" Type="char" MaxLength="25" />
-    <Property Name="Email" Type="char" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
     <Property Name="Active" Type="bit" />
     <Property Name="HoursWorked" Type="bigint" />
     <Property Name="EmailOptOut" Type="bit" />
@@ -60,6 +60,7 @@
     <Parameter Name="Start_Time" Type="time" Mode="In" />
     <Parameter Name="End_Time" Type="time" Mode="In" />
   </Function>
+  <Function Name="ResetHours" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="Update_Volunteer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserID" Type="int" Mode="In" />
     <Parameter Name="FirstName" Type="char" Mode="In" />
