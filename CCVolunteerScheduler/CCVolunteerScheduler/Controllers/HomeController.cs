@@ -439,7 +439,7 @@ namespace CCVolunteerScheduler.Controllers
         public ActionResult Volunteers()
         {
             VolunteersDBEntities _db = new VolunteersDBEntities();
-            ViewData.Model = _db.Volunteers.OrderBy(x => x.Active).ThenByDescending(x => x.Position).ToList();
+            ViewData.Model = _db.Volunteers.OrderByDescending(x => x.Active).ThenBy(x => x.Position).ToList();
             return View();
         }
 
