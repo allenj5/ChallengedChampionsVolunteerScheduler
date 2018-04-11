@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using CCVolunteerScheduler.Models;
@@ -466,19 +467,27 @@ namespace CCVolunteerScheduler.Controllers
         }
         public ActionResult UpdateVolunteer(string id, string firstName, string lastName, string phone, string email, string active, string hoursWorked, string position)
         {
-            int myID = Int32.Parse(id);
-            int myHoursWorked = Int32.Parse(hoursWorked);
 
-            bool myActive = false;
-            if (active == "True" || active == "true")
+            if (NumberValidation(id) && NameValidation(firstName) && NameValidation(lastName) && PhoneValidation(phone) && EmailValidation(email) && NumberValidation(hoursWorked) && PositionValidation(position))
             {
-                myActive = true;
+                int myID = Int32.Parse(id);
+                int myHoursWorked = Int32.Parse(hoursWorked);
+
+                bool myActive = false;
+                if (active == "True" || active == "true")
+                {
+                    myActive = true;
+                }
+
+                UpdateVolunteer x = new UpdateVolunteer();
+                x.Update_Volunteer(myID, firstName, lastName, phone, email, myActive, myHoursWorked, position);
+
+                return new EmptyResult();
             }
-
-            UpdateVolunteer x = new UpdateVolunteer();
-            x.Update_Volunteer(myID, firstName, lastName, phone, email, myActive, myHoursWorked, position);
-
-            return new EmptyResult();
+            else
+            {
+                return new EmptyResult();
+            }
         }
 
         public ActionResult GetDetail(int id)
@@ -488,16 +497,45 @@ namespace CCVolunteerScheduler.Controllers
             var Model = volunteerList.Where(x => x.ID == id).FirstOrDefault();
             return PartialView("EditVolunteerPartial", Model);
         }
-        
-        //function for volunteer table to Hash passwords for new accounts added by the admin
-        /*         
-              -make sure using CCVolunteerScheduler.Models is called in your file
-              -To hash the password for the new account before adding it to the database, add these two lines of code to your function:
-         
-              var salt = new Byte[16];
-              string hashedPassword = HashingSaltModel.ComputeHash(user.Password, new SHA256CryptoServiceProvider(), salt);         
-         */
 
+        bool NumberValidation(string number)
+        {
+            int n;
+            return int.TryParse(number, out n);
+        }
+
+        bool NameValidation(string name)
+        {
+            var nameRegex = new Regex("^[a-zA-Z0-9 ']*$");
+            return nameRegex.IsMatch(name) && !name.Contains("' ") && name.Length < 20;
+        }
+
+        bool PhoneValidation(string phone)
+        {
+            int n;
+            return int.TryParse(phone, out n) && phone.Length == 10;
+        }
+
+        bool EmailValidation(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        bool PositionValidation(string position)
+        {
+
+
+            //return position == "type1" || position == "type2" || position == "type3" || position == "type4";
+            return true;
+        }
 
 
     }
