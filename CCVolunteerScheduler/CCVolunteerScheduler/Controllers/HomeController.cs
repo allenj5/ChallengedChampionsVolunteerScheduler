@@ -129,7 +129,6 @@ namespace CCVolunteerScheduler.Controllers
             return View("AdminCalendar", model);
         }
 
-
         public ActionResult AdminEventsForDay(string day)
         {
             EventDBEntities _db = new EventDBEntities();
@@ -137,6 +136,7 @@ namespace CCVolunteerScheduler.Controllers
             var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
             return PartialView(Model);
         }
+
         public ActionResult GetEventDetail(int id)
         {
             EventDBEntities _db = new EventDBEntities();
@@ -155,6 +155,7 @@ namespace CCVolunteerScheduler.Controllers
 
             return new EmptyResult();
         }
+
         public ActionResult DeleteEvent(int id)
         {
             EventSPEntities x = new EventSPEntities();
@@ -162,6 +163,7 @@ namespace CCVolunteerScheduler.Controllers
 
             return new EmptyResult();
         }
+
         public ActionResult UpdateEvent(int id, string title, string description, string date, string start, string end)
         {
             DateTime myDate = DateTime.Parse(date);
@@ -173,7 +175,6 @@ namespace CCVolunteerScheduler.Controllers
 
             return new EmptyResult();
         }
-
 
         public ActionResult AdminHome(long id = -1)
         {
@@ -200,7 +201,7 @@ namespace CCVolunteerScheduler.Controllers
 
             return View();
         }
-        
+
         [HttpPost]
         public ActionResult MySchedule(string requestedDate, string userMonth, string userYear)
         {
@@ -424,13 +425,23 @@ namespace CCVolunteerScheduler.Controllers
         
               
          */
-
+         [HttpGet]
         public ActionResult Volunteers()
         {
             VolunteersDBEntities _db = new VolunteersDBEntities();
             ViewData.Model = _db.Volunteers.OrderBy(x => x.Active).ThenByDescending(x => x.Position).ToList();
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Volunteers(int setHoursTo = 0)
+        {
+            VolunteersDBEntities _db = new VolunteersDBEntities();
+            _db.ResetHours();
+            ViewData.Model = _db.Volunteers.OrderBy(x => x.Active).ThenByDescending(x => x.Position).ToList();
+            return View();
+        }
+
         public ActionResult AddVolunteer(string firstName, string lastName, string phone, string email, string position)
         {
             var Hashing = new LoginController();

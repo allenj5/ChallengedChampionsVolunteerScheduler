@@ -49,7 +49,7 @@
                 Email
             </th>
             <th class="rmLeftBorder">
-              <!--Leave this to fix email spacing in the table-->
+                <!--Leave this to fix email spacing in the table-->
             </th>
             <th>
                 Active
@@ -60,44 +60,49 @@
             <th>
                 Position
             </th>
-        </tr> 
-    
-    @foreach (var item in Model) {
-
-        <tr>
-            
-            <td>
-                @Html.Encode(item.FirstName)
-            </td>
-            <td>
-                @Html.Encode(item.LastName)
-            </td>
-            <td>
-                @Html.Encode(item.Phone)
-            </td>
-            <td colspan="2">
-                @Html.Encode(item.Email)
-            </td>
-            <td>
-                @Html.Encode(item.Active)
-            </td>
-            <td>
-                @Html.Encode(item.HoursWorked)
-            </td>
-            <td>
-                @Html.Encode(item.Position)
-            </td>
-            <td>
-                <!-- Trigger the modal with a button -->
-                <button type="button" class="btn btn-info" onclick="Open(@item.ID)" data-toggle="modal" data-target="#EditVolunteerModal">Edit</button>
-            </td>
         </tr>
 
-    } 
+        @foreach (var item in Model)
+        {
 
-    </table> 
+            <tr>
+
+                <td>
+                    @Html.Encode(item.FirstName)
+                </td>
+                <td>
+                    @Html.Encode(item.LastName)
+                </td>
+                <td>
+                    @Html.Encode(item.Phone)
+                </td>
+                <td colspan="2">
+                    @Html.Encode(item.Email)
+                </td>
+                <td>
+                    @Html.Encode(item.Active)
+                </td>
+                <td>
+                    @Html.Encode(item.HoursWorked)
+                </td>
+                <td>
+                    @Html.Encode(item.Position)
+                </td>
+                <td>
+                    <!-- Trigger the modal with a button -->
+                    <button type="button" class="btn btn-info" onclick="Open(@item.ID)" data-toggle="modal" data-target="#EditVolunteerModal">Edit</button>
+                </td>
+            </tr>
+
+        }
+
+    </table>
     <!-- Trigger the modal with a button -->
     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#AddVolunteerModal">Add Volunteer</button>
+    @using (Html.BeginForm("Volunteers", "Home"))
+    {
+        <input onclick="return confirmAction()" type="submit" value="Reset Hours" class="btn btn-info" />
+    }
 </div>
 
 <!-- Modal -->
@@ -194,5 +199,11 @@
                 }
             })
         })(jQuery);
+    }
+</script>
+
+<script>
+    function confirmAction() {
+        return confirm("Are you sure you want to reset ALL volunteer hours?");
     }
 </script>

@@ -44,5 +44,6 @@
     </AssociationSetMapping>
     <FunctionImportMapping FunctionImportName="Insert_Event" FunctionName="VolunteersDBModel.Store.Insert_Event" />
     <FunctionImportMapping FunctionImportName="Update_Volunteer" FunctionName="VolunteersDBModel.Store.Update_Volunteer" />
+    <FunctionImportMapping FunctionImportName="ResetHours" FunctionName="VolunteersDBModel.Store.ResetHours" />
   </EntityContainerMapping>
 </Mapping>
