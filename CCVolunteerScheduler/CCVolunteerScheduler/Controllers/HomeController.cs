@@ -8,6 +8,7 @@ using CCVolunteerScheduler.Models;
 
 namespace CCVolunteerScheduler.Controllers
 {
+    [NoDirectAccess]
     public class HomeController : Controller
     {
         public static long currentUserId = 0;
