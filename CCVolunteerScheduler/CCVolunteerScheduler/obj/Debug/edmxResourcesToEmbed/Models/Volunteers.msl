@@ -7,6 +7,7 @@
     <EntitySetMapping Name="Events">
       <EntityTypeMapping TypeName="VolunteersDBModel.Event">
         <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="MaxVolunteers" ColumnName="MaxVolunteers" />
           <ScalarProperty Name="EndTime" ColumnName="EndTime" />
           <ScalarProperty Name="StartTime" ColumnName="StartTime" />
           <ScalarProperty Name="EventDate" ColumnName="EventDate" />
@@ -45,5 +46,6 @@
     <FunctionImportMapping FunctionImportName="Insert_Event" FunctionName="VolunteersDBModel.Store.Insert_Event" />
     <FunctionImportMapping FunctionImportName="Update_Volunteer" FunctionName="VolunteersDBModel.Store.Update_Volunteer" />
     <FunctionImportMapping FunctionImportName="ResetHours" FunctionName="VolunteersDBModel.Store.ResetHours" />
+    <FunctionImportMapping FunctionImportName="TodaysVolunteers" FunctionName="VolunteersDBModel.Store.TodaysVolunteers" />
   </EntityContainerMapping>
 </Mapping>

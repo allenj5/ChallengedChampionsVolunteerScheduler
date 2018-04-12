@@ -25,6 +25,7 @@ namespace CCVolunteerScheduler.Models
         public System.DateTime EventDate { get; set; }
         public System.TimeSpan StartTime { get; set; }
         public System.TimeSpan EndTime { get; set; }
+        public Nullable<int> MaxVolunteers { get; set; }
     
         public virtual ICollection<Volunteer> Volunteers { get; set; }
     }

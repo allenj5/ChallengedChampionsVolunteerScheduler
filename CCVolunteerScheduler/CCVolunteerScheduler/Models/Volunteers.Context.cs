@@ -66,7 +66,7 @@ namespace CCVolunteerScheduler.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Check_Admin", userIDParameter);
         }
     
-        public virtual int Insert_Event(string event_Title, string event_Description, Nullable<System.DateTime> event_Date, Nullable<System.TimeSpan> start_Time, Nullable<System.TimeSpan> end_Time)
+        public virtual int Insert_Event(string event_Title, string event_Description, Nullable<System.DateTime> event_Date, Nullable<System.TimeSpan> start_Time, Nullable<System.TimeSpan> end_Time, Nullable<int> max_Volunteers)
         {
             var event_TitleParameter = event_Title != null ?
                 new ObjectParameter("Event_Title", event_Title) :
@@ -88,7 +88,11 @@ namespace CCVolunteerScheduler.Models
                 new ObjectParameter("End_Time", end_Time) :
                 new ObjectParameter("End_Time", typeof(System.TimeSpan));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_Event", event_TitleParameter, event_DescriptionParameter, event_DateParameter, start_TimeParameter, end_TimeParameter);
+            var max_VolunteersParameter = max_Volunteers.HasValue ?
+                new ObjectParameter("Max_Volunteers", max_Volunteers) :
+                new ObjectParameter("Max_Volunteers", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_Event", event_TitleParameter, event_DescriptionParameter, event_DateParameter, start_TimeParameter, end_TimeParameter, max_VolunteersParameter);
         }
     
         public virtual int Update_Volunteer(Nullable<int> userID, string firstName, string lastName, string phone, string email, Nullable<bool> activeStatus, Nullable<int> hoursWorked, string volunteerRole)
@@ -131,6 +135,16 @@ namespace CCVolunteerScheduler.Models
         public virtual int ResetHours()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ResetHours");
+        }
+    
+        [EdmFunction("VolunteersDBEntities", "TodaysVolunteers")]
+        public virtual IQueryable<string> TodaysVolunteers(Nullable<System.DateTime> day)
+        {
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("Day", day) :
+                new ObjectParameter("Day", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<string>("[VolunteersDBEntities].[TodaysVolunteers](@Day)", dayParameter);
         }
     }
 }

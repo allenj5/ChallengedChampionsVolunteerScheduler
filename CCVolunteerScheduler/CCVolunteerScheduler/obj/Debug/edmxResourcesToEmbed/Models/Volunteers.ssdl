@@ -10,6 +10,7 @@
     <Property Name="EventDate" Type="date" Nullable="false" />
     <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
     <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="MaxVolunteers" Type="int" />
   </EntityType>
   <EntityType Name="VolunteerEventInstance">
     <Key>
@@ -59,8 +60,19 @@
     <Parameter Name="Event_Date" Type="date" Mode="In" />
     <Parameter Name="Start_Time" Type="time" Mode="In" />
     <Parameter Name="End_Time" Type="time" Mode="In" />
+    <Parameter Name="Max_Volunteers" Type="int" Mode="In" />
   </Function>
   <Function Name="ResetHours" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="TodaysVolunteers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Day" Type="datetime" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
   <Function Name="Update_Volunteer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserID" Type="int" Mode="In" />
     <Parameter Name="FirstName" Type="char" Mode="In" />

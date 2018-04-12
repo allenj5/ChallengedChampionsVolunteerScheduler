@@ -24,6 +24,7 @@
       <Parameter Name="Event_Date" Mode="In" Type="DateTime" />
       <Parameter Name="Start_Time" Mode="In" Type="Time" />
       <Parameter Name="End_Time" Mode="In" Type="Time" />
+      <Parameter Name="Max_Volunteers" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="Update_Volunteer">
       <Parameter Name="UserID" Mode="In" Type="Int32" />
@@ -36,6 +37,9 @@
       <Parameter Name="VolunteerRole" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="ResetHours" />
+    <FunctionImport Name="TodaysVolunteers" IsComposable="true" ReturnType="Collection(String)">
+      <Parameter Name="Day" Mode="In" Type="DateTime" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Event">
     <Key>
@@ -48,6 +52,7 @@
     <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
     <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
     <NavigationProperty Name="Volunteers" Relationship="VolunteersDBModel.VolunteerEventInstance" FromRole="Event" ToRole="Volunteer" />
+    <Property Name="MaxVolunteers" Type="Int32" />
   </EntityType>
   <EntityType Name="Volunteer">
     <Key>
