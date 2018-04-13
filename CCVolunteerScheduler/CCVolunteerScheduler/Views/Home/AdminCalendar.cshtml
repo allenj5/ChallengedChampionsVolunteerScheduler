@@ -162,11 +162,15 @@
 
                         <label for="eventEnd">End Time</label>
                         <input type="text" class="form-control" id="eventEnd" name="eventEnd"/>
+                        <br />
+
+                        <label for="maxVol">Number of Volunteers Needed</label>
+                        <input type="text" class="form-control" id="maxVol" name="maxVol"/>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal" onclick="AddEvent(eventTitle.value, eventDesc.value, $('#datepicker').val(), eventStart.value, eventEnd.value)">Save</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal" onclick="AddEvent(eventTitle.value, eventDesc.value, $('#datepicker').val(), eventStart.value, eventEnd.value, maxVol.value)">Save</button>
             </div>
         </div>
     </div>
@@ -248,12 +252,12 @@
 
 <!-- add event --->
 <script type="text/javascript">
-    function AddEvent(eventTitle, eventDesc, eventDate, eventStart, eventEnd) {
+    function AddEvent(eventTitle, eventDesc, eventDate, eventStart, eventEnd, maxVol) {
         jQuery.noConflict();
         (function ($) {
             $.ajax({
                 type: "Get",
-                url: '@Url.Action("AddEvent", "home")?title=' + eventTitle + '&description=' + eventDesc + '&date=' + eventDate + '&start=' + eventStart + '&end=' + eventEnd,
+                url: '@Url.Action("AddEvent", "home")?title=' + eventTitle + '&description=' + eventDesc + '&date=' + eventDate + '&start=' + eventStart + '&end=' + eventEnd + '&maxVolunteers=' + maxVol,
                 success: function () {
                     //refresh page after event is added
                     location.reload();
@@ -265,12 +269,12 @@
 
 <!-- update event --->
 <script type="text/javascript">
-    function UpdateEvent(eventID, eventTitle, eventDesc, eventDate, eventStart, eventEnd) {
+    function UpdateEvent(eventID, eventTitle, eventDesc, eventDate, eventStart, eventEnd, maxVol) {
         jQuery.noConflict();
         (function ($) {
             $.ajax({
                 type: "Get",
-                url: '@Url.Action("UpdateEvent", "home")?id=' + eventID + '&title=' + eventTitle + '&description=' + eventDesc + '&date=' + eventDate + '&start=' + eventStart + '&end=' + eventEnd,
+                url: '@Url.Action("UpdateEvent", "home")?id=' + eventID + '&title=' + eventTitle + '&description=' + eventDesc + '&date=' + eventDate + '&start=' + eventStart + '&end=' + eventEnd + '&maxVolunteers=' + maxVol,
                 success: function () {
                     //refresh page after event is updated
                     location.reload();

@@ -148,14 +148,15 @@ namespace CCVolunteerScheduler.Controllers
             var Model = volunteerList.Where(x => x.EventID == id).FirstOrDefault();
             return PartialView("CopyEventPartial", Model);
         }
-        public ActionResult AddEvent(string title, string description, string date, string start, string end){
+        public ActionResult AddEvent(string title, string description, string date, string start, string end, string maxVolunteers){
 
             DateTime myDate = DateTime.Parse(date);
             TimeSpan myStart = TimeSpan.Parse(start);
             TimeSpan myEnd = TimeSpan.Parse(end);
+            int numVolunteers = Int32.Parse(maxVolunteers);
 
             EventSPEntities x = new EventSPEntities();
-            x.Insert_Event(title, description, myDate, myStart, myEnd);
+            x.Insert_Event(title, description, myDate, myStart, myEnd, numVolunteers);
 
             return new EmptyResult();
         }
@@ -168,14 +169,15 @@ namespace CCVolunteerScheduler.Controllers
             return new EmptyResult();
         }
 
-        public ActionResult UpdateEvent(int id, string title, string description, string date, string start, string end)
+        public ActionResult UpdateEvent(int id, string title, string description, string date, string start, string end, string maxVolunteers)
         {
             DateTime myDate = DateTime.Parse(date);
             TimeSpan myStart = TimeSpan.Parse(start);
             TimeSpan myEnd = TimeSpan.Parse(end);
+            int numVolunteers = Int32.Parse(maxVolunteers);
 
             EventSPEntities x = new EventSPEntities();
-            x.Update_Event(id, title, description, myDate, myStart, myEnd);
+            x.Update_Event(id, title, description, myDate, myStart, myEnd, numVolunteers);
 
             return new EmptyResult();
         }

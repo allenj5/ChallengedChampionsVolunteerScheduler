@@ -13,5 +13,6 @@
     <Property Name="EventDate" Type="date" Nullable="false" />
     <Property Name="StartTime" Type="time" Nullable="false" />
     <Property Name="EndTime" Type="time" Nullable="false" />
+    <Property Name="MaxVolunteers" Type="int" />
   </EntityType>
 </Schema>

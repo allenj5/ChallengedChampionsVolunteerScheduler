@@ -29,11 +29,15 @@
 
             <label for="eventEndCopy">End Time</label>
             <input type="text" class="form-control" id="eventEndCopy" name="eventEndCopy" value="@Model.EndTime" />
+            <br />
+            
+            <label for="maxVolCopy">Number of Volunteers Needed</label>
+            <input type="text" class="form-control" id="maxVolCopy" name="maxVolCopy"/>
         </div>
     </form>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-info" data-dismiss="modal" onclick="DeleteEvent(@Model.EventID)">Delete</button>
-    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="UpdateEvent(@Model.EventID, eventTitleCopy.value, eventDescCopy.value, $('#datepickerCopy').val(), eventStartCopy.value, eventEndCopy.value)">Update</button>
-    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="AddEvent(eventTitleCopy.value, eventDescCopy.value, $('#datepickerCopy').val(), eventStartCopy.value, eventEndCopy.value)">Copy</button>
+    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="UpdateEvent(@Model.EventID, eventTitleCopy.value, eventDescCopy.value, $('#datepickerCopy').val(), eventStartCopy.value, eventEndCopy.value, maxVolCopy.value)">Update</button>
+    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="AddEvent(eventTitleCopy.value, eventDescCopy.value, $('#datepickerCopy').val(), eventStartCopy.value, eventEndCopy.value, maxVolCopy.value)">Copy</button>
 </div>

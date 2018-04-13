@@ -10,6 +10,7 @@
     <Parameter Name="Event_Date" Type="date" Mode="In" />
     <Parameter Name="Start_Time" Type="time" Mode="In" />
     <Parameter Name="End_Time" Type="time" Mode="In" />
+    <Parameter Name="Max_Volunteers" Type="int" Mode="In" />
   </Function>
   <Function Name="Update_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
@@ -18,5 +19,6 @@
     <Parameter Name="Date" Type="date" Mode="In" />
     <Parameter Name="Start" Type="time" Mode="In" />
     <Parameter Name="End" Type="time" Mode="In" />
+    <Parameter Name="Max_Volunteers" Type="int" Mode="In" />
   </Function>
 </Schema>

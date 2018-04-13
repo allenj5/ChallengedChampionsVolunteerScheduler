@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EventDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EventDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="EventDBModelStoreContainer">
           <EntitySet Name="Events" EntityType="EventDBModel.Store.Events" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
@@ -18,9 +18,9 @@
           <Property Name="EventDate" Type="date" Nullable="false" />
           <Property Name="StartTime" Type="time" Nullable="false" />
           <Property Name="EndTime" Type="time" Nullable="false" />
+          <Property Name="MaxVolunteers" Type="int" />
         </EntityType>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EventDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -37,6 +37,7 @@
           <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
           <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Type="Int32" Name="MaxVolunteers" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -47,6 +48,7 @@
           <EntitySetMapping Name="Events">
             <EntityTypeMapping TypeName="EventDBModel.Event">
               <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="MaxVolunteers" ColumnName="MaxVolunteers" />
                 <ScalarProperty Name="EventID" ColumnName="EventID" />
                 <ScalarProperty Name="EventTitle" ColumnName="EventTitle" />
                 <ScalarProperty Name="EventDescription" ColumnName="EventDescription" />
