@@ -152,7 +152,10 @@ namespace CCVolunteerScheduler.Controllers
         {
             VolunteersDBEntities _db = new VolunteersDBEntities();
             var Model = _db.VolunteersSignedUp(eventID);
-            
+            if (Model.FirstOrDefault().FirstName == null)
+            {
+                throw new Exception();
+            }
             return PartialView("AdminCalVolunteerPerEventPartial", Model);
         }
         public ActionResult AddEvent(string title, string description, string date, string start, string end, string maxVolunteers){
