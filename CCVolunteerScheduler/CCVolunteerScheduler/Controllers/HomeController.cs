@@ -151,11 +151,18 @@ namespace CCVolunteerScheduler.Controllers
         public ActionResult SeeVolunteersSignedUp(int eventID)
         {
             VolunteersDBEntities _db = new VolunteersDBEntities();
-            var Model = _db.VolunteersSignedUp(eventID);
-            if (Model.FirstOrDefault().FirstName == null)
+            var volunteerList = _db.VolunteersSignedUp(eventID);
+            if (volunteerList.FirstOrDefault().FirstName == null)
             {
                 throw new Exception();
             }
+
+            Models.AdminCalVolunteerPerEventPartialModel Model = new Models.AdminCalVolunteerPerEventPartialModel
+            {
+                event_ID = eventID,
+                volunteers = volunteerList
+            };
+
             return PartialView("AdminCalVolunteerPerEventPartial", Model);
         }
         public ActionResult AddEvent(string title, string description, string date, string start, string end, string maxVolunteers){
@@ -323,10 +330,19 @@ namespace CCVolunteerScheduler.Controllers
             var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
             return PartialView("MyScheduleEventsPerDay", Model);
         }
+
+        
         public ActionResult UnScheduleVolunteer(int id)
         {
             ScheduleVolunteerDBEntities x = new ScheduleVolunteerDBEntities();
             x.unSchedule_Volunteer(Convert.ToInt32(currentUser), id);     //we need to revisit inconsistencies in DB with bigint / int for id column datatypes
+            return new EmptyResult();
+        }
+
+        public ActionResult AdminUnScheduleVolunteer(int volunteerID, int eventID)
+        {
+            ScheduleVolunteerDBEntities x = new ScheduleVolunteerDBEntities();
+            x.unSchedule_Volunteer(volunteerID, eventID);
             return new EmptyResult();
         }
 

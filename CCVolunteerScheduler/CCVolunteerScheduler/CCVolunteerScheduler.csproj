@@ -191,6 +191,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AddVolunteer.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminCalVolunteerPerEventPartialModel.cs" />
     <Compile Include="Models\CalendarModels.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Event.cs">

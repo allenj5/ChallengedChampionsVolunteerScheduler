@@ -1,6 +1,7 @@
-﻿@foreach (var item in Model)
+﻿@foreach (var item in Model.volunteers)
 {
     <div class="volunteer">
         <p>@Html.Encode(item.LastName), @Html.Encode(item.FirstName)</p>
+        <button class="btn btn-info" onclick="AdminUnScheduleVolunteer(@item.ID, @Model.event_ID)">Remove</button>
     </div>
 }

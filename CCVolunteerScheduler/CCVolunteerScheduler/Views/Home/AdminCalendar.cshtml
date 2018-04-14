@@ -336,3 +336,19 @@
         })(jQuery);
     }
 </script>
+
+<script type="text/javascript">
+    function AdminUnScheduleVolunteer(volunteerID, eventID) {
+        jQuery.noConflict();
+        (function ($) {
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("AdminUnScheduleVolunteer", "home")?volunteerID=' + volunteerID + '&eventID=' + eventID,
+                success: function () {
+                    //refresh page
+                    SeeVolunteersSignedUp(eventID);
+                }
+            })
+        })(jQuery);
+    }
+</script>
