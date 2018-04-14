@@ -35,6 +35,11 @@
             <input type="text" class="form-control" id="maxVolCopy" name="maxVolCopy" value="@Model.MaxVolunteers"/>
         </div>
     </form>
+    <button type="button" class="btn btn-info" onclick="SeeVolunteersSignedUp(@Model.EventID)">View Volunteers Signed Up</button>
+    <br />
+    <div id="@("listOfVolunteers" + Model.EventID)">
+        @* Partial View *@
+    </div>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-info" data-dismiss="modal" onclick="DeleteEvent(@Model.EventID)">Delete</button>

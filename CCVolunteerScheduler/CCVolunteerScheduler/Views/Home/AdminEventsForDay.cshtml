@@ -7,10 +7,6 @@
         <div class="eventDetails hide" id="@("event" + item.EventID)">
             <p>@Html.Encode(item.EventDescription)</p>
             <p>Volunteers needed: @Html.Encode(item.MaxVolunteers)</p>
-            <button type="button" class="btn btn-info" onclick="SeeVolunteersSignedUp(@item.EventID)">View Volunteers</button>
-            <div id="@("listOfVolunteers" + item.EventID)">
-                @* Partial View *@
-            </div>
             <button type="button" class="btn btn-info" onclick="Open(@item.EventID)" data-toggle="modal" data-target="#CopyEventModal">Edit</button>
         </div>
     </div>
