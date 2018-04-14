@@ -148,6 +148,13 @@ namespace CCVolunteerScheduler.Controllers
             var Model = volunteerList.Where(x => x.EventID == id).FirstOrDefault();
             return PartialView("CopyEventPartial", Model);
         }
+        public ActionResult SeeVolunteersSignedUp(int eventID)
+        {
+            VolunteersDBEntities _db = new VolunteersDBEntities();
+            var Model = _db.VolunteersSignedUp(eventID);
+            
+            return PartialView("AdminCalVolunteerPerEventPartial", Model);
+        }
         public ActionResult AddEvent(string title, string description, string date, string start, string end, string maxVolunteers){
 
             DateTime myDate = DateTime.Parse(date);

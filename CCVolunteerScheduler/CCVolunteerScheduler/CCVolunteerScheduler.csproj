@@ -309,6 +309,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Volunteers.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\VolunteersSignedUp_Result.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -583,6 +584,7 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\ChangePhone.cshtml" />
     <Content Include="Views\Home\MyScheduleEventsPerDay.cshtml" />
+    <Content Include="Views\Home\AdminCalVolunteerPerEventPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

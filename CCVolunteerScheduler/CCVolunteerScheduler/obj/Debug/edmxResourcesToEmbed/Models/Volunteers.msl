@@ -47,5 +47,23 @@
     <FunctionImportMapping FunctionImportName="Update_Volunteer" FunctionName="VolunteersDBModel.Store.Update_Volunteer" />
     <FunctionImportMapping FunctionImportName="ResetHours" FunctionName="VolunteersDBModel.Store.ResetHours" />
     <FunctionImportMapping FunctionImportName="TodaysVolunteers" FunctionName="VolunteersDBModel.Store.TodaysVolunteers" />
+    <FunctionImportMapping FunctionImportName="VolunteersSignedUp" FunctionName="VolunteersDBModel.Store.VolunteersSignedUp">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VolunteersDBModel.VolunteersSignedUp_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
+          <ScalarProperty Name="EmailOptOut" ColumnName="EmailOptOut" />
+          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="GUID" ColumnName="GUID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

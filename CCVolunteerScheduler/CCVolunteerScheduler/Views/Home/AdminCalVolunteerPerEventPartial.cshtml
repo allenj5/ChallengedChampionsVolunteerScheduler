@@ -1,0 +1,6 @@
+﻿@foreach (var item in Model)
+{
+    <div class="volunteer">
+        <p>@Html.Encode(item.LastName), @Html.Encode(item.FirstName)</p>
+    </div>
+}

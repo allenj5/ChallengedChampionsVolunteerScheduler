@@ -315,3 +315,24 @@
         }
     }
 </script>
+
+<script type="text/javascript">
+    function SeeVolunteersSignedUp(eventID) {
+        jQuery.noConflict();
+        (function ($) {
+            var myID = "#listOfVolunteers" + eventID
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("SeeVolunteersSignedUp", "home")?eventID=' + eventID,
+                success: function (data) {
+                    if (data.trim != '') {
+                        $(myID).html(data);
+                    }
+                    else {
+                        $(myID).html("No volunteers have signed up for this event yet.");
+                    }
+                }
+            })
+        })(jQuery);
+    }
+</script>
