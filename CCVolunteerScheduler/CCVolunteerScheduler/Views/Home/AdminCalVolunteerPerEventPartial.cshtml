@@ -2,6 +2,6 @@
 {
     <div class="volunteer">
         <p>@Html.Encode(item.LastName), @Html.Encode(item.FirstName)</p>
-        <button class="btn btn-info" onclick="AdminUnScheduleVolunteer(@item.ID, @Model.event_ID)">Remove</button>
+        <button class="btn btn-info" onclick="if(window.confirm('Remove @Html.Encode(item.FirstName) from this event?')){AdminUnScheduleVolunteer(@item.ID, @Model.event_ID)}">Remove</button>
     </div>
 }
