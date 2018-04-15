@@ -32,15 +32,61 @@
 <br />
 
 <div class="col-xs-12 col-md-12">
-    <p>Welcome, @Model.FirstName!</p>  
+    <h3><p>Welcome, @Model.FirstName!</p></h3>
 </div>
 
 <br />
-<br />
-
-@*"....instructions...." will be updated once we know what information to put for the admin*@
-<div class="col-xs-12 col-md-12">
-    <p>.....instructions.....</p>
+<div class="col-xs-12 col-md-12 col-xl-12">
+    <p>
+        <h4>Events</h4>
+        The "Calendar" page is where event management will take place.<br /><br />
+        <code>Adding an Event</code><br />
+        To add a new event to the schedule just click the "Add Event" button at the bottom of the calendar.<br />
+        You will see a pop-up prompting you for information. Fill out each field and then click the "Save" button.<br />
+        That event will now show up in the calendar for all volunteers to see and sign up for. <br />
+        If you would prefer volunteers not sign up or sign-ups are not necessary, set the max number of volunteers to '0'<br /><br />
+        <code>Editing an Event</code><br />
+        To edit an events information simply click on the event and then click the "Edit" button.<br />
+        Adjust whichever information needs changed and then click the "Update" button.<br /><br />
+        <code>Copying an Event</code><br />
+        For recurring events, click the event that is going to be happening again and then click the "Edit" button.<br />
+        Choose a new date for this event to take place and click the "Copy" button.<br />
+        That event will now show up on the original date and the new date that you chose<br /><br />
+        <code>Deleting an Event</code><br />
+        If you would like to remove an event from the calendar, start by clicking on the event.<br />
+        Click the "Edit" button and then click the "Delete" button.<br />
+        That event will now be removed from all calendars.<br />
+    </p>
+    <br />
+    <p>
+        <h4>Communicating with Volunteers</h4>
+        On the "Communications" page there are a few buttons that can be used to communicate with volunteers.<br /><br />
+        <code>Email All Volunteers</code><br />
+        This button will send an email to every volunteer in the database. If they show up on the Volunteer page they will receive an email.<br /><br />
+        <code>Email All Volunteers Working Today</code><br />
+        This button wil send an email to any volunteer is scheduled for an event today. <br /><br />
+        <code>Text All Volunteers</code><br />
+        This button will send a text message to all volunteers in the database. If they show up on the Volunteer page they will receive a text.<br /><br />
+        <code>Contacting Individuals</code><br />
+        To contact an individual volunteer please refer to the Volunteer page. Here you can find their email address and their phone number. There in not a feature to contact<br />
+        individuals so this information can be used to send them an email or text manually.<br />
+    </p>
+    <br />
+    <p>
+        <h4>Managing Volunteers and Volunteer Data</h4>
+        The "Volunteers" page is where you can view and edit volunteer information. The table on this page is sorted first by the "Active" status, and then by the volunteers position.<br />
+        If you would like to search for something specific, press <kbd>CTRL + F</kbd> on your keyboard and then type in what you would like to find.<br /><br />
+        <code>Adding a New Volunteer</code><br />
+        At the bottom of the table of Volunteers is a button labeled "Add Volunteer". Simply click this button, fill out the form that appears on your screen, <br />
+        and then click the "Save" button. The new  volunteer with the information you provided will now show up in the volunteer table. <br /><br />
+        <code>Editing a Volunteer</code><br />
+        To edit or correct an error with volunteer information, click the "Edit" button to the right of the volunteer you would like to edit.<br />
+        A form will appear populated with that volunteer's information. Make the changes you would like to make and then click the "Save" button/<br /><br />
+        <code>Resetting Hours</code><br />
+        To reset a single volunteers hours, click the "Edit" button next to their name and then change their "Hours Worked" to 0.<br />
+        To reset ALL volunteer hours click the "Reset Hours" button. You will get a pop-up asking to confirm your action. Upon clicking the "Ok" button<br />
+        all hours will be reset to 0.<br /><br />
+    </p>
 </div>
 
 <br />
