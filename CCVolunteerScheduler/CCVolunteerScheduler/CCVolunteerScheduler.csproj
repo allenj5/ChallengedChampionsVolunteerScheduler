@@ -310,7 +310,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Volunteers.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\VolunteersSignedUp_Result.cs" />
+    <Compile Include="Models\VolunteersSignedUp_Result.cs">
+      <DependentUpon>Volunteers.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
