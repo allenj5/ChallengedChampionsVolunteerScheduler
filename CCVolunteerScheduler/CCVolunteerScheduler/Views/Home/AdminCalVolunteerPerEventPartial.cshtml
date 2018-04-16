@@ -5,3 +5,20 @@
         <button class="btn btn-info" onclick="if(window.confirm('Remove @Html.Encode(item.FirstName) from this event?')){AdminUnScheduleVolunteer(@item.ID, @Model.event_ID)}">Remove</button>
     </div>
 }
+
+<div class="loadingModal" id="loadingModal" style="display: none;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    width: 128px;
+    height: 128px;
+    padding:30px 15px 0px;
+    border: 3px solid #ababab;
+    box-shadow:1px 1px 10px #ababab;
+    border-radius:20px;
+    background-color: white;
+    z-index: 1002;
+    text-align:center;
+    overflow: auto;">
+    <p>Loading...</p>
+</div>

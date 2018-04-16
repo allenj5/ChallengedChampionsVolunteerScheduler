@@ -339,6 +339,7 @@
 
 <script type="text/javascript">
     function AdminUnScheduleVolunteer(volunteerID, eventID) {
+        openLoadModal();
         jQuery.noConflict();
         (function ($) {
             $.ajax({
@@ -346,9 +347,24 @@
                 url: '@Url.Action("AdminUnScheduleVolunteer", "home")?volunteerID=' + volunteerID + '&eventID=' + eventID,
                 success: function () {
                     //refresh page
+                    closeLoadModal();
                     SeeVolunteersSignedUp(eventID);
+                },
+                error: function () {
+                    closeLoadModal();
                 }
             })
         })(jQuery);
+    }
+</script>
+
+
+
+<script type="text/javascript">
+    function openLoadModal() {
+        document.getElementById('loadingModal').style.display = 'block';
+    }
+    function closeLoadModal() {
+        document.getElementById('loadingModal').style.display = 'none';
     }
 </script>

@@ -343,6 +343,26 @@ namespace CCVolunteerScheduler.Controllers
         {
             ScheduleVolunteerDBEntities x = new ScheduleVolunteerDBEntities();
             x.unSchedule_Volunteer(volunteerID, eventID);
+
+            EventDBEntities _Edb = new EventDBEntities();
+            var events = _Edb.Events.ToList();
+            Models.Event myEvent = (Models.Event)(events.Where(y => y.EventID == eventID).FirstOrDefault());
+
+            VolunteersDBEntities _Vdb = new VolunteersDBEntities();
+            var volunteers = _Vdb.Volunteers.ToList();
+            Models.Volunteer myVolunteer = (Models.Volunteer)(volunteers.Where(z => z.ID == volunteerID).FirstOrDefault());
+
+            //notify volunteer of schedule change
+            SmtpClient client = new SmtpClient();
+            MailMessage notifyVolunteer = new MailMessage();
+            notifyVolunteer.Subject = "You have been unscheduled from an event at the Challenged Champions Equestrian Center";
+            notifyVolunteer.Body = "This is an automated message informing you that an administrator has unscheduled you from the following event: "
+                + myEvent.EventTitle + " on " + myEvent.EventDate.ToString("MM-dd-yyyy")
+             + ". Please check the \"My Schedule\" portion of the volunteer website to review your schedule.";
+            notifyVolunteer.To.Add(myVolunteer.Email);
+
+            client.Send(notifyVolunteer);
+
             return new EmptyResult();
         }
 
