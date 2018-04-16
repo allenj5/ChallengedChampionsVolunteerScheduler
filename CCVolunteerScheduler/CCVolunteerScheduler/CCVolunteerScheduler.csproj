@@ -195,7 +195,7 @@
     <Compile Include="Models\CalendarModels.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Event.cs">
-      <DependentUpon>Volunteers.tt</DependentUpon>
+      <DependentUpon>Events.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EventActions.Context.cs">
       <AutoGen>True</AutoGen>
@@ -275,7 +275,7 @@
     </Compile>
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Volunteer.cs">
-      <DependentUpon>Volunteers.tt</DependentUpon>
+      <DependentUpon>Events.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VolunteerEventInstance.Context.cs">
       <AutoGen>True</AutoGen>
@@ -523,7 +523,9 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

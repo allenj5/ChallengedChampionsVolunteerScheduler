@@ -180,6 +180,20 @@ namespace CCVolunteerScheduler.Controllers
 
         public ActionResult DeleteEvent(int id)
         {
+            EventDBEntities _db = new EventDBEntities();
+            Models.Event myEvent = (Models.Event)_db.Events.Where(y => y.EventID == id).FirstOrDefault();
+
+            if (myEvent.Volunteers != null)
+            {
+                var volunteers = myEvent.Volunteers.ToList();
+
+                foreach (var volunteer in volunteers)
+                {
+                    AdminUnScheduleVolunteer((int)volunteer.ID, id);
+                }
+            }
+
+            //have to do this AFTER emailing volunteers
             EventSPEntities x = new EventSPEntities();
             x.Delete_Event(id);
 
@@ -506,23 +520,15 @@ namespace CCVolunteerScheduler.Controllers
 
         public ActionResult AddVolunteer(string firstName, string lastName, string phone, string email, string position)
         {
+            var Hashing = new LoginController();
 
-            if (NameValidation(firstName) && NameValidation(lastName) && PhoneValidation(phone) && EmailValidation(email) && PositionValidation(position))
-            {
-                var Hashing = new LoginController();
+            int hoursWorked = 0;
+            string password = Hashing.HashPassword("ChalChampVolunteer"); //should change this
 
-                int hoursWorked = 0;
-                string password = Hashing.HashPassword("ChalChampVolunteer"); //should change this
+            AddVolunteerEntities x = new AddVolunteerEntities();
+            x.Insert_Volunteer(firstName, lastName, phone, email, hoursWorked, password, position);
 
-                AddVolunteerEntities x = new AddVolunteerEntities();
-                x.Insert_Volunteer(firstName, lastName, phone, email, hoursWorked, password, position);
-
-                return new EmptyResult();
-            }
-            else
-            {
-                return new EmptyResult();
-            }
+            return new EmptyResult();
         }
         public ActionResult UpdateVolunteer(string id, string firstName, string lastName, string phone, string email, string active, string hoursWorked, string position)
         {
@@ -559,29 +565,24 @@ namespace CCVolunteerScheduler.Controllers
 
         bool NumberValidation(string number)
         {
-            number = number.Replace(" ", "").ToLower();
             int n;
             return int.TryParse(number, out n);
         }
 
         bool NameValidation(string name)
         {
-            name = name.Replace(" ", "").ToLower();
             var nameRegex = new Regex("^[a-zA-Z0-9 ']*$");
-            return nameRegex.IsMatch(name) && !(name.Contains("' ")) && name.Length < 30;
+            return nameRegex.IsMatch(name) && !name.Contains("' ") && name.Length < 20;
         }
 
         bool PhoneValidation(string phone)
         {
             int n;
-            phone = phone.Replace(" ","").ToLower();
-            var phoneRegex = new Regex(@"^\d+$");
-            return phoneRegex.IsMatch(phone) && phone.Length == 10;
+            return int.TryParse(phone, out n) && phone.Length == 10;
         }
 
         bool EmailValidation(string email)
         {
-            email = email.Replace(" ", "").ToLower();
             try
             {
                 var addr = new System.Net.Mail.MailAddress(email);
@@ -599,27 +600,6 @@ namespace CCVolunteerScheduler.Controllers
 
             //return position == "type1" || position == "type2" || position == "type3" || position == "type4";
             return true;
-        }
-
-        public ActionResult AutoReminder()
-        {
-            DateTime today = DateTime.Now;
-
-            //Instantiate and create a new email message
-            SmtpClient client = new SmtpClient();
-            MailMessage autoReminder = new MailMessage();
-            autoReminder.From = new MailAddress("challengedchampions@yahoo.com");
-            autoReminder.Subject = "Automatic Reminder: Your event today at Challenged Champions Equestrian Center";
-            autoReminder.Body = "This is an automated message reminding you that you've signed up for an event today. Please check the \"My Schedule\" portion of the volunteer website for more information about this event.";
-
-            VolunteersDBEntities _db = new VolunteersDBEntities();
-            
-            foreach(string email in _db.TodaysVolunteers(today))
-            {
-                autoReminder.To.Add(email);
-            }
-
-            return new EmptyResult();
         }
     }
 }

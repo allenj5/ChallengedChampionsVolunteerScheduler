@@ -180,6 +180,23 @@
             <script>document.getElementById("@("date" + DateTime.Today.ToString("dd"))").classList = "calendar-day cell-active";</script>
 }
 
+<div class="loadingModal" id="loadingModal" style="display: none;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    width: 128px;
+    height: 128px;
+    padding:30px 15px 0px;
+    border: 3px solid #ababab;
+    box-shadow:1px 1px 10px #ababab;
+    border-radius:20px;
+    background-color: white;
+    z-index: 1002;
+    text-align:center;
+    overflow: auto;">
+    <p>Loading...</p>
+</div>
+
 <!-- used for getting events for a day -->
 <script type="text/javascript">
     function getEvents(currentDay) {
@@ -287,6 +304,7 @@
 <!-- delete event --->
 <script type="text/javascript">
     function DeleteEvent(eventID) {
+        openLoadModal();
         jQuery.noConflict();
         (function ($) {
             $.ajax({
@@ -295,8 +313,13 @@
                 success: function () {
                     //refresh page after event is deleted
                     location.reload();
+                    closeLoadModal();
+                },
+                error: function () {
+                    closeLoadModal();
                 }
             })
+
         })(jQuery);
     }
 </script>
