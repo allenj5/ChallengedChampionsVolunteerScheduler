@@ -180,6 +180,20 @@ namespace CCVolunteerScheduler.Controllers
 
         public ActionResult DeleteEvent(int id)
         {
+            EventDBEntities _db = new EventDBEntities();
+            Models.Event myEvent = (Models.Event)_db.Events.Where(y => y.EventID == id).FirstOrDefault();
+
+            if (myEvent.Volunteers != null)
+            {
+                var volunteers = myEvent.Volunteers.ToList();
+
+                foreach (var volunteer in volunteers)
+                {
+                    AdminUnScheduleVolunteer((int)volunteer.ID, id);
+                }
+            }
+
+            //have to do this AFTER emailing volunteers
             EventSPEntities x = new EventSPEntities();
             x.Delete_Event(id);
 

@@ -2,6 +2,11 @@
 <Schema Namespace="EventDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="EventDBEntities" p1:LazyLoadingEnabled="true">
     <EntitySet Name="Events" EntityType="EventDBModel.Event" />
+    <EntitySet Name="Volunteers" EntityType="EventDBModel.Volunteer" />
+    <AssociationSet Name="VolunteerEventInstance" Association="EventDBModel.VolunteerEventInstance">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="Volunteer" EntitySet="Volunteers" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Event">
     <Key>
@@ -14,5 +19,28 @@
     <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
     <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
     <Property Type="Int32" Name="MaxVolunteers" />
+    <NavigationProperty Name="Volunteers" Relationship="EventDBModel.VolunteerEventInstance" FromRole="Event" ToRole="Volunteer" />
   </EntityType>
+  <EntityType Name="Volunteer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int64" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="FirstName" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="LastName" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Phone" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Email" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="Active" />
+    <Property Type="Int64" Name="HoursWorked" />
+    <Property Type="Boolean" Name="EmailOptOut" />
+    <Property Type="Boolean" Name="isAdmin" />
+    <Property Type="String" Name="Password" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Position" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="GUID" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Events" Relationship="EventDBModel.VolunteerEventInstance" FromRole="Volunteer" ToRole="Event" />
+  </EntityType>
+  <Association Name="VolunteerEventInstance">
+    <End Type="EventDBModel.Event" Role="Event" Multiplicity="*" />
+    <End Type="EventDBModel.Volunteer" Role="Volunteer" Multiplicity="*" />
+  </Association>
 </Schema>
