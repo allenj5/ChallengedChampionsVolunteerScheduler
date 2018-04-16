@@ -18,25 +18,25 @@
     <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
     <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
-    <Property Name="MaxVolunteers" Type="Int32" />
+    <Property Type="Int32" Name="MaxVolunteers" />
     <NavigationProperty Name="Volunteers" Relationship="EventDBModel.VolunteerEventInstance" FromRole="Event" ToRole="Volunteer" />
   </EntityType>
   <EntityType Name="Volunteer">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
-    <Property Name="LastName" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
-    <Property Name="Phone" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
-    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Active" Type="Boolean" />
-    <Property Name="HoursWorked" Type="Int64" />
-    <Property Name="EmailOptOut" Type="Boolean" />
-    <Property Name="isAdmin" Type="Boolean" />
-    <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="Position" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
-    <Property Name="GUID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="Int64" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="FirstName" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="LastName" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Phone" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="Email" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="Active" />
+    <Property Type="Int64" Name="HoursWorked" />
+    <Property Type="Boolean" Name="EmailOptOut" />
+    <Property Type="Boolean" Name="isAdmin" />
+    <Property Type="String" Name="Password" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Position" MaxLength="25" FixedLength="true" Unicode="false" />
+    <Property Type="String" Name="GUID" MaxLength="200" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Events" Relationship="EventDBModel.VolunteerEventInstance" FromRole="Volunteer" ToRole="Event" />
   </EntityType>
   <Association Name="VolunteerEventInstance">

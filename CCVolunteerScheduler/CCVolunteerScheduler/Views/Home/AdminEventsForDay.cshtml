@@ -1,9 +1,12 @@
 ﻿@foreach (var item in Model){
-    <div class="event" onclick="ToggleDescription(@item.EventID)">
-        <p>@Html.Encode(item.EventTitle)</p>
-        <p>@Html.Encode(item.StartTime.ToString(@"hh\:mm")) - @Html.Encode(item.EndTime.ToString(@"hh\:mm"))</p>
+    <div class="event" >
+        <div class="basicEventInfo" onclick="ToggleDescription(@item.EventID)">
+            <p>@Html.Encode(item.EventTitle)</p>
+            <p>@Html.Encode(item.StartTime.ToString(@"hh\:mm")) - @Html.Encode(item.EndTime.ToString(@"hh\:mm"))</p>
+        </div>
         <div class="eventDetails hide" id="@("event" + item.EventID)">
             <p>@Html.Encode(item.EventDescription)</p>
+            <p>Volunteers needed: @Html.Encode(item.MaxVolunteers)</p>
             <button type="button" class="btn btn-info" onclick="Open(@item.EventID)" data-toggle="modal" data-target="#CopyEventModal">Edit</button>
         </div>
     </div>

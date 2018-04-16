@@ -38,7 +38,7 @@ namespace CCVolunteerScheduler.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Delete_Event", iDParameter);
         }
     
-        public virtual int Insert_Event(string event_Title, string event_Description, Nullable<System.DateTime> event_Date, Nullable<System.TimeSpan> start_Time, Nullable<System.TimeSpan> end_Time)
+        public virtual int Insert_Event(string event_Title, string event_Description, Nullable<System.DateTime> event_Date, Nullable<System.TimeSpan> start_Time, Nullable<System.TimeSpan> end_Time, Nullable<int> max_Volunteers)
         {
             var event_TitleParameter = event_Title != null ?
                 new ObjectParameter("Event_Title", event_Title) :
@@ -60,10 +60,14 @@ namespace CCVolunteerScheduler.Models
                 new ObjectParameter("End_Time", end_Time) :
                 new ObjectParameter("End_Time", typeof(System.TimeSpan));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_Event", event_TitleParameter, event_DescriptionParameter, event_DateParameter, start_TimeParameter, end_TimeParameter);
+            var max_VolunteersParameter = max_Volunteers.HasValue ?
+                new ObjectParameter("Max_Volunteers", max_Volunteers) :
+                new ObjectParameter("Max_Volunteers", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_Event", event_TitleParameter, event_DescriptionParameter, event_DateParameter, start_TimeParameter, end_TimeParameter, max_VolunteersParameter);
         }
     
-        public virtual int Update_Event(Nullable<int> iD, string title, string description, Nullable<System.DateTime> date, Nullable<System.TimeSpan> start, Nullable<System.TimeSpan> end)
+        public virtual int Update_Event(Nullable<int> iD, string title, string description, Nullable<System.DateTime> date, Nullable<System.TimeSpan> start, Nullable<System.TimeSpan> end, Nullable<int> max_Volunteers)
         {
             var iDParameter = iD.HasValue ?
                 new ObjectParameter("ID", iD) :
@@ -89,7 +93,11 @@ namespace CCVolunteerScheduler.Models
                 new ObjectParameter("End", end) :
                 new ObjectParameter("End", typeof(System.TimeSpan));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_Event", iDParameter, titleParameter, descriptionParameter, dateParameter, startParameter, endParameter);
+            var max_VolunteersParameter = max_Volunteers.HasValue ?
+                new ObjectParameter("Max_Volunteers", max_Volunteers) :
+                new ObjectParameter("Max_Volunteers", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_Event", iDParameter, titleParameter, descriptionParameter, dateParameter, startParameter, endParameter, max_VolunteersParameter);
         }
     }
 }

@@ -1,15 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="EventDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="EventDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EventDBModelStoreContainer">
+    <EntitySet Name="Events" EntityType="EventDBModel.Store.Events" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VolunteerEventInstance" EntityType="EventDBModel.Store.VolunteerEventInstance" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Volunteers" EntityType="EventDBModel.Store.Volunteers" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__Volunteer__Event__398D8EEE" Association="EventDBModel.Store.FK__Volunteer__Event__398D8EEE">
+      <End Role="Events" EntitySet="Events" />
+      <End Role="VolunteerEventInstance" EntitySet="VolunteerEventInstance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Volunteer__Volun__3A81B327" Association="EventDBModel.Store.FK__Volunteer__Volun__3A81B327">
+      <End Role="Volunteers" EntitySet="Volunteers" />
+      <End Role="VolunteerEventInstance" EntitySet="VolunteerEventInstance" />
+    </AssociationSet>
+  </EntityContainer>
   <EntityType Name="Events">
     <Key>
       <PropertyRef Name="EventID" />
     </Key>
-    <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="EventTitle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EventID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="EventTitle" Type="varchar" Nullable="false" MaxLength="50" />
     <Property Name="EventDescription" Type="varchar" MaxLength="200" />
     <Property Name="EventDate" Type="date" Nullable="false" />
-    <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
-    <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="StartTime" Type="time" Nullable="false" />
+    <Property Name="EndTime" Type="time" Nullable="false" />
     <Property Name="MaxVolunteers" Type="int" />
   </EntityType>
   <EntityType Name="VolunteerEventInstance">
@@ -24,7 +37,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="FirstName" Type="char" MaxLength="25" />
     <Property Name="LastName" Type="char" MaxLength="25" />
     <Property Name="Phone" Type="char" MaxLength="25" />
@@ -38,10 +51,10 @@
     <Property Name="GUID" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <Association Name="FK__Volunteer__Event__398D8EEE">
-    <End Role="Events" Type="Self.Events" Multiplicity="1">
+    <End Role="Events" Type="EventDBModel.Store.Events" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="VolunteerEventInstance" Type="Self.VolunteerEventInstance" Multiplicity="*" />
+    <End Role="VolunteerEventInstance" Type="EventDBModel.Store.VolunteerEventInstance" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Events">
         <PropertyRef Name="EventID" />
@@ -52,10 +65,10 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Volunteer__Volun__3A81B327">
-    <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="1">
+    <End Role="Volunteers" Type="EventDBModel.Store.Volunteers" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="VolunteerEventInstance" Type="Self.VolunteerEventInstance" Multiplicity="*" />
+    <End Role="VolunteerEventInstance" Type="EventDBModel.Store.VolunteerEventInstance" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Volunteers">
         <PropertyRef Name="ID" />
@@ -65,17 +78,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="EventDBModelStoreContainer">
-    <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="VolunteerEventInstance" EntityType="Self.VolunteerEventInstance" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Volunteers" EntityType="Self.Volunteers" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Volunteer__Event__398D8EEE" Association="Self.FK__Volunteer__Event__398D8EEE">
-      <End Role="Events" EntitySet="Events" />
-      <End Role="VolunteerEventInstance" EntitySet="VolunteerEventInstance" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Volunteer__Volun__3A81B327" Association="Self.FK__Volunteer__Volun__3A81B327">
-      <End Role="Volunteers" EntitySet="Volunteers" />
-      <End Role="VolunteerEventInstance" EntitySet="VolunteerEventInstance" />
-    </AssociationSet>
-  </EntityContainer>
 </Schema>
