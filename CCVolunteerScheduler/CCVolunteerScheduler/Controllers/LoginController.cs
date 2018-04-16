@@ -27,10 +27,10 @@ namespace CCVolunteerScheduler.Controllers
         {
             VolunteersDBEntities _db = new VolunteersDBEntities();
 
+            //if (EmailValidation(user.Email), PasswordValidation(user.Password))
             //ComputeHash code here to check with the database
             var salt = new Byte[16];
             string hashedPassword = HashPassword(user.Password);
-
             Volunteer currentUser = _db.Volunteers.FirstOrDefault(v => v.Email == user.Email);
             long currentUserId = 0;
             if (currentUser != null)

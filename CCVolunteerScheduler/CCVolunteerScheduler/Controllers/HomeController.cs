@@ -506,15 +506,23 @@ namespace CCVolunteerScheduler.Controllers
 
         public ActionResult AddVolunteer(string firstName, string lastName, string phone, string email, string position)
         {
-            var Hashing = new LoginController();
 
-            int hoursWorked = 0;
-            string password = Hashing.HashPassword("ChalChampVolunteer"); //should change this
+            if (NameValidation(firstName) && NameValidation(lastName) && PhoneValidation(phone) && EmailValidation(email) && PositionValidation(position))
+            {
+                var Hashing = new LoginController();
 
-            AddVolunteerEntities x = new AddVolunteerEntities();
-            x.Insert_Volunteer(firstName, lastName, phone, email, hoursWorked, password, position);
+                int hoursWorked = 0;
+                string password = Hashing.HashPassword("ChalChampVolunteer"); //should change this
 
-            return new EmptyResult();
+                AddVolunteerEntities x = new AddVolunteerEntities();
+                x.Insert_Volunteer(firstName, lastName, phone, email, hoursWorked, password, position);
+
+                return new EmptyResult();
+            }
+            else
+            {
+                return new EmptyResult();
+            }
         }
         public ActionResult UpdateVolunteer(string id, string firstName, string lastName, string phone, string email, string active, string hoursWorked, string position)
         {
@@ -551,24 +559,29 @@ namespace CCVolunteerScheduler.Controllers
 
         bool NumberValidation(string number)
         {
+            number = number.Replace(" ", "").ToLower();
             int n;
             return int.TryParse(number, out n);
         }
 
         bool NameValidation(string name)
         {
+            name = name.Replace(" ", "").ToLower();
             var nameRegex = new Regex("^[a-zA-Z0-9 ']*$");
-            return nameRegex.IsMatch(name) && !name.Contains("' ") && name.Length < 20;
+            return nameRegex.IsMatch(name) && !(name.Contains("' ")) && name.Length < 30;
         }
 
         bool PhoneValidation(string phone)
         {
             int n;
-            return int.TryParse(phone, out n) && phone.Length == 10;
+            phone = phone.Replace(" ","").ToLower();
+            var phoneRegex = new Regex(@"^\d+$");
+            return phoneRegex.IsMatch(phone) && phone.Length == 10;
         }
 
         bool EmailValidation(string email)
         {
+            email = email.Replace(" ", "").ToLower();
             try
             {
                 var addr = new System.Net.Mail.MailAddress(email);
