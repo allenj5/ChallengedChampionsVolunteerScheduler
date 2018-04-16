@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Events">
       <EntityTypeMapping TypeName="EventDBModel.Event">
         <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="MaxVolunteers" ColumnName="MaxVolunteers" />
           <ScalarProperty Name="EventID" ColumnName="EventID" />
           <ScalarProperty Name="EventTitle" ColumnName="EventTitle" />
           <ScalarProperty Name="EventDescription" ColumnName="EventDescription" />
@@ -13,5 +14,31 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Volunteers">
+      <EntityTypeMapping TypeName="EventDBModel.Volunteer">
+        <MappingFragment StoreEntitySet="Volunteers">
+          <ScalarProperty Name="GUID" ColumnName="GUID" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+          <ScalarProperty Name="EmailOptOut" ColumnName="EmailOptOut" />
+          <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="VolunteerEventInstance" TypeName="EventDBModel.VolunteerEventInstance" StoreEntitySet="VolunteerEventInstance">
+      <EndProperty Name="Volunteer">
+        <ScalarProperty Name="ID" ColumnName="VolunteerID" />
+      </EndProperty>
+      <EndProperty Name="Event">
+        <ScalarProperty Name="EventID" ColumnName="EventID" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

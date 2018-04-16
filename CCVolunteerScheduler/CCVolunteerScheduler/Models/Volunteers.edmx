@@ -56,6 +56,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Volunteer__Volun__3A81B327">
+          <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VolunteerEventInstance" Type="Self.VolunteerEventInstance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Volunteers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VolunteerEventInstance">
+              <PropertyRef Name="VolunteerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="Check_Admin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
         </Function>
@@ -100,6 +114,10 @@
             <End Role="Events" EntitySet="Events" />
             <End Role="VolunteerEventInstance" EntitySet="VolunteerEventInstance" />
           </AssociationSet>
+          <AssociationSet Name="FK__Volunteer__Volun__3A81B327" Association="Self.FK__Volunteer__Volun__3A81B327">
+            <End Role="Volunteers" EntitySet="Volunteers" />
+            <End Role="VolunteerEventInstance" EntitySet="VolunteerEventInstance" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -119,10 +137,6 @@
           </FunctionImport>
           <EntitySet Name="Events" EntityType="VolunteersDBModel.Event" />
           <EntitySet Name="Volunteers" EntityType="VolunteersDBModel.Volunteer" />
-          <AssociationSet Name="VolunteerEventInstance" Association="VolunteersDBModel.VolunteerEventInstance">
-            <End Role="Event" EntitySet="Events" />
-            <End Role="Volunteer" EntitySet="Volunteers" />
-          </AssociationSet>
           <FunctionImport Name="Insert_Event">
             <Parameter Name="Event_Title" Mode="In" Type="String" />
             <Parameter Name="Event_Description" Mode="In" Type="String" />
@@ -143,8 +157,12 @@
           </FunctionImport>
           <FunctionImport Name="ResetHours" />
           <FunctionImport Name="TodaysVolunteers" IsComposable="true" ReturnType="Collection(String)">
-            <Parameter Name="Day" Mode="In" Type="DateTime" />
+          <Parameter Name="Day" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <AssociationSet Name="VolunteerEventInstance" Association="VolunteersDBModel.VolunteerEventInstance">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Volunteer" EntitySet="Volunteers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Event">
           <Key>
@@ -156,8 +174,8 @@
           <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
           <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Volunteers" Relationship="VolunteersDBModel.VolunteerEventInstance" FromRole="Event" ToRole="Volunteer" />
           <Property Name="MaxVolunteers" Type="Int32" />
+          <NavigationProperty Name="Volunteers" Relationship="VolunteersDBModel.VolunteerEventInstance" FromRole="Event" ToRole="Volunteer" />
         </EntityType>
         <EntityType Name="Volunteer">
           <Key>
@@ -174,8 +192,8 @@
           <Property Name="isAdmin" Type="Boolean" />
           <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Position" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Events" Relationship="VolunteersDBModel.VolunteerEventInstance" FromRole="Volunteer" ToRole="Event" />
           <Property Name="GUID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Events" Relationship="VolunteersDBModel.VolunteerEventInstance" FromRole="Volunteer" ToRole="Event" />
         </EntityType>
         <Association Name="VolunteerEventInstance">
           <End Type="VolunteersDBModel.Event" Role="Event" Multiplicity="*" />
@@ -221,6 +239,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Insert_Event" FunctionName="VolunteersDBModel.Store.Insert_Event" />
+          <FunctionImportMapping FunctionImportName="Update_Volunteer" FunctionName="VolunteersDBModel.Store.Update_Volunteer" />
+          <FunctionImportMapping FunctionImportName="ResetHours" FunctionName="VolunteersDBModel.Store.ResetHours" />
+          <FunctionImportMapping FunctionImportName="TodaysVolunteers" FunctionName="VolunteersDBModel.Store.TodaysVolunteers" />
           <AssociationSetMapping Name="VolunteerEventInstance" TypeName="VolunteersDBModel.VolunteerEventInstance" StoreEntitySet="VolunteerEventInstance">
             <EndProperty Name="Volunteer">
               <ScalarProperty Name="ID" ColumnName="VolunteerID" />
@@ -229,10 +251,6 @@
               <ScalarProperty Name="EventID" ColumnName="EventID" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="Insert_Event" FunctionName="VolunteersDBModel.Store.Insert_Event" />
-          <FunctionImportMapping FunctionImportName="Update_Volunteer" FunctionName="VolunteersDBModel.Store.Update_Volunteer" />
-          <FunctionImportMapping FunctionImportName="ResetHours" FunctionName="VolunteersDBModel.Store.ResetHours" />
-          <FunctionImportMapping FunctionImportName="TodaysVolunteers" FunctionName="VolunteersDBModel.Store.TodaysVolunteers" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
