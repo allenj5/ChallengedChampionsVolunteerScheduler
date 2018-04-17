@@ -51,6 +51,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Volunteer__Volun__3A81B327">
+    <End Role="Volunteers" Type="Self.Volunteers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="VolunteerEventInstance" Type="Self.VolunteerEventInstance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Volunteers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="VolunteerEventInstance">
+        <PropertyRef Name="VolunteerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="Check_Admin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserID" Type="int" Mode="In" />
   </Function>
@@ -93,6 +107,10 @@
     <EntitySet Name="Volunteers" EntityType="Self.Volunteers" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Volunteer__Event__398D8EEE" Association="Self.FK__Volunteer__Event__398D8EEE">
       <End Role="Events" EntitySet="Events" />
+      <End Role="VolunteerEventInstance" EntitySet="VolunteerEventInstance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Volunteer__Volun__3A81B327" Association="Self.FK__Volunteer__Volun__3A81B327">
+      <End Role="Volunteers" EntitySet="Volunteers" />
       <End Role="VolunteerEventInstance" EntitySet="VolunteerEventInstance" />
     </AssociationSet>
   </EntityContainer>

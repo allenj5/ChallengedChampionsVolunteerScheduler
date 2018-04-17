@@ -35,6 +35,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Insert_Event" FunctionName="VolunteersDBModel.Store.Insert_Event" />
+    <FunctionImportMapping FunctionImportName="Update_Volunteer" FunctionName="VolunteersDBModel.Store.Update_Volunteer" />
+    <FunctionImportMapping FunctionImportName="ResetHours" FunctionName="VolunteersDBModel.Store.ResetHours" />
+    <FunctionImportMapping FunctionImportName="TodaysVolunteers" FunctionName="VolunteersDBModel.Store.TodaysVolunteers" />
     <AssociationSetMapping Name="VolunteerEventInstance" TypeName="VolunteersDBModel.VolunteerEventInstance" StoreEntitySet="VolunteerEventInstance">
       <EndProperty Name="Volunteer">
         <ScalarProperty Name="ID" ColumnName="VolunteerID" />
@@ -43,9 +47,5 @@
         <ScalarProperty Name="EventID" ColumnName="EventID" />
       </EndProperty>
     </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="Insert_Event" FunctionName="VolunteersDBModel.Store.Insert_Event" />
-    <FunctionImportMapping FunctionImportName="Update_Volunteer" FunctionName="VolunteersDBModel.Store.Update_Volunteer" />
-    <FunctionImportMapping FunctionImportName="ResetHours" FunctionName="VolunteersDBModel.Store.ResetHours" />
-    <FunctionImportMapping FunctionImportName="TodaysVolunteers" FunctionName="VolunteersDBModel.Store.TodaysVolunteers" />
   </EntityContainerMapping>
 </Mapping>

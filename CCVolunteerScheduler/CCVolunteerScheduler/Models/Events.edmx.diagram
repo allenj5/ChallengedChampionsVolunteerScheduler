@@ -6,6 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="5b92b72d2a3948eda3cf8b6ddb6e3579" Name="Diagram1">
         <EntityTypeShape EntityType="EventDBModel.Event" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventDBModel.Volunteer" Width="1.5" PointX="3" PointY="6.25" />
+        <AssociationConnector Association="EventDBModel.VolunteerEventInstance" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
