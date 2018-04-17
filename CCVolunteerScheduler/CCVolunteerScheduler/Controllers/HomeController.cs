@@ -135,9 +135,8 @@ namespace CCVolunteerScheduler.Controllers
 
         public ActionResult AdminEventsForDay(string day)
         {
-            EventDBEntities _db = new EventDBEntities();
-            var EventList = _db.Events.ToList();
-            var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
+            EventsPerDayWithNumVolunteerEntities _db = new EventsPerDayWithNumVolunteerEntities();
+            var Model = _db.GetEventsForDay(DateTime.Parse(day));
             return PartialView(Model);
         }
 
@@ -466,9 +465,8 @@ namespace CCVolunteerScheduler.Controllers
         }
         public ActionResult VolunteerGetEventsForDay(string day)
         {
-            EventDBEntities _db = new EventDBEntities();
-            var EventList = _db.Events.ToList();
-            var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
+            EventsPerDayWithNumVolunteerEntities _db = new EventsPerDayWithNumVolunteerEntities();
+            var Model = _db.GetEventsForDay(DateTime.Parse(day));
             return PartialView("VolunteerEventsForDay", Model);
         }
         public ActionResult ScheduleVolunteer(int id)

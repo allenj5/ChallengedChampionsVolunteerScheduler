@@ -227,6 +227,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Events.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\EventsPerDayWithNumVolunteers.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventsPerDayWithNumVolunteers.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventsPerDayWithNumVolunteers.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventsPerDayWithNumVolunteers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventsPerDayWithNumVolunteers.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventsPerDayWithNumVolunteers.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetEventsForDay_Result.cs">
+      <DependentUpon>EventsPerDayWithNumVolunteers.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HashingSaltModel.cs" />
     <Compile Include="Models\ScheduleVolunteer.Context.cs">
       <AutoGen>True</AutoGen>
@@ -406,6 +424,16 @@
       <DependentUpon>Events.edmx</DependentUpon>
       <LastGenOutput>Events.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\EventsPerDayWithNumVolunteers.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EventsPerDayWithNumVolunteers.edmx</DependentUpon>
+      <LastGenOutput>EventsPerDayWithNumVolunteers.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EventsPerDayWithNumVolunteers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EventsPerDayWithNumVolunteers.edmx</DependentUpon>
+      <LastGenOutput>EventsPerDayWithNumVolunteers.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\ScheduleVolunteer.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ScheduleVolunteer.edmx</DependentUpon>
@@ -497,6 +525,13 @@
     </EntityDeploy>
     <Content Include="Models\ToggleAutoRemind.edmx.diagram">
       <DependentUpon>ToggleAutoRemind.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\EventsPerDayWithNumVolunteers.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EventsPerDayWithNumVolunteers.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EventsPerDayWithNumVolunteers.edmx.diagram">
+      <DependentUpon>EventsPerDayWithNumVolunteers.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Models\Volunteers.Context.tt">

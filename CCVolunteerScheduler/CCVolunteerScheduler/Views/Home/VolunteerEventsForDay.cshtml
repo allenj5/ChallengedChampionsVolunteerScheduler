@@ -5,7 +5,8 @@
         <div class="eventDetails hide" id="@("event" + item.EventID)">
             <p>@Html.Encode(item.EventDescription)</p>
             @if(item.EventDate >= DateTime.Now){
-            <button class="btn btn-info" onclick="ScheduleVolunteer(@item.EventID)">Sign Up</button>
+                <p>Open Spots: @Html.Encode(item.MaxVolunteers - item.NumVolunteers) / @Html.Encode(item.MaxVolunteers)</p>
+                <button class="btn btn-info" onclick="ScheduleVolunteer(@item.EventID)">Sign Up</button>
             }
         </div>
     </div>
