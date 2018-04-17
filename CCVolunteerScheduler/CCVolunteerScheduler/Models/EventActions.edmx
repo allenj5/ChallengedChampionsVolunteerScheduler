@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EventSPModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EventSPModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="EventSPModelStoreContainer" />
         <Function Name="Delete_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="int" Mode="In" />
@@ -15,6 +15,7 @@
           <Parameter Name="Event_Date" Type="date" Mode="In" />
           <Parameter Name="Start_Time" Type="time" Mode="In" />
           <Parameter Name="End_Time" Type="time" Mode="In" />
+          <Parameter Name="Max_Volunteers" Type="int" Mode="In" />
         </Function>
         <Function Name="Update_Event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="int" Mode="In" />
@@ -23,15 +24,15 @@
           <Parameter Name="Date" Type="date" Mode="In" />
           <Parameter Name="Start" Type="time" Mode="In" />
           <Parameter Name="End" Type="time" Mode="In" />
+          <Parameter Name="Max_Volunteers" Type="int" Mode="In" />
         </Function>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EventSPModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="EventSPEntities" p1:LazyLoadingEnabled="true" >
           <FunctionImport Name="Delete_Event">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Insert_Event">
             <Parameter Name="Event_Title" Mode="In" Type="String" />
@@ -39,6 +40,7 @@
             <Parameter Name="Event_Date" Mode="In" Type="DateTime" />
             <Parameter Name="Start_Time" Mode="In" Type="Time" />
             <Parameter Name="End_Time" Mode="In" Type="Time" />
+            <Parameter Name="Max_Volunteers" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Update_Event">
             <Parameter Name="ID" Mode="In" Type="Int32" />
@@ -47,6 +49,7 @@
             <Parameter Name="Date" Mode="In" Type="DateTime" />
             <Parameter Name="Start" Mode="In" Type="Time" />
             <Parameter Name="End" Mode="In" Type="Time" />
+            <Parameter Name="Max_Volunteers" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
       </Schema>

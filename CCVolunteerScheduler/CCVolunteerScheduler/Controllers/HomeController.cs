@@ -135,9 +135,8 @@ namespace CCVolunteerScheduler.Controllers
 
         public ActionResult AdminEventsForDay(string day)
         {
-            EventDBEntities _db = new EventDBEntities();
-            var EventList = _db.Events.ToList();
-            var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
+            EventsPerDayWithNumVolunteerEntities _db = new EventsPerDayWithNumVolunteerEntities();
+            var Model = _db.GetEventsForDay(DateTime.Parse(day));
             return PartialView(Model);
         }
 
@@ -148,14 +147,32 @@ namespace CCVolunteerScheduler.Controllers
             var Model = volunteerList.Where(x => x.EventID == id).FirstOrDefault();
             return PartialView("CopyEventPartial", Model);
         }
-        public ActionResult AddEvent(string title, string description, string date, string start, string end){
+        public ActionResult SeeVolunteersSignedUp(int eventID)
+        {
+            VolunteersDBEntities _db = new VolunteersDBEntities();
+            var volunteerList = _db.VolunteersSignedUp(eventID);
+            if (volunteerList.FirstOrDefault().FirstName == null)
+            {
+                throw new Exception();
+            }
+
+            Models.AdminCalVolunteerPerEventPartialModel Model = new Models.AdminCalVolunteerPerEventPartialModel
+            {
+                event_ID = eventID,
+                volunteers = volunteerList
+            };
+
+            return PartialView("AdminCalVolunteerPerEventPartial", Model);
+        }
+        public ActionResult AddEvent(string title, string description, string date, string start, string end, string maxVolunteers){
 
             DateTime myDate = DateTime.Parse(date);
             TimeSpan myStart = TimeSpan.Parse(start);
             TimeSpan myEnd = TimeSpan.Parse(end);
+            int numVolunteers = Int32.Parse(maxVolunteers);
 
             EventSPEntities x = new EventSPEntities();
-            x.Insert_Event(title, description, myDate, myStart, myEnd);
+            x.Insert_Event(title, description, myDate, myStart, myEnd, numVolunteers);
 
             return new EmptyResult();
         }
@@ -163,24 +180,34 @@ namespace CCVolunteerScheduler.Controllers
         public ActionResult DeleteEvent(int id)
         {
             EventDBEntities _db = new EventDBEntities();
-            var Model = _db.Events.Where(e => e.EventID == id).FirstOrDefault();
-            //Set admin id here
-            SendEmail("aldaghiria@findlay.edu", Model.EventTitle + " Deleted", "Your event has been deleted");
+            Models.Event myEvent = (Models.Event)_db.Events.Where(y => y.EventID == id).FirstOrDefault();
 
+            if (myEvent.EventDate >= DateTime.Now && myEvent.Volunteers != null)
+            {
+                var volunteers = myEvent.Volunteers.ToList();
+
+                foreach (var volunteer in volunteers)
+                {
+                    AdminUnScheduleVolunteer((int)volunteer.ID, id);
+                }
+            }
+
+            //have to do this AFTER emailing volunteers
             EventSPEntities x = new EventSPEntities();
             x.Delete_Event(id);
 
             return new EmptyResult();
         }
 
-        public ActionResult UpdateEvent(int id, string title, string description, string date, string start, string end)
+        public ActionResult UpdateEvent(int id, string title, string description, string date, string start, string end, string maxVolunteers)
         {
             DateTime myDate = DateTime.Parse(date);
             TimeSpan myStart = TimeSpan.Parse(start);
             TimeSpan myEnd = TimeSpan.Parse(end);
+            int numVolunteers = Int32.Parse(maxVolunteers);
 
             EventSPEntities x = new EventSPEntities();
-            x.Update_Event(id, title, description, myDate, myStart, myEnd);
+            x.Update_Event(id, title, description, myDate, myStart, myEnd, numVolunteers);
 
             return new EmptyResult();
         }
@@ -205,40 +232,6 @@ namespace CCVolunteerScheduler.Controllers
             return View();
         }
 
-        [HttpPost]
-        public JsonResult Communications(int EmailFlag, string subject, string message)
-        {
-            int counter = 0;
-            using (VolunteersDBEntities _db = new VolunteersDBEntities())
-            {
-                List<Volunteer> volunteerList = new List<Volunteer>();
-                if (EmailFlag == 1)
-                {
-                    volunteerList = _db.Volunteers.Where(v => v.Position == "Walker                   ").ToList();
-                }
-                else if (EmailFlag == 2)
-                {
-                    var currentDate = DateTime.Now.Date;
-                    IQueryable<Event> eventList = _db.Events.Where(v => v.EventDate == currentDate);
-                    foreach (var e in eventList)
-                    {
-                        Volunteer v = e.Volunteers.FirstOrDefault();
-                        if (v != null)
-                        {
-                            volunteerList.Add(v);
-                        }
-                    }
-                }
-
-                foreach (Volunteer v in volunteerList)
-                {
-                    SendEmail(v.Email, subject, message);
-                    counter++;
-                }
-            }
-
-            return Json(counter);
-        }
         public ActionResult ManageAccount()
         {
             VolunteersDBEntities _db = new VolunteersDBEntities();
@@ -350,17 +343,39 @@ namespace CCVolunteerScheduler.Controllers
             var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
             return PartialView("MyScheduleEventsPerDay", Model);
         }
+
+        
         public ActionResult UnScheduleVolunteer(int id)
         {
-            EventDBEntities _db = new EventDBEntities();
-            var Model = _db.Events.Where(e => e.EventID == id).FirstOrDefault();
-            Volunteer v =  Model.Volunteers.FirstOrDefault();
-
-            //Set admin id here
-            SendEmail("aldaghiria@findlay.edu", Model.EventTitle + " Decommitted", v.FirstName.Trim() + " " + v.LastName.Trim() + " has decommitted from their " + Model.EventDate.DayOfWeek + " " + Model.EventDate.ToLongDateString() +" event");
-
             ScheduleVolunteerDBEntities x = new ScheduleVolunteerDBEntities();
             x.unSchedule_Volunteer(Convert.ToInt32(currentUser), id);     //we need to revisit inconsistencies in DB with bigint / int for id column datatypes
+            return new EmptyResult();
+        }
+
+        public ActionResult AdminUnScheduleVolunteer(int volunteerID, int eventID)
+        {
+            ScheduleVolunteerDBEntities x = new ScheduleVolunteerDBEntities();
+            x.unSchedule_Volunteer(volunteerID, eventID);
+
+            EventDBEntities _Edb = new EventDBEntities();
+            var events = _Edb.Events.ToList();
+            Models.Event myEvent = (Models.Event)(events.Where(y => y.EventID == eventID).FirstOrDefault());
+
+            VolunteersDBEntities _Vdb = new VolunteersDBEntities();
+            var volunteers = _Vdb.Volunteers.ToList();
+            Models.Volunteer myVolunteer = (Models.Volunteer)(volunteers.Where(z => z.ID == volunteerID).FirstOrDefault());
+
+            //notify volunteer of schedule change
+            SmtpClient client = new SmtpClient();
+            MailMessage notifyVolunteer = new MailMessage();
+            notifyVolunteer.Subject = "You have been unscheduled from an event at the Challenged Champions Equestrian Center";
+            notifyVolunteer.Body = "This is an automated message informing you that an administrator has unscheduled you from the following event: "
+                + myEvent.EventTitle + " on " + myEvent.EventDate.ToString("MM-dd-yyyy")
+             + ". Please check the \"My Schedule\" portion of the volunteer website to review your schedule.";
+            notifyVolunteer.To.Add(myVolunteer.Email);
+
+            client.Send(notifyVolunteer);
+
             return new EmptyResult();
         }
 
@@ -450,9 +465,8 @@ namespace CCVolunteerScheduler.Controllers
         }
         public ActionResult VolunteerGetEventsForDay(string day)
         {
-            EventDBEntities _db = new EventDBEntities();
-            var EventList = _db.Events.ToList();
-            var Model = EventList.Where(x => x.EventDate.ToString("yyyy-MM-dd") == day);
+            EventsPerDayWithNumVolunteerEntities _db = new EventsPerDayWithNumVolunteerEntities();
+            var Model = _db.GetEventsForDay(DateTime.Parse(day));
             return PartialView("VolunteerEventsForDay", Model);
         }
         public ActionResult ScheduleVolunteer(int id)
@@ -584,49 +598,6 @@ namespace CCVolunteerScheduler.Controllers
 
             //return position == "type1" || position == "type2" || position == "type3" || position == "type4";
             return true;
-        }
-
-        public ActionResult AutoReminder()
-        {
-            DateTime today = DateTime.Now;
-
-            //Instantiate and create a new email message
-            SmtpClient client = new SmtpClient();
-            MailMessage autoReminder = new MailMessage();
-            autoReminder.From = new MailAddress("challengedchampions@yahoo.com");
-            autoReminder.Subject = "Automatic Reminder: Your event today at Challenged Champions Equestrian Center";
-            autoReminder.Body = "This is an automated message reminding you that you've signed up for an event today. Please check the \"My Schedule\" portion of the volunteer website for more information about this event.";
-
-            VolunteersDBEntities _db = new VolunteersDBEntities();
-            
-            foreach(string email in _db.TodaysVolunteers(today))
-            {
-                autoReminder.To.Add(email);
-            }
-
-            return new EmptyResult();
-        }
-
-        private bool SendEmail(string To, string Subject, string Message)
-        {
-            try
-            {
-                var smtp = new SmtpClient();
-                var credential = (System.Net.NetworkCredential)smtp.Credentials;
-                using (var message = new MailMessage(credential.UserName.ToString(), To)
-                {
-                    Subject = Subject,
-                    Body = Message
-                })
-                {
-                    smtp.Send(message);
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
         }
     }
 }

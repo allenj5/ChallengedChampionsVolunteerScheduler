@@ -161,7 +161,7 @@
         for (var i = 1; i < 10; i++) {
             getEvents("0" + i);
         }
-        for(var i = 10; i < 32; i++ ){
+        for (var i = 10; i < @DateTime.DaysInMonth(Model.StartDate.Year, Model.StartDate.Month) +1; i++) {
             getEvents(i);
         }
     }
@@ -174,7 +174,7 @@
     }
 </script>
 
-<script>
+<script type="text/javascript">
     function UnScheduleVolunteer(eventID) {
         jQuery.noConflict();
         (function ($) {
