@@ -182,7 +182,7 @@ namespace CCVolunteerScheduler.Controllers
             EventDBEntities _db = new EventDBEntities();
             Models.Event myEvent = (Models.Event)_db.Events.Where(y => y.EventID == id).FirstOrDefault();
 
-            if (myEvent.Volunteers != null)
+            if (myEvent.EventDate >= DateTime.Now && myEvent.Volunteers != null)
             {
                 var volunteers = myEvent.Volunteers.ToList();
 
