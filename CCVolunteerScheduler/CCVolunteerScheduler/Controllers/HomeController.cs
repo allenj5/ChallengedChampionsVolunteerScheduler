@@ -165,15 +165,30 @@ namespace CCVolunteerScheduler.Controllers
             return PartialView("AdminCalVolunteerPerEventPartial", Model);
         }
         public ActionResult AddEvent(string title, string description, string date, string start, string end, string maxVolunteers){
+            if (true)
+            {
+                try
+                {
+                    DateTime myDate = DateTime.Parse(date);
+                    TimeSpan myStart = TimeSpan.Parse(start);
+                    TimeSpan myEnd = TimeSpan.Parse(end);
+                    int numVolunteers = Int32.Parse(maxVolunteers);
 
-            DateTime myDate = DateTime.Parse(date);
-            TimeSpan myStart = TimeSpan.Parse(start);
-            TimeSpan myEnd = TimeSpan.Parse(end);
-            int numVolunteers = Int32.Parse(maxVolunteers);
-
-            EventSPEntities x = new EventSPEntities();
-            x.Insert_Event(title, description, myDate, myStart, myEnd, numVolunteers);
-
+                    if (NameValidation(title) && DescriptionValidation(description))
+                    {
+                        EventSPEntities x = new EventSPEntities();
+                        x.Insert_Event(title, description, myDate, myStart, myEnd, numVolunteers);
+                    }
+                    else
+                    {
+                        return Json(new { status = "error", message = "Make sure Title is less than 20 characters and Description is less than 50 characters" });
+                    }
+                }
+                catch
+                {
+                    return Json(new { status = "error", message = "invalid information entered" });
+                }
+            }
             return new EmptyResult();
         }
 
@@ -201,13 +216,27 @@ namespace CCVolunteerScheduler.Controllers
 
         public ActionResult UpdateEvent(int id, string title, string description, string date, string start, string end, string maxVolunteers)
         {
-            DateTime myDate = DateTime.Parse(date);
-            TimeSpan myStart = TimeSpan.Parse(start);
-            TimeSpan myEnd = TimeSpan.Parse(end);
-            int numVolunteers = Int32.Parse(maxVolunteers);
+            try
+            {
+                DateTime myDate = DateTime.Parse(date);
+                TimeSpan myStart = TimeSpan.Parse(start);
+                TimeSpan myEnd = TimeSpan.Parse(end);
+                int numVolunteers = Int32.Parse(maxVolunteers);
 
-            EventSPEntities x = new EventSPEntities();
-            x.Update_Event(id, title, description, myDate, myStart, myEnd, numVolunteers);
+                if (NameValidation(title) && DescriptionValidation(description))
+                {
+                    EventSPEntities x = new EventSPEntities();
+                    x.Update_Event(id, title, description, myDate, myStart, myEnd, numVolunteers);
+                }
+                else
+                {
+                    return Json(new { status = "error", message = "invalid information entered" });
+                }
+            }
+            catch
+            {
+                return Json(new { status = "error", message = "invalid information entered" });
+            }
 
             return new EmptyResult();
         }
@@ -518,20 +547,27 @@ namespace CCVolunteerScheduler.Controllers
 
         public ActionResult AddVolunteer(string firstName, string lastName, string phone, string email, string position)
         {
-            var Hashing = new LoginController();
+            if (NameValidation(firstName) && NameValidation(lastName) && PhoneValidation(phone) && EmailValidation(email) && NameValidation(position))
+            {
+                var Hashing = new LoginController();
 
-            int hoursWorked = 0;
-            string password = Hashing.HashPassword("ChalChampVolunteer"); //should change this
+                int hoursWorked = 0;
+                string password = Hashing.HashPassword("ChalChampVolunteer"); //should change this
 
-            AddVolunteerEntities x = new AddVolunteerEntities();
-            x.Insert_Volunteer(firstName, lastName, phone, email, hoursWorked, password, position);
+                AddVolunteerEntities x = new AddVolunteerEntities();
+                x.Insert_Volunteer(firstName, lastName, phone, email, hoursWorked, password, position);
 
-            return new EmptyResult();
+                return new EmptyResult();
+            }
+            else
+            {
+                return new EmptyResult();
+            }
         }
         public ActionResult UpdateVolunteer(string id, string firstName, string lastName, string phone, string email, string active, string hoursWorked, string position)
         {
 
-            if (NumberValidation(id) && NameValidation(firstName) && NameValidation(lastName) && PhoneValidation(phone) && EmailValidation(email) && NumberValidation(hoursWorked) && PositionValidation(position))
+            if (NumberValidation(id) && NameValidation(firstName) && NameValidation(lastName) && PhoneValidation(phone) && EmailValidation(email) && NumberValidation(hoursWorked) && NameValidation(position))
             {
                 int myID = Int32.Parse(id);
                 int myHoursWorked = Int32.Parse(hoursWorked);
@@ -573,6 +609,12 @@ namespace CCVolunteerScheduler.Controllers
             return nameRegex.IsMatch(name) && !name.Contains("' ") && name.Length < 20;
         }
 
+        bool DescriptionValidation(string name)
+        {
+            var nameRegex = new Regex("^[a-zA-Z0-9 ']*$");
+            return nameRegex.IsMatch(name) && !name.Contains("' ") && name.Length < 50;
+        }
+
         bool PhoneValidation(string phone)
         {
             int n;
@@ -590,14 +632,6 @@ namespace CCVolunteerScheduler.Controllers
             {
                 return false;
             }
-        }
-
-        bool PositionValidation(string position)
-        {
-
-
-            //return position == "type1" || position == "type2" || position == "type3" || position == "type4";
-            return true;
         }
     }
 }

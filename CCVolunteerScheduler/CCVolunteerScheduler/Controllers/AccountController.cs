@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
@@ -63,14 +64,16 @@ namespace CCVolunteerScheduler.Controllers
             {
                 using (VolunteersDBEntities db = new VolunteersDBEntities())
                 {
-
-                    Volunteer forgetUser = db.Volunteers.FirstOrDefault(u => u.Email == model.Email);
-                    if (forgetUser != null)
+                    if (EmailValidation(model.Email))
                     {
-                        forgetUser.GUID = Guid.NewGuid().ToString();
-                        db.SaveChanges();
-                        SendEmail(forgetUser.Email, "Reset Password", "Your reset password link is http://" + Request.Url.Authority + "/Account/ResetPassword?code=" + forgetUser.GUID);
-                        return View("ForgotPasswordConfirmation");
+                        Volunteer forgetUser = db.Volunteers.FirstOrDefault(u => u.Email == model.Email);
+                        if (forgetUser != null)
+                        {
+                            forgetUser.GUID = Guid.NewGuid().ToString();
+                            db.SaveChanges();
+                            SendEmail(forgetUser.Email, "Reset Password", "Your reset password link is http://" + Request.Url.Authority + "/Account/ResetPassword?code=" + forgetUser.GUID);
+                            return View("ForgotPasswordConfirmation");
+                        }
                     }
                 }
             }
@@ -90,14 +93,18 @@ namespace CCVolunteerScheduler.Controllers
         {
             using (VolunteersDBEntities db = new VolunteersDBEntities())
             {
-                string hashPassword = HashPassword(model.Password);
-                Volunteer currentUser = db.Volunteers.FirstOrDefault(u => u.Email == User.Identity.Name && u.Password == hashPassword);
-                if (currentUser != null)
+                if (EmailValidation(model.Email) && PasswordValidation(model.Password))
                 {
-                    currentUser.Email = model.Email;
-                    db.SaveChanges();
-                    FormsAuthentication.SetAuthCookie(currentUser.Email, true);
-                    return View("ChangeEmailConfirmation");
+
+                    string hashPassword = HashPassword(model.Password);
+                    Volunteer currentUser = db.Volunteers.FirstOrDefault(u => u.Email == User.Identity.Name && u.Password == hashPassword);
+                    if (currentUser != null)
+                    {
+                        currentUser.Email = model.Email;
+                        db.SaveChanges();
+                        FormsAuthentication.SetAuthCookie(currentUser.Email, true);
+                        return View("ChangeEmailConfirmation");
+                    }
                 }
             }
             return View();
@@ -116,13 +123,16 @@ namespace CCVolunteerScheduler.Controllers
         {
             using (VolunteersDBEntities db = new VolunteersDBEntities())
             {
-                string hashPassword = HashPassword(model.OldPassword);
-                Volunteer currentUser = db.Volunteers.FirstOrDefault(u => u.Email == User.Identity.Name && u.Password == hashPassword);
-                if (currentUser != null)
+                if (PasswordValidation(model.OldPassword) && PasswordValidation(model.NewPassword) && PasswordValidation(model.ConfirmNewPassword))
                 {
-                    currentUser.Password = HashPassword(model.NewPassword);
-                    db.SaveChanges();
-                    return View("ChangePasswordConfirmation");
+                    string hashPassword = HashPassword(model.OldPassword);
+                    Volunteer currentUser = db.Volunteers.FirstOrDefault(u => u.Email == User.Identity.Name && u.Password == hashPassword);
+                    if (currentUser != null)
+                    {
+                        currentUser.Password = HashPassword(model.NewPassword);
+                        db.SaveChanges();
+                        return View("ChangePasswordConfirmation");
+                    }
                 }
             }
             return View();
@@ -171,12 +181,15 @@ namespace CCVolunteerScheduler.Controllers
         {
             using (VolunteersDBEntities db = new VolunteersDBEntities())
             {
-                Volunteer currentUser = db.Volunteers.FirstOrDefault(u => u.Email == User.Identity.Name);
-                if (currentUser != null)
+                if (PhoneValidation(model.Phone))
                 {
-                    currentUser.Phone = model.Phone;
-                    db.SaveChanges();
-                    return View("ChangePhoneConfirmation");
+                    Volunteer currentUser = db.Volunteers.FirstOrDefault(u => u.Email == User.Identity.Name);
+                    if (currentUser != null)
+                    {
+                        currentUser.Phone = model.Phone;
+                        db.SaveChanges();
+                        return View("ChangePhoneConfirmation");
+                    }
                 }
             }
             return View();
@@ -482,6 +495,28 @@ namespace CCVolunteerScheduler.Controllers
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
 
+
+        bool EmailValidation(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        bool PasswordValidation(string password)
+        {
+            var hasMinimum8Chars = new Regex(@".{8,15}");
+
+            return hasMinimum8Chars.IsMatch(password) && !password.Contains("' ");
+            
+        }
+
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
         {
@@ -500,6 +535,12 @@ namespace CCVolunteerScheduler.Controllers
             ChangePasswordSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
+        }
+
+        bool PhoneValidation(string phone)
+        {
+            int n;
+            return int.TryParse(phone, out n) && phone.Length == 10;
         }
 
         internal class ExternalLoginResult : ActionResult
@@ -592,4 +633,6 @@ namespace CCVolunteerScheduler.Controllers
         }
         #endregion
     }
+
+
 }

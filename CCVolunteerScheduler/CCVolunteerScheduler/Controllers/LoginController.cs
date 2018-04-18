@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Net.Mail;
 using System.Web.Mvc;
@@ -28,36 +29,44 @@ namespace CCVolunteerScheduler.Controllers
         {
             VolunteersDBEntities _db = new VolunteersDBEntities();
 
-            //if (EmailValidation(user.Email), PasswordValidation(user.Password))
-            //ComputeHash code here to check with the database
-            var salt = new Byte[16];
-            string hashedPassword = HashPassword(user.Password);
-            Volunteer currentUser = _db.Volunteers.FirstOrDefault(v => v.Email == user.Email);
-            long currentUserId = 0;
-            if (currentUser != null)
+            if (EmailValidation(user.Email) && PasswordValidation(user.Password))
             {
-                currentUserId = currentUser.ID;
-            }
-            string userId = _db.ValidateUser(currentUserId, hashedPassword).FirstOrDefault();
+                //if (EmailValidation(user.Email), PasswordValidation(user.Password))
+                //ComputeHash code here to check with the database
+                var salt = new Byte[16];
+                string hashedPassword = HashPassword(user.Password);
+                Volunteer currentUser = _db.Volunteers.FirstOrDefault(v => v.Email == user.Email);
+                long currentUserId = 0;
+                if (currentUser != null)
+                {
+                    currentUserId = currentUser.ID;
+                }
+                string userId = _db.ValidateUser(currentUserId, hashedPassword).FirstOrDefault();
 
-            string message = string.Empty;
+                string message = string.Empty;
 
-            if (userId == "false")
-            {
-                message = "Username and/or password is incorrect.";
+                if (userId == "false")
+                {
+                    message = "Username and/or password is incorrect.";
+                }
+                else
+                {
+                    FormsAuthentication.SetAuthCookie(user.Email, true);
+                    string adminUser = _db.Check_Admin((int)currentUserId).FirstOrDefault();
+
+                    if (adminUser == "true")
+                        return RedirectToAction("AdminHome", "Home", new { id = currentUserId });
+                    else
+                        return RedirectToAction("MySchedule", "Home", new { id = currentUserId });
+                }
+
+                ViewBag.Message = message;
             }
             else
             {
-                FormsAuthentication.SetAuthCookie(user.Email, true);
-                string adminUser = _db.Check_Admin((int)currentUserId).FirstOrDefault();
-
-                if (adminUser == "true")
-                    return RedirectToAction("AdminHome", "Home", new { id = currentUserId });
-                else
-                    return RedirectToAction("MySchedule", "Home", new { id = currentUserId });
+                string message = "Username and/or password is incorrect.";
+                ViewBag.Message = message;
             }
-
-            ViewBag.Message = message;
             return View(user);
         }
         public string HashPassword(string Password)
@@ -71,6 +80,27 @@ namespace CCVolunteerScheduler.Controllers
             var hashedPassword = BitConverter.ToString(hashBytePassword);
 
             return hashedPassword;
+        }
+
+        bool EmailValidation(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        bool PasswordValidation(string password)
+        {
+            var hasMinimum8Chars = new Regex(@".{8,15}");
+
+            return hasMinimum8Chars.IsMatch(password) && !password.Contains("' ");
+
         }
 
         public ActionResult PDYfkXYuBGyPhWgzDhBQsRnUkQjZKAtC()
