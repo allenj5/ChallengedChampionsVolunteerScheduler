@@ -14,6 +14,10 @@
     </FunctionImport>
     <EntitySet Name="Events" EntityType="VolunteersDBModel.Event" />
     <EntitySet Name="Volunteers" EntityType="VolunteersDBModel.Volunteer" />
+    <AssociationSet Name="VolunteerEventInstance" Association="VolunteersDBModel.VolunteerEventInstance">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="Volunteer" EntitySet="Volunteers" />
+    </AssociationSet>
     <FunctionImport Name="Insert_Event">
       <Parameter Name="Event_Title" Mode="In" Type="String" />
       <Parameter Name="Event_Description" Mode="In" Type="String" />
@@ -36,10 +40,9 @@
     <FunctionImport Name="TodaysVolunteers" IsComposable="true" ReturnType="Collection(String)">
       <Parameter Name="Day" Mode="In" Type="DateTime" />
     </FunctionImport>
-    <AssociationSet Name="VolunteerEventInstance" Association="VolunteersDBModel.VolunteerEventInstance">
-      <End Role="Event" EntitySet="Events" />
-      <End Role="Volunteer" EntitySet="Volunteers" />
-    </AssociationSet>
+    <FunctionImport Name="VolunteersSignedUp" IsComposable="true" ReturnType="Collection(VolunteersDBModel.VolunteersSignedUp_Result)">
+      <Parameter Name="EventID" Mode="In" Type="Int64" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Event">
     <Key>
@@ -51,8 +54,8 @@
     <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
     <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
-    <Property Name="MaxVolunteers" Type="Int32" />
     <NavigationProperty Name="Volunteers" Relationship="VolunteersDBModel.VolunteerEventInstance" FromRole="Event" ToRole="Volunteer" />
+    <Property Name="MaxVolunteers" Type="Int32" />
   </EntityType>
   <EntityType Name="Volunteer">
     <Key>
@@ -69,11 +72,25 @@
     <Property Name="isAdmin" Type="Boolean" />
     <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Position" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
-    <Property Name="GUID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Events" Relationship="VolunteersDBModel.VolunteerEventInstance" FromRole="Volunteer" ToRole="Event" />
+    <Property Name="GUID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="VolunteerEventInstance">
     <End Type="VolunteersDBModel.Event" Role="Event" Multiplicity="*" />
     <End Type="VolunteersDBModel.Volunteer" Role="Volunteer" Multiplicity="*" />
   </Association>
+  <ComplexType Name="VolunteersSignedUp_Result">
+    <Property Type="Int64" Name="ID" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+    <Property Type="Boolean" Name="Active" Nullable="true" />
+    <Property Type="Int64" Name="HoursWorked" Nullable="true" />
+    <Property Type="Boolean" Name="EmailOptOut" Nullable="true" />
+    <Property Type="Boolean" Name="isAdmin" Nullable="true" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Position" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="GUID" Nullable="true" MaxLength="200" />
+  </ComplexType>
 </Schema>

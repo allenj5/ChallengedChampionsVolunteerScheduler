@@ -123,6 +123,7 @@
         </table>
     </div>
     <br />
+    <p>To view events from different months, use the buttons at the top of the page.</p>
     @if (Model.StartDate.Month == DateTime.Now.Month && Model.StartDate.Year == DateTime.Now.Year)
     {
         <script>document.getElementById("@("date" + DateTime.Today.ToString("dd"))").classList = "calendar-day cell-active";</script>
@@ -161,7 +162,7 @@
         for (var i = 1; i < 10; i++) {
             getEvents("0" + i);
         }
-        for(var i = 10; i < 32; i++ ){
+        for (var i = 10; i < @DateTime.DaysInMonth(Model.StartDate.Year, Model.StartDate.Month) +1; i++) {
             getEvents(i);
         }
     }
@@ -174,7 +175,7 @@
     }
 </script>
 
-<script>
+<script type="text/javascript">
     function UnScheduleVolunteer(eventID) {
         jQuery.noConflict();
         (function ($) {

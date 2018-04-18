@@ -10,6 +10,7 @@
       <Parameter Name="Event_Date" Mode="In" Type="DateTime" />
       <Parameter Name="Start_Time" Mode="In" Type="Time" />
       <Parameter Name="End_Time" Mode="In" Type="Time" />
+      <Parameter Name="Max_Volunteers" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="Update_Event">
       <Parameter Name="ID" Mode="In" Type="Int32" />
@@ -18,6 +19,7 @@
       <Parameter Name="Date" Mode="In" Type="DateTime" />
       <Parameter Name="Start" Mode="In" Type="Time" />
       <Parameter Name="End" Mode="In" Type="Time" />
+      <Parameter Name="Max_Volunteers" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
 </Schema>

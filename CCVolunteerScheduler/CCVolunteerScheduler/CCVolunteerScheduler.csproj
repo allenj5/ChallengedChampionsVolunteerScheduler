@@ -191,6 +191,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AddVolunteer.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminCalVolunteerPerEventPartialModel.cs" />
     <Compile Include="Models\CalendarModels.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Event.cs">
@@ -225,6 +226,24 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Events.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventsPerDayWithNumVolunteers.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventsPerDayWithNumVolunteers.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventsPerDayWithNumVolunteers.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventsPerDayWithNumVolunteers.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventsPerDayWithNumVolunteers.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventsPerDayWithNumVolunteers.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetEventsForDay_Result.cs">
+      <DependentUpon>EventsPerDayWithNumVolunteers.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HashingSaltModel.cs" />
     <Compile Include="Models\ScheduleVolunteer.Context.cs">
@@ -308,6 +327,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Volunteers.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VolunteersSignedUp_Result.cs">
+      <DependentUpon>Volunteers.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -402,6 +424,16 @@
       <DependentUpon>Events.edmx</DependentUpon>
       <LastGenOutput>Events.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\EventsPerDayWithNumVolunteers.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EventsPerDayWithNumVolunteers.edmx</DependentUpon>
+      <LastGenOutput>EventsPerDayWithNumVolunteers.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EventsPerDayWithNumVolunteers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EventsPerDayWithNumVolunteers.edmx</DependentUpon>
+      <LastGenOutput>EventsPerDayWithNumVolunteers.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\ScheduleVolunteer.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ScheduleVolunteer.edmx</DependentUpon>
@@ -494,6 +526,13 @@
     <Content Include="Models\ToggleAutoRemind.edmx.diagram">
       <DependentUpon>ToggleAutoRemind.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="Models\EventsPerDayWithNumVolunteers.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EventsPerDayWithNumVolunteers.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EventsPerDayWithNumVolunteers.edmx.diagram">
+      <DependentUpon>EventsPerDayWithNumVolunteers.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Models\Volunteers.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -519,7 +558,9 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -583,6 +624,7 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\ChangePhone.cshtml" />
     <Content Include="Views\Home\MyScheduleEventsPerDay.cshtml" />
+    <Content Include="Views\Home\AdminCalVolunteerPerEventPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

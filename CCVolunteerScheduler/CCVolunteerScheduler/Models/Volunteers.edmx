@@ -106,6 +106,27 @@
           <Parameter Name="UserID" Type="bigint" Mode="In" />
           <Parameter Name="Password" Type="text" Mode="In" />
         </Function>
+        <Function Name="VolunteersSignedUp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventID" Type="bigint" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ID" Type="bigint" Nullable="false" />
+                <Property Name="FirstName" Type="char" MaxLength="25" />
+                <Property Name="LastName" Type="char" MaxLength="25" />
+                <Property Name="Phone" Type="char" MaxLength="25" />
+                <Property Name="Email" Type="nvarchar" MaxLength="100" />
+                <Property Name="Active" Type="bit" />
+                <Property Name="HoursWorked" Type="bigint" />
+                <Property Name="EmailOptOut" Type="bit" />
+                <Property Name="isAdmin" Type="bit" />
+                <Property Name="Password" Type="nvarchar" MaxLength="200" />
+                <Property Name="Position" Type="char" MaxLength="25" />
+                <Property Name="GUID" Type="nvarchar" MaxLength="200" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <EntityContainer Name="VolunteersDBModelStoreContainer">
           <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VolunteerEventInstance" EntityType="Self.VolunteerEventInstance" Schema="dbo" store:Type="Tables" />
@@ -137,6 +158,10 @@
           </FunctionImport>
           <EntitySet Name="Events" EntityType="VolunteersDBModel.Event" />
           <EntitySet Name="Volunteers" EntityType="VolunteersDBModel.Volunteer" />
+          <AssociationSet Name="VolunteerEventInstance" Association="VolunteersDBModel.VolunteerEventInstance">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Volunteer" EntitySet="Volunteers" />
+          </AssociationSet>
           <FunctionImport Name="Insert_Event">
             <Parameter Name="Event_Title" Mode="In" Type="String" />
             <Parameter Name="Event_Description" Mode="In" Type="String" />
@@ -159,10 +184,9 @@
           <FunctionImport Name="TodaysVolunteers" IsComposable="true" ReturnType="Collection(String)">
           <Parameter Name="Day" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <AssociationSet Name="VolunteerEventInstance" Association="VolunteersDBModel.VolunteerEventInstance">
-            <End Role="Event" EntitySet="Events" />
-            <End Role="Volunteer" EntitySet="Volunteers" />
-          </AssociationSet>
+          <FunctionImport Name="VolunteersSignedUp" IsComposable="true" ReturnType="Collection(VolunteersDBModel.VolunteersSignedUp_Result)">
+          <Parameter Name="EventID" Mode="In" Type="Int64" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Event">
           <Key>
@@ -174,8 +198,8 @@
           <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
           <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="MaxVolunteers" Type="Int32" />
           <NavigationProperty Name="Volunteers" Relationship="VolunteersDBModel.VolunteerEventInstance" FromRole="Event" ToRole="Volunteer" />
+          <Property Name="MaxVolunteers" Type="Int32" />
         </EntityType>
         <EntityType Name="Volunteer">
           <Key>
@@ -192,13 +216,27 @@
           <Property Name="isAdmin" Type="Boolean" />
           <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Position" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
-          <Property Name="GUID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Events" Relationship="VolunteersDBModel.VolunteerEventInstance" FromRole="Volunteer" ToRole="Event" />
+          <Property Name="GUID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="VolunteerEventInstance">
           <End Type="VolunteersDBModel.Event" Role="Event" Multiplicity="*" />
           <End Type="VolunteersDBModel.Volunteer" Role="Volunteer" Multiplicity="*" />
         </Association>
+        <ComplexType Name="VolunteersSignedUp_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="Int64" Name="HoursWorked" Nullable="true" />
+          <Property Type="Boolean" Name="EmailOptOut" Nullable="true" />
+          <Property Type="Boolean" Name="isAdmin" Nullable="true" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Position" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="GUID" Nullable="true" MaxLength="200" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -239,10 +277,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="Insert_Event" FunctionName="VolunteersDBModel.Store.Insert_Event" />
-          <FunctionImportMapping FunctionImportName="Update_Volunteer" FunctionName="VolunteersDBModel.Store.Update_Volunteer" />
-          <FunctionImportMapping FunctionImportName="ResetHours" FunctionName="VolunteersDBModel.Store.ResetHours" />
-          <FunctionImportMapping FunctionImportName="TodaysVolunteers" FunctionName="VolunteersDBModel.Store.TodaysVolunteers" />
           <AssociationSetMapping Name="VolunteerEventInstance" TypeName="VolunteersDBModel.VolunteerEventInstance" StoreEntitySet="VolunteerEventInstance">
             <EndProperty Name="Volunteer">
               <ScalarProperty Name="ID" ColumnName="VolunteerID" />
@@ -251,6 +285,28 @@
               <ScalarProperty Name="EventID" ColumnName="EventID" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="Insert_Event" FunctionName="VolunteersDBModel.Store.Insert_Event" />
+          <FunctionImportMapping FunctionImportName="Update_Volunteer" FunctionName="VolunteersDBModel.Store.Update_Volunteer" />
+          <FunctionImportMapping FunctionImportName="ResetHours" FunctionName="VolunteersDBModel.Store.ResetHours" />
+          <FunctionImportMapping FunctionImportName="TodaysVolunteers" FunctionName="VolunteersDBModel.Store.TodaysVolunteers" />
+          <FunctionImportMapping FunctionImportName="VolunteersSignedUp" FunctionName="VolunteersDBModel.Store.VolunteersSignedUp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VolunteersDBModel.VolunteersSignedUp_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
+                <ScalarProperty Name="EmailOptOut" ColumnName="EmailOptOut" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
