@@ -143,8 +143,8 @@ namespace CCVolunteerScheduler.Controllers
         public ActionResult GetEventDetail(int id)
         {
             EventDBEntities _db = new EventDBEntities();
-            var volunteerList = _db.Events.ToList();
-            var Model = volunteerList.Where(x => x.EventID == id).FirstOrDefault();
+            var EventList = _db.Events.ToList();
+            var Model = EventList.Where(x => x.EventID == id).FirstOrDefault();
             return PartialView("CopyEventPartial", Model);
         }
         public ActionResult SeeVolunteersSignedUp(int eventID)

@@ -24,11 +24,11 @@
 
             <small id="eventTimeDescCopy" class="form-text text-muted">Please format times as follows: HH:MM (6:00 for 6:00 AM or 18:00 for 6:00 PM)</small>
             <label for="eventStartCopy">Start Time</label>
-            <input type="text" class="form-control" id="eventStartCopy" name="eventStartCopy" value="@Model.StartTime" />
+            <input type="text" class="form-control" id="eventStartCopy" name="eventStartCopy" value="@Model.StartTime.ToString(@"hh\:mm")" />
             <br />
 
             <label for="eventEndCopy">End Time</label>
-            <input type="text" class="form-control" id="eventEndCopy" name="eventEndCopy" value="@Model.EndTime" />
+            <input type="text" class="form-control" id="eventEndCopy" name="eventEndCopy" value="@Model.EndTime.ToString(@"hh\:mm")" />
             <br />
             
             <label for="maxVolCopy">Number of Volunteers Needed</label>
