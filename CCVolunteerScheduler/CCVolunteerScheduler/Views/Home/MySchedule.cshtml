@@ -123,6 +123,7 @@
         </table>
     </div>
     <br />
+    <p>To view events from different months, use the buttons at the top of the page.</p>
     @if (Model.StartDate.Month == DateTime.Now.Month && Model.StartDate.Year == DateTime.Now.Year)
     {
         <script>document.getElementById("@("date" + DateTime.Today.ToString("dd"))").classList = "calendar-day cell-active";</script>
