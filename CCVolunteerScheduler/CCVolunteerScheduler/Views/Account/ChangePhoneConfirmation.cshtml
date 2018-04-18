@@ -21,13 +21,6 @@
                 <li class="nav-item">
                     @Html.ActionLink("Volunteers", "Volunteers", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
                 </li>
-                @if (Request.IsAuthenticated)
-                {
-                    <li class="nav-item"><a href="~/Account/ChangeEmail" class="nav-link">Change Email</a></li>
-                    <li class="nav-item"><a href="~/Account/ChangePassword" class="nav-link">Change Password</a></li>
-                    <li class="nav-item"><a href="~/Account/ForgotPassword" class="nav-link">Forget Password</a></li>
-                    <li class="nav-item"><a href="~/Account/ChangePhone" class="nav-link">Change Phone</a></li>
-                }
             </ul>
         </div>
     </nav>
