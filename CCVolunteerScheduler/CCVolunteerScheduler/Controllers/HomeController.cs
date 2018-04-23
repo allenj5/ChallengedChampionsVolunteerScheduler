@@ -195,6 +195,9 @@ namespace CCVolunteerScheduler.Controllers
         public ActionResult DeleteEvent(int id)
         {
             EventDBEntities _db = new EventDBEntities();
+            var Model = _db.Events.Where(e => e.EventID == id).FirstOrDefault();
+            //Set admin id here
+            SendEmail("aldaghiria@findlay.edu", Model.EventTitle + " Deleted", "Your event has been deleted");
             Models.Event myEvent = (Models.Event)_db.Events.Where(y => y.EventID == id).FirstOrDefault();
 
             if (myEvent.EventDate >= DateTime.Now && myEvent.Volunteers != null)
@@ -259,6 +262,41 @@ namespace CCVolunteerScheduler.Controllers
         {
 
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult Communications(int EmailFlag, string subject, string message)
+        {
+            int counter = 0;
+            using (VolunteersDBEntities _db = new VolunteersDBEntities())
+            {
+                List<Volunteer> volunteerList = new List<Volunteer>();
+                if (EmailFlag == 1)
+                {
+                    volunteerList = _db.Volunteers.Where(v => v.Position == "Walker                   ").ToList();
+                }
+                else if (EmailFlag == 2)
+                {
+                    var currentDate = DateTime.Now.Date;
+                    IQueryable<Event> eventList = _db.Events.Where(v => v.EventDate == currentDate);
+                    foreach (var e in eventList)
+                    {
+                        Volunteer v = e.Volunteers.FirstOrDefault();
+                        if (v != null)
+                        {
+                            volunteerList.Add(v);
+                        }
+                    }
+                }
+
+                foreach (Volunteer v in volunteerList)
+                {
+                    SendEmail(v.Email, subject, message);
+                    counter++;
+                }
+            }
+
+            return Json(counter);
         }
 
         public ActionResult ManageAccount()
@@ -376,6 +414,14 @@ namespace CCVolunteerScheduler.Controllers
         
         public ActionResult UnScheduleVolunteer(int id)
         {
+
+            EventDBEntities _db = new EventDBEntities();
+            var Model = _db.Events.Where(e => e.EventID == id).FirstOrDefault();
+            Volunteer v = Model.Volunteers.FirstOrDefault();
+
+            //Set admin email here
+            SendEmail("aldaghiria@findlay.edu", Model.EventTitle + " Decommitted", v.FirstName.Trim() + " " + v.LastName.Trim() + " has decommitted from the " + Model.EventDate.DayOfWeek + " " + Model.EventDate.ToLongDateString() + " event");
+
             ScheduleVolunteerDBEntities x = new ScheduleVolunteerDBEntities();
             x.unSchedule_Volunteer(Convert.ToInt32(currentUser), id);     //we need to revisit inconsistencies in DB with bigint / int for id column datatypes
             return new EmptyResult();
@@ -536,6 +582,13 @@ namespace CCVolunteerScheduler.Controllers
             return View();
         }
 
+        public ActionResult TextVolunteers()
+        {
+            VolunteersDBEntities _db = new VolunteersDBEntities();
+            ViewData.Model = _db.Volunteers.OrderByDescending(x => x.Active).ThenBy(x => x.Position).ToList();
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Volunteers(int setHoursTo = 0)
         {
@@ -629,6 +682,28 @@ namespace CCVolunteerScheduler.Controllers
                 return addr.Address == email;
             }
             catch
+            {
+                return false;
+            }
+        }
+
+        private bool SendEmail(string To, string Subject, string Message)
+        {
+            try
+            {
+                var smtp = new SmtpClient();
+                var credential = (System.Net.NetworkCredential)smtp.Credentials;
+                using (var message = new MailMessage(credential.UserName.ToString(), To)
+                {
+                    Subject = Subject,
+                    Body = Message
+                })
+                {
+                    smtp.Send(message);
+                    return true;
+                }
+            }
+            catch (Exception ex)
             {
                 return false;
             }

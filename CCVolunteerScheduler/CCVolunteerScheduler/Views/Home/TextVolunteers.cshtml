@@ -1,0 +1,25 @@
+﻿@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "TextVolunteers";
+}
+
+
+<div class="container">
+	<div class="col-xs-12 col-md-12">
+		<center>
+			<h2>Text Volunteers</h2>
+		</center>
+		<form id="form" action=@Url.Action("SendSMS","Texting") method="post">
+			<select multiple="multiple" name="phoneNumbers">
+				@foreach (var item in Model)
+				{
+					<option value=@item.Phone> @Html.Encode(item.FirstName) @Html.Encode(item.LastName) @Html.Encode(item.Position)</option>
+				}
+			</select>
+			<p>Instructions: Hold down the Ctrl key while clicking on each person to select multiple volunteers from the list</p>
+			<textarea name="textMessage" rows="3" cols="20">Enter your text message here</textarea>
+			<input type="submit" value="submit" />
+		</form>
+	</div>
+</div>
+

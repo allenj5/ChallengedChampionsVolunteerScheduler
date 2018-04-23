@@ -282,7 +282,6 @@ C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerSche
 C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\DotNetOpenAuth.OAuth.xml
 C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\DotNetOpenAuth.OpenId.xml
 C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.csprojResolveAssemblyReference.cache
 C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.csproj.CoreCompileInputs.cache
 C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.dll
 C:\Users\Aziz\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.pdb
@@ -406,3 +405,5 @@ C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerS
 C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.csprojResolveAssemblyReference.cache
 C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.dll
 C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.pdb
+C:\Users\Testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.csproj.CoreCompileInputs.cache
+C:\Users\Testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.csproj.CopyComplete
