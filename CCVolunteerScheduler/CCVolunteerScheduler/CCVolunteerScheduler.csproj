@@ -625,6 +625,7 @@
     <Content Include="Views\Account\ChangePhone.cshtml" />
     <Content Include="Views\Home\MyScheduleEventsPerDay.cshtml" />
     <Content Include="Views\Home\AdminCalVolunteerPerEventPartial.cshtml" />
+    <Content Include="Views\Home\TextVolunteers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -582,6 +582,13 @@ namespace CCVolunteerScheduler.Controllers
             return View();
         }
 
+        public ActionResult TextVolunteers()
+        {
+            VolunteersDBEntities _db = new VolunteersDBEntities();
+            ViewData.Model = _db.Volunteers.OrderByDescending(x => x.Active).ThenBy(x => x.Position).ToList();
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Volunteers(int setHoursTo = 0)
         {
