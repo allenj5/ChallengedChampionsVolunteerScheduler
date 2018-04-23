@@ -652,32 +652,37 @@ namespace CCVolunteerScheduler.Controllers
 
         bool NumberValidation(string number)
         {
+            var num = number.Replace(" ", String.Empty);
             int n;
-            return int.TryParse(number, out n);
+            return int.TryParse(num, out n);
         }
 
         bool NameValidation(string name)
         {
+            var trimmedName = name.Replace(" ", String.Empty);
             var nameRegex = new Regex("^[a-zA-Z0-9 ']*$");
-            return nameRegex.IsMatch(name) && !name.Contains("' ") && name.Length < 20;
+            return nameRegex.IsMatch(trimmedName) && !trimmedName.Contains("' ") && trimmedName.Length < 20;
         }
 
         bool DescriptionValidation(string name)
         {
+            var trimmedDesc = name.Replace(" ", String.Empty);
             var nameRegex = new Regex("^[a-zA-Z0-9 ']*$");
-            return nameRegex.IsMatch(name) && !name.Contains("' ") && name.Length < 50;
+            return nameRegex.IsMatch(trimmedDesc) && !trimmedDesc.Contains("' ") && trimmedDesc.Length < 50;
         }
 
         bool PhoneValidation(string phone)
         {
-            int n;
-            return int.TryParse(phone, out n) && phone.Length == 10;
+            Regex digitsOnly = new Regex(@"[^\d]");
+            var cellPhone = digitsOnly.Replace(phone, "");
+            return cellPhone.Length == 10;
         }
 
         bool EmailValidation(string email)
         {
             try
             {
+                email = email.Replace(" ", String.Empty);
                 var addr = new System.Net.Mail.MailAddress(email);
                 return addr.Address == email;
             }
