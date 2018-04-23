@@ -420,7 +420,7 @@ namespace CCVolunteerScheduler.Controllers
             Volunteer v = Model.Volunteers.FirstOrDefault();
 
             //Set admin email here
-            SendEmail("aldaghiria@findlay.edu", Model.EventTitle + " Decommitted", v.FirstName.Trim() + " " + v.LastName.Trim() + " has decommitted from the " + Model.EventDate.DayOfWeek + " " + Model.EventDate.ToLongDateString() + " event");
+            SendEmail("aldaghiria@findlay.edu", Model.EventTitle + " Decommitted", v.FirstName.Trim() + " " + v.LastName.Trim() + " has decommitted from the " + Model.EventTitle + " " + Model.EventDate.ToLongDateString() + " event");
 
             ScheduleVolunteerDBEntities x = new ScheduleVolunteerDBEntities();
             x.unSchedule_Volunteer(Convert.ToInt32(currentUser), id);     //we need to revisit inconsistencies in DB with bigint / int for id column datatypes
