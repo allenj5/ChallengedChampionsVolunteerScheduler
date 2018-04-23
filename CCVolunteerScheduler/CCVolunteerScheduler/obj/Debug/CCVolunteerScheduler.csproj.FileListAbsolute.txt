@@ -405,3 +405,13 @@ C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerS
 C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.csprojResolveAssemblyReference.cache
 C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.dll
 C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.pdb
+C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\JWT.dll
+C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\Twilio.AspNet.Common.dll
+C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\Twilio.AspNet.Mvc.dll
+C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\Twilio.dll
+C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\Twilio.xml
