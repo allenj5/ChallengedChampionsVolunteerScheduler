@@ -181,6 +181,9 @@
                 url: '@Url.Action("UpdateVolunteer", "home")?id=' + id + '&firstName=' + firstName + '&lastName=' + lastName + '&phone=' + phone + '&email=' + email + '&active=' + active + '&hoursWorked=' + hoursWorked + '&position=' + position,
                 success: function () {
                     location.reload();
+                },
+                error: function() {
+                    window.alert("Invalid information enterd for the volunteer. Please try again.");
                 }
             })
         })(jQuery);
@@ -196,6 +199,9 @@
                 url: '@Url.Action("AddVolunteer", "home")?firstName=' + firstName + '&lastName=' + lastName + '&phone=' + phone + '&email=' + email + '&position=' + position,
                 success: function () {
                     location.reload();
+                },
+                error: function() {
+                    window.alert("Invalid information enterd for new volunteer. Please try again.");
                 }
             })
         })(jQuery);

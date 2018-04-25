@@ -415,5 +415,3 @@ C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerS
 C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\Microsoft.IdentityModel.Tokens.xml
 C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\System.IdentityModel.Tokens.Jwt.xml
 C:\Users\testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\bin\Twilio.xml
-C:\Users\Testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.csproj.CoreCompileInputs.cache
-C:\Users\Testens\Source\Repos\ChallengedChampionsVolunteerScheduler\CCVolunteerScheduler\CCVolunteerScheduler\obj\Debug\CCVolunteerScheduler.csproj.CopyComplete

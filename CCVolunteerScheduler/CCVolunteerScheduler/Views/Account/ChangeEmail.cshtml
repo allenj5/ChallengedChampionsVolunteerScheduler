@@ -25,6 +25,7 @@
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
+<span>@ViewBag.Message</span>
 <br />
 @using (Html.BeginForm("ChangeEmail", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {

@@ -614,7 +614,7 @@ namespace CCVolunteerScheduler.Controllers
             }
             else
             {
-                return new EmptyResult();
+                return Json(new { status = "error", message = "invalid information entered" });
             }
         }
         public ActionResult UpdateVolunteer(string id, string firstName, string lastName, string phone, string email, string active, string hoursWorked, string position)
@@ -638,7 +638,7 @@ namespace CCVolunteerScheduler.Controllers
             }
             else
             {
-                return new EmptyResult();
+                return Json(new { status = "error", message = "invalid information entered" });
             }
         }
 
@@ -668,7 +668,7 @@ namespace CCVolunteerScheduler.Controllers
         {
             var trimmedDesc = name.Replace(" ", String.Empty);
             var nameRegex = new Regex("^[a-zA-Z0-9 ']*$");
-            return nameRegex.IsMatch(trimmedDesc) && !trimmedDesc.Contains("' ") && trimmedDesc.Length < 50;
+            return nameRegex.IsMatch(trimmedDesc) && !trimmedDesc.Contains("' ") && trimmedDesc.Length < 100;
         }
 
         bool PhoneValidation(string phone)

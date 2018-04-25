@@ -77,6 +77,8 @@ namespace CCVolunteerScheduler.Controllers
                     }
                 }
             }
+            string message = "invalid email entered. Please try again.";
+            ViewBag.Message = message;
             return View(model);
         }
 
@@ -107,6 +109,8 @@ namespace CCVolunteerScheduler.Controllers
                     }
                 }
             }
+            string message = "Invalid email address entered. Please try again.";
+            ViewBag.Message = message;
             return View();
         }
 
@@ -135,6 +139,8 @@ namespace CCVolunteerScheduler.Controllers
                     }
                 }
             }
+            string message = "Passwords entered did not match input validation expectations. Make sure passwords are between 8-15 characters.";
+            ViewBag.Message = message;
             return View();
         }
 
@@ -192,6 +198,8 @@ namespace CCVolunteerScheduler.Controllers
                     }
                 }
             }
+            string message = "Invalid phone number entered. Please try again";
+            ViewBag.Message = message;
             return View();
         }
 
@@ -511,9 +519,7 @@ namespace CCVolunteerScheduler.Controllers
 
         bool PasswordValidation(string password)
         {
-            var hasMinimum8Chars = new Regex(@".{8,15}");
-
-            return hasMinimum8Chars.IsMatch(password) && !password.Contains("' ");
+            return !password.Contains("' ") && password.Length <= 15;
             
         }
 
