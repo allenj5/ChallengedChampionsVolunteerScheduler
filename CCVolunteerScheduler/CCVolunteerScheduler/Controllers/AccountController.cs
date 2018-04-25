@@ -198,7 +198,7 @@ namespace CCVolunteerScheduler.Controllers
                     }
                 }
             }
-            string message = "Invalid phone number entered. Please try again";
+            string message = "Invalid phone number entered. Do not uses - and make sure your phone number is 10 numbers long.";
             ViewBag.Message = message;
             return View();
         }
