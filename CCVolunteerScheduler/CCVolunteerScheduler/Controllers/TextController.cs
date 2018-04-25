@@ -30,7 +30,7 @@ namespace CCVolunteerScheduler.Controllers
                     );
             }
 
-            return View("Home/TextVolunteers");
+            return View("~/Views/TextVolunteers.cshtml");
         }
 
     }

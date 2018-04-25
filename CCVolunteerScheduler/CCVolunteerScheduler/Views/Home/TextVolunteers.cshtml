@@ -1,8 +1,7 @@
 ﻿@{
-	Layout = "~/Views/Shared/_Layout.cshtml";
-	ViewBag.Title = "TextVolunteers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "TextVolunteers";
 }
-
 @section navbar {
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse rounded">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,23 +28,48 @@
 }
 
 <br />
+<br />
+<br />
 
 <div class="container">
-	<div class="col-xs-12 col-md-12">
-		<center>
-			<h2>Text Volunteers</h2>
-		</center>
-		<form id="form" action=@Url.Action("SendSMS","Text") method="post">
-			<select multiple="multiple" name="phoneNumbers">
-				@foreach (var item in Model)
-				{
-					<option value=@item.Phone> @Html.Encode(item.FirstName) @Html.Encode(item.LastName) @Html.Encode(item.Position)</option>
-				}
-			</select>
-			<p>Instructions: Hold down the Ctrl key while clicking on each person to select multiple volunteers from the list</p>
-			<textarea name="textMessage" rows="3" cols="20">Enter your text message here</textarea>
-			<input type="submit" value="submit" />
-		</form>
-	</div>
+    <div class="col-xs-12 col-md-12">
+        <center>
+            <h2>Text Volunteers</h2>
+        </center>
+    </div>
 </div>
 
+<br />
+
+<form id="form" action=@Url.Action("SendSMS","Text") method="post">
+    <div class="container">
+        <div class="col-xs-12 col-md-12">
+            <p>Instructions: Hold down the Ctrl key while clicking on each person to select multiple volunteers from the list</p>
+            <select multiple="multiple" name="phoneNumbers">
+                @foreach (var item in Model)
+                {
+                    <option value=@item.Phone> @Html.Encode(item.FirstName) @Html.Encode(item.LastName) @Html.Encode(item.Position)</option>
+                }
+            </select>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="container">
+        <div class="col-xs-12 col-md-12">
+            <textarea name="textMessage" placeholder="Enter your text message here" rows="5" cols="50"></textarea>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="container">
+        <div class="col-xs-12 col-md-12">
+            <input type="submit" value="submit" />
+        </div>
+    </div>
+</form>
+
+<br />
+<br />
+<br />
