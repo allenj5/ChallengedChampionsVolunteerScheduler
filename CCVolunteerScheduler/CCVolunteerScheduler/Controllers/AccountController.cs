@@ -161,16 +161,21 @@ namespace CCVolunteerScheduler.Controllers
         [HttpPost]
         public ActionResult ResetPassword(ResetPasswordViewModel model)
         {
-            using (VolunteersDBEntities db = new VolunteersDBEntities())
+            if (PasswordValidation(model.Password) && PasswordValidation(model.ConfirmPassword) && model.Password == model.ConfirmPassword)
             {
-                Volunteer currentUser = db.Volunteers.FirstOrDefault(u => u.GUID == model.Code);
-                if (currentUser != null)
+                using (VolunteersDBEntities db = new VolunteersDBEntities())
                 {
-                    currentUser.Password = HashPassword(model.Password);
-                    db.SaveChanges();
-                    return View("ResetPasswordConfirmation");
+                    Volunteer currentUser = db.Volunteers.FirstOrDefault(u => u.GUID == model.Code);
+                    if (currentUser != null)
+                    {
+                        currentUser.Password = HashPassword(model.Password);
+                        db.SaveChanges();
+                        return View("ResetPasswordConfirmation");
+                    }
                 }
             }
+            string message = "Passwords entered did not match input validation expectations. Make sure passwords are between 8-15 characters and that password and confirm password match.";
+            ViewBag.Message = message;
             return View(model);
         }
 
