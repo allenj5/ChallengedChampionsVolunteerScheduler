@@ -508,6 +508,7 @@ namespace CCVolunteerScheduler.Controllers
         {
             try
             {
+                email = email.Replace(" ", String.Empty);
                 var addr = new System.Net.Mail.MailAddress(email);
                 return addr.Address == email;
             }
@@ -545,8 +546,9 @@ namespace CCVolunteerScheduler.Controllers
 
         bool PhoneValidation(string phone)
         {
-            int n;
-            return int.TryParse(phone, out n) && phone.Length == 10;
+            Regex digitsOnly = new Regex(@"[^\d]");
+            var cellPhone = digitsOnly.Replace(phone, "");
+            return cellPhone.Length == 10;
         }
 
         internal class ExternalLoginResult : ActionResult
