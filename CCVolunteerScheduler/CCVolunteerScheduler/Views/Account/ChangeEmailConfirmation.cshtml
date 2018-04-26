@@ -9,18 +9,17 @@
         <a class="navbar-brand headerSpacing" href="#"></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    @Html.ActionLink("Home", "AdminHome", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                    @Html.ActionLink("Manage Account", "ManageAccount", new { controller = "Home" }, new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Calendar", "AdminCalendar", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                    @Html.ActionLink("View Calendar", "VolunteerCalendar", new { controller = "Home" }, new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Communications", "Communications", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                    @Html.ActionLink("My Schedule", "MySchedule", new { controller = "Home" }, new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Volunteers", "Volunteers", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
-                </li>
+            </ul>
             </ul>
         </div>
     </nav>
