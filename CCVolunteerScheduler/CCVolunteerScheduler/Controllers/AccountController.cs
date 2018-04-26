@@ -127,7 +127,7 @@ namespace CCVolunteerScheduler.Controllers
         {
             using (VolunteersDBEntities db = new VolunteersDBEntities())
             {
-                if (PasswordValidation(model.OldPassword) && PasswordValidation(model.NewPassword) && PasswordValidation(model.ConfirmNewPassword))
+                if (PasswordValidation(model.OldPassword) && PasswordValidation(model.NewPassword) && PasswordValidation(model.ConfirmNewPassword) && (model.NewPassword == model.ConfirmNewPassword))
                 {
                     string hashPassword = HashPassword(model.OldPassword);
                     Volunteer currentUser = db.Volunteers.FirstOrDefault(u => u.Email == User.Identity.Name && u.Password == hashPassword);
