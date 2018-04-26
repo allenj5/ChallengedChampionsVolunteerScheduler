@@ -181,7 +181,7 @@ namespace CCVolunteerScheduler.Controllers
                     }
                     else
                     {
-                        return Json(new { status = "error", message = "Make sure Title is less than 20 characters and Description is less than 50 characters" });
+                        return Json(new { status = "error", message = "Make sure Title is less than 20 characters and Description is less than 200 characters" });
                     }
                 }
                 catch
@@ -660,15 +660,15 @@ namespace CCVolunteerScheduler.Controllers
         bool NameValidation(string name)
         {
             var trimmedName = name.Replace(" ", String.Empty);
-            var nameRegex = new Regex("^[a-zA-Z0-9 ']*$");
+            var nameRegex = new Regex("^[a-zA-Z0-9 \\.']*$");
             return nameRegex.IsMatch(trimmedName) && !trimmedName.Contains("' ") && trimmedName.Length < 20;
         }
 
         bool DescriptionValidation(string name)
         {
             var trimmedDesc = name.Replace(" ", String.Empty);
-            var nameRegex = new Regex("^[a-zA-Z0-9 ']*$");
-            return nameRegex.IsMatch(trimmedDesc) && !trimmedDesc.Contains("' ") && trimmedDesc.Length < 100;
+            var nameRegex = new Regex("^[a-zA-Z0-9 \\.']*$");
+            return nameRegex.IsMatch(trimmedDesc) && !trimmedDesc.Contains("' ") && trimmedDesc.Length < 200;
         }
 
         bool PhoneValidation(string phone)
