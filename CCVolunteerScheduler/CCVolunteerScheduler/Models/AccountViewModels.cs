@@ -85,10 +85,10 @@ namespace CCVolunteerScheduler.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "New Email Address")]
+        [Display(Name = "New Email")]
         public string Email { get; set; }
 
-        [Display(Name = "Confirm Email Address")]
+        [Display(Name = "Confirm New Email")]
         [Compare("Email", ErrorMessage = "The email and confirmation email do not match.")]
         public string ConfirmEmail { get; set; }
 

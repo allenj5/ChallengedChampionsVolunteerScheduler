@@ -142,11 +142,10 @@ calendar td:hover {
     }
 }
 
-.col-md-2 {
-    text-align: left !important;
-    width:100%;
-}
-
 .btn{
     color:white !important;
+}
+
+.input{
+    width:100%;
 }

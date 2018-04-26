@@ -42,11 +42,11 @@
         </tr>
         <tr>
             <td>@Html.LabelFor(m => m.Email)</td>
-            <td>@Html.EditorFor(m => m.Email)</td>
+            <td>@Html.EditorFor(m => m.Email, new { @class = "form-control" })</td>
         </tr>
         <tr>
             <td>@Html.LabelFor(m => m.ConfirmEmail)</td>
-            <td>@Html.PasswordFor(m => m.ConfirmEmail, new { @class = "form-control" })</td>
+            <td>@Html.EditorFor(m => m.ConfirmEmail, new { @class = "form-control" })</td>
         </tr>
         <tr>
             <td>@Html.LabelFor(m => m.Password)</td>
