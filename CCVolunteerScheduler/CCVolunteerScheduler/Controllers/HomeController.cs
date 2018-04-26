@@ -200,7 +200,7 @@ namespace CCVolunteerScheduler.Controllers
             SendEmail("aldaghiria@findlay.edu", Model.EventTitle + " Deleted", "Your event has been deleted");
             Models.Event myEvent = (Models.Event)_db.Events.Where(y => y.EventID == id).FirstOrDefault();
 
-            if (myEvent.EventDate >= DateTime.Now && myEvent.Volunteers != null)
+            if (myEvent.EventDate >= DateTime.Today && myEvent.Volunteers != null)
             {
                 var volunteers = myEvent.Volunteers.ToList();
 
