@@ -45,7 +45,7 @@
     <div class="container">
         <div class="col-xs-12 col-md-12">
             <p>Instructions: Hold down the Ctrl key while clicking on each person to select multiple volunteers from the list</p>
-            <select multiple="multiple" name="phoneNumbers">
+            <select multiple="multiple" name="phoneNumbers" style="height: 500px; width: 300px">
                 @foreach (var item in Model)
                 {
                     <option value=@item.Phone> @Html.Encode(item.FirstName) @Html.Encode(item.LastName) @Html.Encode(item.Position)</option>
@@ -65,7 +65,7 @@
 
     <div class="container">
         <div class="col-xs-12 col-md-12">
-            <input type="submit" value="submit" />
+            <input type="submit" value="submit" class="btn btn-info" />
         </div>
     </div>
 </form>
