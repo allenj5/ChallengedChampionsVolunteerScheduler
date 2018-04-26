@@ -109,7 +109,7 @@ namespace CCVolunteerScheduler.Controllers
                     }
                 }
             }
-            string message = "Invalid email address entered. Please try again.";
+            string message = "Invalid email address or password. Please try again.";
             ViewBag.Message = message;
             return View();
         }
