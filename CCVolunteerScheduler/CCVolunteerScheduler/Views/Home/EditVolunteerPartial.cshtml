@@ -9,19 +9,19 @@
     <form>
         <div class="form-group">
             <label for="firstNameEdit">First Name</label>
-            <input type="text" class="form-control" id="firstNameEdit" value="@Html.Encode(Model.FirstName)" />
+            <input type="text" class="form-control" id="firstNameEdit" value="@Html.Encode(Model.FirstName).Trim()" />
             <br />
 
             <label for="lastNameEdit">Last Name</label>
-            <input type="text" class="form-control" id="lastNameEdit" value="@Html.Encode(Model.LastName)" />
+            <input type="text" class="form-control" id="lastNameEdit" value="@Html.Encode(Model.LastName).Trim()" />
             <br />
 
             <label for="phoneEdit">Phone</label>
-            <input type="text" class="form-control" id="phoneEdit" value="@Html.Encode(Model.Phone)"/>
+            <input type="text" class="form-control" id="phoneEdit" value="@Html.Encode(Model.Phone).Trim()"/>
             <br />
 
             <label for="emailEdit">Email</label>
-            <input type="text" class="form-control" id="emailEdit" value="@Html.Encode(Model.Email)" />
+            <input type="text" class="form-control" id="emailEdit" value="@Html.Encode(Model.Email).Trim()" />
             <br />
 
             <label for="activeEdit">Active</label>
@@ -33,7 +33,7 @@
             <br />
 
             <label for="positionEdit">Position</label>
-            <input type="text" class="form-control" id="positionEdit" value="@Html.Encode(Model.Position)"/>
+            <input type="text" class="form-control" id="positionEdit" value="@Html.Encode(Model.Position).Trim()"/>
             <br />
         </div>
     </form>
