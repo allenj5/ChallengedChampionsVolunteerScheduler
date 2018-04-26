@@ -42,7 +42,7 @@
           <Property Name="Position" Type="char" MaxLength="25" />
           <Property Name="GUID" Type="nvarchar" MaxLength="200" />
         </EntityType>
-        <Association Name="FK__Volunteer__Event__398D8EEE">
+        <Association Name="FK__Volunteer__Event__276EDEB3">
           <End Role="Events" Type="Self.Events" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -92,6 +92,16 @@
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="TodaysVolunteersPhone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Day" Type="datetime" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Phone" Type="char" MaxLength="25" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="Update_Volunteer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
           <Parameter Name="FirstName" Type="char" Mode="In" />
@@ -131,7 +141,7 @@
           <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VolunteerEventInstance" EntityType="Self.VolunteerEventInstance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Volunteers" EntityType="Self.Volunteers" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Volunteer__Event__398D8EEE" Association="Self.FK__Volunteer__Event__398D8EEE">
+          <AssociationSet Name="FK__Volunteer__Event__276EDEB3" Association="Self.FK__Volunteer__Event__276EDEB3">
             <End Role="Events" EntitySet="Events" />
             <End Role="VolunteerEventInstance" EntitySet="VolunteerEventInstance" />
           </AssociationSet>
@@ -186,6 +196,9 @@
           </FunctionImport>
           <FunctionImport Name="VolunteersSignedUp" IsComposable="true" ReturnType="Collection(VolunteersDBModel.VolunteersSignedUp_Result)">
           <Parameter Name="EventID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="TodaysVolunteersPhone" IsComposable="true" ReturnType="Collection(String)">
+            <Parameter Name="Day" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Event">
@@ -307,6 +320,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TodaysVolunteersPhone" FunctionName="VolunteersDBModel.Store.TodaysVolunteersPhone" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

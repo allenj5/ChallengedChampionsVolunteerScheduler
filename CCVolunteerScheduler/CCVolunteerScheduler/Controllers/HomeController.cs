@@ -589,6 +589,22 @@ namespace CCVolunteerScheduler.Controllers
             return View();
         }
 
+        public ActionResult TextTodaysVolunteers()
+        {
+            DateTime today = DateTime.Now;
+
+            VolunteersDBEntities _db = new VolunteersDBEntities();
+
+            foreach (string email in _db.TodaysVolunteersPhone(today.Date))
+            {
+                //This foreach collects all of the volunteers phone numbers, so add the phone numbers to send to here
+            }
+
+            //Send the text somewhere here, after we've gathered all of the phone numbers.
+
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Volunteers(int setHoursTo = 0)
         {

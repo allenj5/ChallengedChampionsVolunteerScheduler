@@ -156,5 +156,15 @@ namespace CCVolunteerScheduler.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<VolunteersSignedUp_Result>("[VolunteersDBEntities].[VolunteersSignedUp](@EventID)", eventIDParameter);
         }
+    
+        [EdmFunction("VolunteersDBEntities", "TodaysVolunteersPhone")]
+        public virtual IQueryable<string> TodaysVolunteersPhone(Nullable<System.DateTime> day)
+        {
+            var dayParameter = day.HasValue ?
+                new ObjectParameter("Day", day) :
+                new ObjectParameter("Day", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<string>("[VolunteersDBEntities].[TodaysVolunteersPhone](@Day)", dayParameter);
+        }
     }
 }

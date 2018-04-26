@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "TextVolunteers";
+}
+@section navbar {
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse rounded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand headerSpacing" href="#"></a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    @Html.ActionLink("Home", "AdminHome", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Calendar", "AdminCalendar", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Communications", "Communications", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Volunteers", "Volunteers", "Home", new { @class = "nav-link" })<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+}
+
+<br />
+<br />
+<br />
+
+<div class="container">
+    <div class="col-xs-12 col-md-12">
+        <center>
+            <h2>Text Volunteers</h2>
+        </center>
+    </div>
+</div>
+
+<br />
+
+<form id="form" action=@Url.Action("SendSMS","Text") method="post">
+    <div class="container">
+        <div class="col-xs-12 col-md-12">
+            <textarea name="textMessage" placeholder="Enter your text message here" rows="5" cols="40"></textarea>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="container">
+        <div class="col-xs-12 col-md-12">
+            <input type="submit" value="submit" class="btn btn-info" />
+        </div>
+    </div>
+</form>
+
+<br />
+<br />
+<br />

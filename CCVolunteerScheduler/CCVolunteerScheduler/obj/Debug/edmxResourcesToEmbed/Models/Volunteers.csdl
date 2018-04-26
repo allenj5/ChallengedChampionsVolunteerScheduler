@@ -43,6 +43,9 @@
     <FunctionImport Name="VolunteersSignedUp" IsComposable="true" ReturnType="Collection(VolunteersDBModel.VolunteersSignedUp_Result)">
       <Parameter Name="EventID" Mode="In" Type="Int64" />
     </FunctionImport>
+    <FunctionImport Name="TodaysVolunteersPhone" IsComposable="true" ReturnType="Collection(String)">
+      <Parameter Name="Day" Mode="In" Type="DateTime" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Event">
     <Key>
