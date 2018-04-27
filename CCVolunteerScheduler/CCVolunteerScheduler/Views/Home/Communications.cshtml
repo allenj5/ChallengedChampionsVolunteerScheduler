@@ -102,7 +102,7 @@
     <br />
     <div class="container">
         <div class="col-xs-12 col-md-12">
-            <button type="button" class="btn btn-info" onclick="location.href='@Url.Action("TextTodaysVolunteers", "Text")';return false;" data-toggle="modal" data-target="#TextVolunteersModal">Text Today's Volunteers</button>
+            <button type="button" class="btn btn-info" onclick="if(window.confirm('Text a reminder to all volunteers working today?')){location.href='@Url.Action("TextTodaysVolunteers", "Text")';return false;}" data-toggle="modal" data-target="#TextVolunteersModal">Text Today's Volunteers</button>
         </div>
     </div>
     <!---<br /> we took out this feature
