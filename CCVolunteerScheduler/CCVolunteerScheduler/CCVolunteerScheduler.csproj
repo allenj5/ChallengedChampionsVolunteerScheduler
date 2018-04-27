@@ -720,6 +720,8 @@
     <Content Include="obj\Release\TransformWebConfig\assist\Web.config" />
     <Content Include="obj\Release\TransformWebConfig\original\Web.config" />
     <Content Include="obj\Release\TransformWebConfig\transformed\Web.config" />
+    <None Include="Properties\PublishProfiles\challengedchampions - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\challengedchampions - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Models\Volunteers.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -52,7 +52,7 @@ namespace CCVolunteerScheduler.Controllers
                 var message = MessageResource.Create(
                    to: "+1" + email,
                    from: from,
-                   body: "Just making sure it goes back to the Communications page after they press the button"
+                   body: "This is an automated message from Challenged Champions Equestrian Center. Reminder: you are signed up for an event today!"
                    );
             }
 
