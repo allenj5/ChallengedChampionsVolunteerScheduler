@@ -27,7 +27,7 @@ namespace CCVolunteerScheduler.Controllers
                 var message = MessageResource.Create(
                     to: "+1" + number,
                     from: from,
-                    body: textMessage
+                    body: textMessage + "    (Please do not respond to this phone number. Instead, please contact 4192350626. Thanks!)"
                     );
             }
 
