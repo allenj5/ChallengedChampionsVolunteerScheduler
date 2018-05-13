@@ -197,7 +197,7 @@ namespace CCVolunteerScheduler.Controllers
             EventDBEntities _db = new EventDBEntities();
             var Model = _db.Events.Where(e => e.EventID == id).FirstOrDefault();
             //Set admin id here
-            SendEmail("aldaghiria@findlay.edu", Model.EventTitle + " Deleted", "Your event has been deleted");
+            SendEmail("CCVolunteerScheduler@gmail.com", Model.EventTitle + " Deleted", "Your event has been deleted");
             Models.Event myEvent = (Models.Event)_db.Events.Where(y => y.EventID == id).FirstOrDefault();
 
             if (myEvent.EventDate >= DateTime.Today && myEvent.Volunteers != null)
@@ -420,7 +420,7 @@ namespace CCVolunteerScheduler.Controllers
             Volunteer v = Model.Volunteers.FirstOrDefault();
 
             //Set admin email here
-            SendEmail("aldaghiria@findlay.edu", Model.EventTitle + " Decommitted", v.FirstName.Trim() + " " + v.LastName.Trim() + " has decommitted from the " + Model.EventTitle + " " + Model.EventDate.ToLongDateString() + " event");
+            SendEmail("CCVolunteerScheduler@gmail.com", Model.EventTitle + " Decommitted", v.FirstName.Trim() + " " + v.LastName.Trim() + " has decommitted from the " + Model.EventTitle + "event | The event is scheduled for" + Model.EventDate.ToLongDateString());
 
             ScheduleVolunteerDBEntities x = new ScheduleVolunteerDBEntities();
             x.unSchedule_Volunteer(Convert.ToInt32(currentUser), id);     //we need to revisit inconsistencies in DB with bigint / int for id column datatypes
