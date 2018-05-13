@@ -2,7 +2,7 @@
     <div class="event" >
         <div class="basicEventInfo" onclick="ToggleDescription(@item.EventID)">
             <p>@Html.Encode(item.EventTitle)</p>
-            <p>@Html.Encode(item.StartTime.ToString(@"hh\:mm")) - @Html.Encode(item.EndTime.ToString(@"hh\:mm"))</p>
+            <p>@formatDay(item.StartTime) - @formatDay(item.EndTime)</p>
         </div>
         <div class="eventDetails hide" id="@("event" + item.EventID)">
             <p>@Html.Encode(item.EventDescription)</p>
@@ -12,4 +12,36 @@
             <button type="button" class="btn btn-info" onclick="Open(@item.EventID)" data-toggle="modal" data-target="#CopyEventModal">Edit</button>
         </div>
     </div>
+}
+
+@functions{ 
+    string formatDay(TimeSpan myTime)
+    {
+        string myString;
+
+        int hours = myTime.Hours;
+        int minutes = myTime.Minutes;
+        string minuteString = "";
+
+        string timeOfDay = "AM";
+
+        if (hours >= 12)
+        {
+            timeOfDay = "PM";
+            if(hours > 12)
+            {
+                hours -= 12;
+            }
+        }
+
+        if(minutes < 10)
+        {
+            minuteString += "0";
+        }
+        minuteString += minutes;
+
+        myString = hours + ":" + minuteString + " " + timeOfDay;
+
+        return myString;
+    }
 }

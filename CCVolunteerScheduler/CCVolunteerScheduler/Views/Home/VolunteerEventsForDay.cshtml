@@ -1,15 +1,50 @@
-﻿@foreach (var item in Model){
+﻿@foreach (var item in Model)
+{
     <div class="event" onclick="ToggleDescription(@item.EventID)">
         <p>@Html.Encode(item.EventTitle)</p>
-        <p>@Html.Encode(item.StartTime.ToString(@"hh\:mm")) - @Html.Encode(item.EndTime.ToString(@"hh\:mm"))</p>
+        <p>@formatDay(item.StartTime) - @formatDay(item.EndTime)</p>
         <div class="eventDetails hide" id="@("event" + item.EventID)">
             <p>@Html.Encode(item.EventDescription)</p>
-            @if(item.EventDate >= DateTime.Now && item.MaxVolunteers > 0){
+            @if (item.EventDate >= DateTime.Now && item.MaxVolunteers > 0)
+            {
                 <p>Open Spots: @Html.Encode(item.MaxVolunteers - item.NumVolunteers) / @Html.Encode(item.MaxVolunteers)</p>
-                if(item.NumVolunteers < item.MaxVolunteers){
+                if (item.NumVolunteers < item.MaxVolunteers)
+                {
                     <button class="btn btn-info" onclick="ScheduleVolunteer(@item.EventID)">Sign Up</button>
                 }
             }
         </div>
     </div>
+}
+
+@functions{
+    string formatDay(TimeSpan myTime)
+    {
+        string myString;
+
+        int hours = myTime.Hours;
+        int minutes = myTime.Minutes;
+        string minuteString = "";
+
+        string timeOfDay = "AM";
+
+        if (hours >= 12)
+        {
+            timeOfDay = "PM";
+            if (hours > 12)
+            {
+                hours -= 12;
+            }
+        }
+
+        if (minutes < 10)
+        {
+            minuteString += "0";
+        }
+        minuteString += minutes;
+
+        myString = hours + ":" + minuteString + " " + timeOfDay;
+
+        return myString;
+    }
 }
